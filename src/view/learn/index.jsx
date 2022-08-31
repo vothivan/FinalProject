@@ -3,7 +3,7 @@ import { Avatar, Container, Tab, Card, Grid, Button, Menu, MenuItem } from '@mat
 import { TabContext, TabList, TabPanel } from '@material-ui/lab';
 
 
-export default function Test() {
+export default function Learn() {
     const [value, setValue] = React.useState('learn');
     const handleChange = (event, newValue) => {
         setValue(newValue);

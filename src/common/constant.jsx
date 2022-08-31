@@ -5,5 +5,6 @@ module.exports = {
         SHOP: '/shop',
         ORTHERS: '/orther',
         ACCOUNT: '/account',
+        LOGIN: '/login',
     }
 };

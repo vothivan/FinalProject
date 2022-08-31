@@ -1,12 +1,17 @@
 import {ROUTE} from './common/constant';
 
-import Test from './components/Test';
-
+import Learn from './view/learn';
+import Login from './view/login';
 const router = [
     {
         path: ROUTE.LEARN,
         pathActive: ROUTE.LEARN,
-        component: Test,
+        component: Learn,
+    },
+    {
+        path: ROUTE.LOGIN,
+        pathActive: ROUTE.LOGIN,
+        component: Login,
     }
 ];
 
