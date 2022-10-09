@@ -1,89 +1,56 @@
-import React, {Component}  from "react";
-import { Button, Grid, FormControlLabel, TextField, Link, Box, ThemeProvider, Avatar, Checkbox } from "@material-ui/core";
-import Typography from "material-ui/styles/typography";
-import Container from "@material-ui/core/Container";
-import CssBaseline from '@material-ui/core/CssBaseline';
+import React from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
+import { Card, Container, CssBaseline, Button } from '@material-ui/core';
+import Register from './Register';
+import LoginUser from './LoginUser';
+import './style.css';
+import { Component } from 'react';
 
-class  Login extends Component {
-    // const theme = createTheme();
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     const data = new FormData(event.currentTarget);
-    //     console.log({
-    //         email: data.get('email'),
-    //         password: data.get('password'),
-    //     });
-    // };
+class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            status: '',
+        }
+    }
     render() {
         return (
-            <Grid>
-                <Container component="main" maxWidth="xs">
-                    <CssBaseline />
-                    <Box
-                        sx={{
-                            marginTop: 8,
+            <React.Fragment>
+                <CssBaseline />
+                <Container maxWidth='sm'>
+                    <Card
+                        style={{
+                            height: '100vh',
+                            margin: '24px',
+                            borderRadius: '20px',
+                            backgroundColor: '#e1bec3',
                             display: 'flex',
                             flexDirection: 'column',
-                            alignItems: 'center',
+                            overflow: 'hidden',
+                            maxWidth: '430px',
+                            position: 'relative',
                         }}
                     >
-                        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                            {/* <LockOutlinedIcon /> */}
-                        </Avatar>
-                        <Typography component="h1" variant="h5">
-                            Sign in
-                        </Typography>
-                        <Box component="form" noValidate sx={{ mt: 1 }}>
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                autoFocus
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox value="remember" color="primary" />}
-                                label="Remember me"
-                            />
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Sign In
-                            </Button>
-                            <Grid container>
-                                <Grid item xs>
-                                    <Link href="#" variant="body2">
-                                        Forgot password?
-                                    </Link>
-                                </Grid>
-                                <Grid item>
-                                    <Link href="#" variant="body2">
-                                        {"Don't have an account? Sign Up"}
-                                    </Link>
-                                </Grid>
-                            </Grid>
-                        </Box>
-                    </Box>
+                        {this.state.status === '' &&
+                            <div className='total'>
+                                <img className='image' src='https://web.letmespeak.org/static/media/welcome.e401ce2cc62f60a8e599bcbb26504c74.svg' />
+                                <h1 className='header'>Chào mừng đến với thế giới của Let Me Speak</h1>
+                                <span className='header-child'>Bạn sẽ bắt đầu học tiếng Anh hôm nay!</span>
+                                <div className='button'>
+                                    <Button className='button-child'><Link to='/register'>Tôi là người mới</Link></Button>
+                                    <div style={{ width: '100%', margin: '16px 0px 0px' }}><Button className='button-child'><Link to='/login'>Tôi đã có tài khoản</Link></Button></div>
+                                </div>
+                                <Switch>
+                                    <Route exact path='/register'><Register /></Route>
+                                    <Route path='/login'><LoginUser /></Route>
+                                </Switch>
+                            </div>
+                        }
+
+                    </Card>
                 </Container>
-            </Grid>
-        );
+            </React.Fragment>
+        )
     }
-    
-};
+}
 export default Login;
