@@ -25,16 +25,16 @@ export default function App() {
                 >
                     <div style={{ height: '100%', overflow: 'hidden auto', padding: '25px 0px 20px' }}>
                         <Switch>
-                            <Route exact path="/"><Words /></Route>
-                            <Route path="/words" ><Words /></Route>
-                            <Route path="/grammar"><Grammar /></Route>
+                            <Route exact path="/page"><Words /></Route>
+                            <Route path="/learn/word" ><Words /></Route>
+                            <Route path="/learn/grammar"><Grammar /></Route>
                             <Route path="/account"><Account /></Route>
                         </Switch>
                     </div>
                     <nav style={{ height: '72px', display: 'grid', borderTop: '1px solid rgb(242, 242, 242)', gridTemplateColumns: 'repeat(4, auto)', backgroundColor: '#fff' }}>
-                        <Link className='footer-child' to="/">Home</Link>
-                        <Link className='footer-child' to="/words">Words</Link>
-                        <Link className='footer-child' to="/grammar">Grammar</Link>
+                        <Link className='footer-child' to="/page">Home</Link>
+                        <Link className='footer-child' to="/learn/word">Words</Link>
+                        <Link className='footer-child' to="/learn/grammar">Grammar</Link>
                         <Link className='footer-child' to="/account">Account</Link>
                     </nav>
                 </Card>
