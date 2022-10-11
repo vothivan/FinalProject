@@ -13,7 +13,7 @@ export default function App() {
             <Container maxWidth='sm'>
                 <Card
                     style={{
-                        height: '100vh',
+                        height: '90vh',
                         margin: '24px',
                         borderRadius: '20px',
                         backgroundColor: '#e1bec3',
