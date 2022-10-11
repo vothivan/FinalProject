@@ -1,11 +1,11 @@
 import React from 'react';
 import './style.css';
 import ArrowForwardIosSharpIcon from '@material-ui/icons/ArrowForwardIosSharp';
-const Data = {
-    'Du Lịch': ['Tại sân bay', 'Tại khách sạn', 'Tại nhà hàng', 'Tại bảo tàng'],
-    'Thức ăn': ['Trái cây', 'Rau củ', 'Thức ăn nhanh', 'Thức uống'],
-    'Mối quan hệ': ['Buổi đầu hẹn hò', 'Lễ cưới', 'Những món quà'],
-}
+// const Data = {
+//     'Du Lịch': ['Tại sân bay', 'Tại khách sạn', 'Tại nhà hàng', 'Tại bảo tàng'],
+//     'Thức ăn': ['Trái cây', 'Rau củ', 'Thức ăn nhanh', 'Thức uống'],
+//     'Mối quan hệ': ['Buổi đầu hẹn hò', 'Lễ cưới', 'Những món quà'],
+// }
 function Words() {
     return (
         <div>

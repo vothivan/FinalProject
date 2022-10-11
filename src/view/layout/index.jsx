@@ -43,11 +43,12 @@ class Layout extends Component {
     };
 
     render() {
+        const currentRoute = this.getCurrentRoute();
         return (
             <div>
                 {window.location.pathname === '/' ?
-                    <Login></Login> :
-                    <Switch>
+                    <Route path='/' render={(props) => <Login {...props}/>}/>:
+                    <Switch currentRoute={currentRoute}>
                         {this.getRouter(router)}
                     </Switch>
                 }
