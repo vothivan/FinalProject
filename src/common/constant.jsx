@@ -8,3 +8,8 @@ export const ROUTE = {
     GRAMMAR: '/learn/grammar',
     ACCOUNT: '/account',
 };
+
+export const ROUTER_KEY = {
+    PAGE_VIEW: 1,
+    PAGE_LAYOUT: 2,
+}

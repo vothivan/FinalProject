@@ -3,13 +3,10 @@ import _ from 'lodash';
 import { Switch, Route } from 'react-router-dom';
 import router from '../../router';
 import Login from '../login';
+import App from '../../App';
+import {ROUTER_KEY} from '../../common/constant';
 
 class Layout extends Component {
-
-    componentDidMount() {
-        // const currentRoute = this.getCurrentRoute();
-        console.log(window.location.pathname);
-    }
 
     /**
    * get router
@@ -35,7 +32,7 @@ class Layout extends Component {
     getCurrentRoute = () => {
         for (let i = 0; i < router.length; i++) {
             const route = router[i];
-            if (window.location.pathname.includes(route.pathActive)) {
+            if (window.location.pathname === route.pathActive) {
                 return route;
             }
         }
@@ -46,12 +43,25 @@ class Layout extends Component {
         const currentRoute = this.getCurrentRoute();
         return (
             <div>
-                {window.location.pathname === '/' ?
+                {this.getCurrentRoute().key === ROUTER_KEY.PAGE_VIEW ?
+                (window.location.pathname === '/' ?
                     <Route path='/' render={(props) => <Login {...props}/>}/>:
                     <Switch currentRoute={currentRoute}>
                         {this.getRouter(router)}
                     </Switch>
-                }
+                ) :
+                (
+                    <div>
+                        <App
+                          mainPage={
+                            <Switch currentRoute={currentRoute}>
+                              {this.getRouter(router)}
+                            </Switch>
+                          }  
+                        />
+                    </div>
+                )
+            }
 
             </div>
         )

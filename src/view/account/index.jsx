@@ -1,8 +1,15 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
-function Account() {
-    return (
-        <h1>Account</h1>
+import { Component } from 'react';
+import { redirectRouter } from '../../utils/common';
+class Account extends Component {
+    render () {
+        return (
+        <div>
+            <Button onClick={() => redirectRouter(this.props, '/login')}>Log Out</Button>
+        </div>
     )
+    }
 }
 
 export default Account
