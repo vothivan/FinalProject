@@ -18,6 +18,7 @@ class App extends Component {
                             margin: '24px',
                             borderRadius: '20px',
                             // backgroundColor: '#e1bec3',
+                            background: 'linear-gradient(rgb(231, 110, 135) 0%, rgb(255, 170, 122) 100%)',
                             display: 'flex',
                             flexDirection: 'column',
                             overflow: 'hidden',

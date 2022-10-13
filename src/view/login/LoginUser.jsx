@@ -25,7 +25,10 @@ class LoginUser extends Component {
     }
     api.post("/accounts/login", payload).then((res) => {
       if (res && res.status === 200) {
-        redirectRouter(this.props, '/page')
+        if(res.data.token) {
+          localStorage.setItem("jwt_token", res.data.token)
+          redirectRouter(this.props, '/page')
+        }
       }
     })
   }
