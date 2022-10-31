@@ -7,6 +7,7 @@ import Words from './view/words';
 import Grammar from './view/grammar';
 import Account from './view/account';
 import Page from './view/page';
+import LessonAll from './view/grammar/lesson_all';
 const router = [
     {
         path: ROUTE.HOME,
@@ -48,6 +49,13 @@ const router = [
         pathActive: ROUTE.GRAMMAR,
         key: ROUTER_KEY.PAGE_LAYOUT,
         component: Grammar,
+        layout: ROUTE.LAYOUT,
+    },
+    {
+        path: ROUTE.GRAMMAR_ALL,
+        pathActive: ROUTE.GRAMMAR_ALL,
+        key: ROUTER_KEY.PAGE_LAYOUT,
+        component: LessonAll,
         layout: ROUTE.LAYOUT,
     },
     {

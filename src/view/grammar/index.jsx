@@ -1,6 +1,10 @@
-import { Card, Chip } from '@material-ui/core';
+import { Card, Chip, Button } from '@material-ui/core';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { ROUTE } from '../../common/constant';
 import api from '../../service/api';
+import { redirectRouter } from '../../utils/common';
+
 import './style.css'
 class Grammar extends Component {
 
@@ -12,40 +16,47 @@ class Grammar extends Component {
     }
 
     componentDidMount() {
-
         api.get('/grammar').then((res) => {
             if (res && res.status === 200) {
-                // debugger
                 this.setState({
                     listTopic: res.data,
                 })
             }
         })
-
     }
 
+    /**
+     * itemTopic
+     * @param {*} item 
+     * @returns 
+     */
     itemTopic(item) {
-        // debugger
-        console.log(item);
         return (
-            <Card style={{ height: '110px', borderRadius: '20px', marginBottom: '20px' }}>
-                <div style={{ paddingLeft: '10px' }}>
-                    <p>{item.category}</p>
-                    <b>{item.title}</b>
-                    <div style={{display: 'flex'}}>
-                        {item.descriptions.map((des) => {
-                            console.log(des);
-                            return (
-                                <div style={{marginRight: '10px'}}>
-                                    <Chip size='small' label={des} className='chip' color='rgb(231, 110, 135)' />
-                                </div>
-                            )
-                        })}
-                    </div>
+            <Link
+                to={{
+                    pathname: ROUTE.GRAMMAR_ALL + '/' + item.id,
+                }}
+            >
+                <Button style={{ width: '100%' }} onClick={() => redirectRouter(this.props, '/learn/grammar/lesson_all')}>
+                    <Card style={{ height: '110px', borderRadius: '20px', marginBottom: '20px', width: '100%' }}>
+                        <div style={{ paddingLeft: '10px', display: 'block' }}>
+                            <div>{item.category}</div>
+                            <div><b>{item.title}</b></div>
+                            <div style={{ display: 'flex' }}>
+                                {item.descriptions.map((des) => {
+                                    return (
+                                        <div style={{ marginRight: '10px' }}>
+                                            <Chip size='small' label={des} className='chip' color='rgb(231, 110, 135)' />
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </Card>
+                </Button>
+            </Link>
 
-                </div>
 
-            </Card>
         )
     }
 

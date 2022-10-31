@@ -6,6 +6,7 @@ export const ROUTE = {
     PAGE: '/page',
     WORD: '/learn/word',
     GRAMMAR: '/learn/grammar',
+    GRAMMAR_ALL: '/learn/grammar/lesson_all',
     ACCOUNT: '/account',
 };
 

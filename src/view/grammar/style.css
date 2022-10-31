@@ -13,5 +13,29 @@
     color: aliceblue;
 }
 .chip {
-    color: linear-gradient(rgb(231, 110, 135) 0%, rgb(227 133 80) 100%),
+    color: linear-gradient(rgb(231, 110, 135) 0%, rgb(227 133 80) 100%);
+    background-color: '#ff7777';
+    
 }
+
+.button {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 100%;
+}
+.total {
+    height: 100%;
+    padding: 24px 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+  }

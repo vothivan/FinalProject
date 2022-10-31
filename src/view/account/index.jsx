@@ -8,7 +8,7 @@ class Account extends Component {
         <div>
             <Button onClick={() => redirectRouter(this.props, '/login')}>Log Out</Button>
         </div>
-    )
+        )
     }
 }
 
