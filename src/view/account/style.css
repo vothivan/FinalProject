@@ -1,0 +1,157 @@
+.header {
+    width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+}
+
+.header-left {
+    height: 40px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.header-right {
+    display: flex;
+}
+
+.header-left-right {
+    margin: 0px 0px 0px 6px;
+    font-family: 'NexaText-ExtraBold', sans-serif;
+    font-size: 19px;
+    line-height: 21px;
+    display: block;
+}
+
+.header-left-right-right {
+    display: block;
+    font-size: 12px;
+    line-height: 13px;
+    color: rgba(0, 0, 0, 0.5);
+}
+.personage {
+    -webkit-box-align: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.name {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    margin: 3px 0px 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: cursive;
+    font-size: 25px;
+    line-height: 33px;
+}
+.point {
+    min-width: 66px;
+    height: 32px;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 0px 12px 0px 4px;
+    color: white;
+    font-family: 'NexaText-ExtraBold', sans-serif;
+    font-size: 21px;
+    line-height: 24px;
+    background: rgb(169, 128, 255);
+    border-radius: 100px;
+}
+.level {
+    display: flex;
+    margin-bottom: 24px;
+}
+.level-left {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-shrink: 0;
+    text-shadow: rgb(30, 90, 32) 0px 1.5px 0px;
+    font-family: NexaText-ExtraBold, sans-serif;
+    font-size: 23px;
+    background: url(https://web.letmespeak.org/static/media/ShieldIcon.2d01c7fa6c22315ec4b35b26fec8a3f8.svg) 0% 0% / contain;
+    margin: 0px 16px 0px 0px;
+}
+.level-right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.level-right-top {
+    width: 100%;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+.level-right-bottom {
+    width: 100%;
+    height: 12px;
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 100px;
+}
+.day-left {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background: url(https://web.letmespeak.org/static/media/VisaIcon.05845b9068240351feb0733b98bcc97a.svg) 0% 0% / contain;
+    margin: 0px 16px 0px 0px;
+}
+.title-skill {
+    margin-bottom: 16px;
+    font-family: cursive;
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 24px;
+}
+.skill-body {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    row-gap: 24px;
+    margin-bottom: 32px;
+}
+.skill-body-item {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+.talent {
+    width: 100%;
+    min-height: 73px;
+    height: auto;
+    display: flex;
+    border: 2px solid rgba(5, 5, 5, 0.1);
+    border-radius: 12px;
+    direction: ltr; 
+}
+
+.talent-item {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex: 1 1 0%;
+    padding: 16px 0px;
+    direction: ltr;
+}

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Container, Card } from '@material-ui/core';
-import {Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import HomeIcon from '@material-ui/icons/Home';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
+import FaceIcon from '@material-ui/icons/Face';
 import './App.css';
 class App extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <React.Fragment>
@@ -17,12 +18,11 @@ class App extends Component {
                             height: '90vh',
                             margin: '24px',
                             borderRadius: '20px',
-                            // backgroundColor: '#e1bec3',
-                            background: 'linear-gradient(rgb(231, 110, 135) 0%, rgb(255, 170, 122) 100%)',
                             display: 'flex',
                             flexDirection: 'column',
                             overflow: 'hidden',
-                            maxWidth: '430px'
+                            maxWidth: '430px',
+                            boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px',
                         }}
                     >
                         <div style={{ height: '100%', overflow: 'hidden auto', padding: '25px 0px 20px' }}>
@@ -33,10 +33,32 @@ class App extends Component {
 
                         {/* <Grammar/> */}
                         <nav style={{ height: '72px', display: 'grid', borderTop: '1px solid rgb(242, 242, 242)', gridTemplateColumns: 'repeat(4, auto)', backgroundColor: '#fff' }}>
-                            <Link className='footer-child' to={'/page'}>Home</Link>
-                            <Link className='footer-child' to={'/learn/word'}>Words</Link>
-                            <Link className='footer-child' to={'/learn/grammar'}>Grammar</Link>
-                            <Link className='footer-child' to={'/account'}>Account</Link>
+                            <Link className='footer-child' to={'/page'}>
+                                <div className='footer-nav'>
+                                    <HomeIcon />
+                                    <span>Home</span>
+                                </div>
+
+                            </Link>
+                            <Link className='footer-child' to={'/learn/word'}>
+                                <div className='footer-nav'>
+                                    <MenuBookIcon />
+                                    Words
+                                </div>
+
+                            </Link>
+                            <Link className='footer-child' to={'/learn/grammar'}>
+                                <div className='footer-nav'>
+                                    <LibraryAddCheckIcon />
+                                    Grammar
+                                </div>
+                            </Link>
+                            <Link className='footer-child' to={'/account'}>
+                                <div className='footer-nav'>
+                                    <FaceIcon />
+                                    Account
+                                </div>
+                            </Link>
                         </nav>
                     </Card>
                 </Container>

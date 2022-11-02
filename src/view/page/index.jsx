@@ -1,8 +1,14 @@
 import React from 'react';
-function Page() {
-    return (
-        <h1>Page</h1>
-    )
+import './style.css';
+import { Component } from 'react';
+class Page extends Component {
+    render() {
+        return (
+            <div>
+                <h1 className='title'>Page</h1>
+            </div>
+        )
+    }
 }
 
 export default Page

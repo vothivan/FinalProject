@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { Card, Container, CssBaseline, Button } from '@material-ui/core';
+import {Button } from '@material-ui/core';
 import { redirectRouter } from '../../utils/common';
 import { ArrowBack } from '@material-ui/icons';
 import './style.css';
+import api from '../../service/api';
 class LessonAll extends Component {
-    constructor(props) {
-        super(props);
+    componentDidMount() {
+        console.log("*****************");
+        console.log(this.props.match.params);
+        const {id} = this.props.match.params;
+        api.get("/grammar", id).then((res) => {
+            console.log(res);
+        })
     }
 
     /**
@@ -13,8 +19,7 @@ class LessonAll extends Component {
      * @returns 
      */
     render() {
-        const props = this.props;
-        console.log(props);
+        console.log(this.props.match.params);
         return (
             <div>
                 <div style={{ display: 'flex' }}>

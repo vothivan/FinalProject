@@ -52,7 +52,7 @@ const router = [
         layout: ROUTE.LAYOUT,
     },
     {
-        path: ROUTE.GRAMMAR_ALL,
+        path: ROUTE.GRAMMAR_ALL + '/:id',
         pathActive: ROUTE.GRAMMAR_ALL,
         key: ROUTER_KEY.PAGE_LAYOUT,
         component: LessonAll,

@@ -20,7 +20,6 @@ api.interceptors.request.use(function (config) {
             'Accept': 'application/json',
         }
     }
-    console.log(config.headers);
     return config;
 }, function (error) {
     // Do something with request error
@@ -28,7 +27,6 @@ api.interceptors.request.use(function (config) {
 });
 
 api.interceptors.response.use((response) => {
-    console.log(response);
     return response
 }, async function (error) {
     return Promise.reject(error);
