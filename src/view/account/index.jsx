@@ -25,8 +25,7 @@ class Account extends Component {
                     <div className='header-right'>
                         <SettingsIcon style={{ color: 'black', marginRight: '12px' }} />
                         <Button onClick={() => redirectRouter(this.props, '/login')}>
-                            <ExitToAppIcon style={{ color: 'black' }}>
-                            </ExitToAppIcon>
+                            <ExitToAppIcon style={{ color: 'black' }}/>
                         </Button>
                     </div>
                 </div>
@@ -104,7 +103,6 @@ class Account extends Component {
                         Tốc độ học
                     </div>
                 </div>
-                {/* <Button onClick={() => redirectRouter(this.props, '/login')}>Log Out</Button> */}
             </div>
         )
     }

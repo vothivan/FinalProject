@@ -5,6 +5,14 @@ import { ROUTE } from '../../common/constant';
 import api from '../../service/api';
 
 import './style.css'
+
+const listCategory = new Map([
+    ['QUESTION_WORDS', 'Question words'],
+    ['PRESENT_SIMPLE', 'Present simple'],
+    ['PRONOUNS', 'Pronouns'],
+    ['MODAL_VERBS', 'Modal verb'],
+    ['PAST_SIMPLE', 'Past simple'],
+])
 class Grammar extends Component {
 
     constructor(props) {
@@ -38,10 +46,18 @@ class Grammar extends Component {
                 }
             >
                 <Button style={{ width: '100%' }}>
-                    <Card style={{ height: '110px', borderRadius: '20px', marginBottom: '20px', width: '100%' }}>
-                        <div style={{ paddingLeft: '10px', display: 'block' }}>
-                            <div>{item.category}</div>
-                            <div><b>{item.title}</b></div>
+                    <Card style={{ height: '110px', borderRadius: '20px', marginBottom: '20px', width: '100%' ,boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px',}}>
+                        <div style={{ paddingLeft: '10px', display: 'block', textTransform: 'none' }}>
+                            <div>
+                                {listCategory.forEach((value, key) => {
+                                    // console.log(value);
+                                    // console.log(key);
+                                    if (key === item.category) {
+                                        return value
+                                    }
+                                })}
+                            </div>
+                            <div>{item.title}</div>
                             <div style={{ display: 'flex' }}>
                                 {item.descriptions.map((des) => {
                                     return (
