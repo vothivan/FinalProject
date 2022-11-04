@@ -89,25 +89,12 @@ class Grammar extends Component {
     render() {
         return (
             <div className='root'>
-                <h1 className='title'>Grammar</h1>
+                <h1 className='title'>
+                    Ngữ pháp
+                </h1>
                 <h4 style={{ fontFamily: 'cursive' }}>Luyện tập cấu trúc ngữ pháp và nhận sao</h4>
                 <div>
                     <h3>Trung cấp</h3>
-                    {/* {this.state.listTopic.filter((item) => {
-                        if (item.level === 'INTERMEDIATE') {
-                            return (
-                                <div>
-                                    {this.itemTopic(item)}
-                                </div>
-                            )
-                        } else if (item.level === 'ADVANCED') {
-                            return (
-                                <div>
-                                    {this.itemTopic(item)}
-                                </div>
-                            )
-                        }
-                    })} */}
                     {this.state.listTopic.filter((item) => item.level === 'INTERMEDIATE').map((itemTopic) => <div>{this.itemTopic(itemTopic)}</div>)}
                     <h3>Cao cấp</h3>
                     {this.state.listTopic.filter((item) => item.level === 'ADVANCED').map((itemTopic) => <div>{this.itemTopic(itemTopic)}</div>)}
