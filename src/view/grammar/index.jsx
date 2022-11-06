@@ -90,13 +90,13 @@ class Grammar extends Component {
         return (
             <div className='root'>
                 <h1 className='title'>
-                    Ngữ pháp
+                    Grammar
                 </h1>
-                <h4 style={{ fontFamily: 'cursive' }}>Luyện tập cấu trúc ngữ pháp và nhận sao</h4>
+                <h4 style={{ fontFamily: 'cursive' }}>Practice grammar rules and earn stars</h4>
                 <div>
-                    <h3>Trung cấp</h3>
+                    <h3>Intermediate</h3>
                     {this.state.listTopic.filter((item) => item.level === 'INTERMEDIATE').map((itemTopic) => <div>{this.itemTopic(itemTopic)}</div>)}
-                    <h3>Cao cấp</h3>
+                    <h3>Advanced</h3>
                     {this.state.listTopic.filter((item) => item.level === 'ADVANCED').map((itemTopic) => <div>{this.itemTopic(itemTopic)}</div>)}
                 </div>
             </div>

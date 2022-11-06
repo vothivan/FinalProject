@@ -5,6 +5,7 @@ export const ROUTE = {
     LOGIN: '/login',
     PAGE: '/page',
     WORD: '/learn/word',
+    LIST_WORD: '/learn/word/list-word',
     GRAMMAR: '/learn/grammar',
     GRAMMAR_ALL: '/learn/grammar/lesson_all',
     ACCOUNT: '/account',
