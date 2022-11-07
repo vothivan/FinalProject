@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
 import React, { Component } from "react";
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
+import { redirectRouter } from "../../utils/common";
 const list_Word = {
   'Juxtaposition': 'Tương quan',
   'Mesmerizing': 'Mê hoặc',
@@ -21,7 +22,7 @@ class listWord extends Component {
       <div>
         <div className="item-left">
           <div className="item-left-1">
-            <VolumeUpIcon style={{color: 'rgb(70, 177, 255)'}}/>
+            <VolumeUpIcon style={{ color: 'rgb(70, 177, 255)' }} />
           </div>
           <div className="item-left-2">
             <span>
@@ -41,17 +42,16 @@ class listWord extends Component {
   render() {
     return (
       <div className="total">
-        <Button className="button-return" style={{ marginRight: 'auto', borderRadius: '50%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px' }}>
+        <Button
+          className="button-return"
+          style={{ marginRight: 'auto', borderRadius: '50%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px' }}
+          onClick={() => redirectRouter(this.props, '/learn/word')}
+        >
           <ArrowBack style={{ marginRight: 'auto' }} />
         </Button>
         <div className="body">
           <h4>Phổ biến</h4>
           <h1>Từ ngữ cho những chuyên gia</h1>
-          { for (let key in list_Word) {
-                return {this.listWordItem()}
-            }
-          }
-          
         </div>
       </div>
     )

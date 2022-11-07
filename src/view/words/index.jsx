@@ -7,17 +7,33 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { redirectRouter } from '../../utils/common';
 import { ROUTE } from '../../common/constant';
+import api from '../../service/api';
 class Words extends Component {
-    itemWords = () => {
+    constructor(props) {
+        super(props);
+        this.state = {
+            list_vocabulary: []
+        }
+    }
+    componentDidMount() {
+        api.get("/vocabulary").then((response) => {
+            if (response && response.status === 200) {
+                this.setState({
+                    list_vocabulary: response.data,
+                })
+            }
+        })
+    }
+    itemWords = (title, num_of_word,) => {
         return (
-            <Button 
-                className='button-word' 
+            <Button
+                className='button-word'
                 style={{ borderRadius: '20px', marginLeft: '20px', display: 'block', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px' }}
                 onClick={() => redirectRouter(this.props, ROUTE.LIST_WORD)}
             >
                 <div className='button-top'>
-                    <span className='button-top-top'>Trái cây và rau củ</span>
-                    <span className='button-top-bottom'>47 từ</span>
+                    <span className='button-top-top'>{title}</span>
+                    <span className='button-top-bottom'>{num_of_word} words</span>
                 </div >
                 <div className='button-bottom'>
                     <div style={{ display: 'block' }}>
@@ -77,22 +93,24 @@ class Words extends Component {
                     {this.itemWords()}
                     {this.itemWords()}
                 </div>
-                <div>
-                    <div className='header-item'>
-                        <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold', marginBottom: '0px' }}>In progress</h1>
-                        <Button className='button-see-all' style={{textTransform: 'none' }}>
-                            See all
-                            <NavigateNextIcon/>
-                        </Button>
-                    </div>
-                    
-                    <div style={{ display: 'flex' }}>
-                        {this.itemWords()}
-                        {this.itemWords()}
-                        {this.itemWords()}
-                    </div>
-                </div>
-
+                {this.state.list_vocabulary.map((item) => {
+                    return (
+                        <div>
+                            <div className='header-item'>
+                                <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold', marginBottom: '0px' }}>{item.topic}</h1>
+                                <Button className='button-see-all' style={{ textTransform: 'none' }}>
+                                    See all
+                                    <NavigateNextIcon />
+                                </Button>
+                            </div>
+                            <div style={{ display: 'flex' }}>
+                                {item.types.map((item_vocabulary) => (
+                                    this.itemWords(item_vocabulary.type, item_vocabulary.numOfWords)
+                                ))}
+                            </div>
+                        </div>
+                    )
+                })}
             </div >
         )
     }
