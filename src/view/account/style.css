@@ -24,7 +24,7 @@
 
 .header-left-right {
     margin: 0px 0px 0px 6px;
-    font-family: 'NexaText-ExtraBold', sans-serif;
+    font-family: cursive;
     font-size: 19px;
     line-height: 21px;
     display: block;
@@ -52,6 +52,7 @@
     font-family: cursive;
     font-size: 25px;
     line-height: 33px;
+    font-weight: bold;
 }
 .point {
     min-width: 66px;
@@ -99,6 +100,7 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
     margin-bottom: 4px;
+    font-family: cursive;
 }
 .level-right-bottom {
     width: 100%;
@@ -119,7 +121,7 @@
     margin-bottom: 16px;
     font-family: cursive;
     font-size: 21px;
-    font-weight: 400;
+    font-weight: bold;
     line-height: 24px;
 }
 .skill-body {
@@ -133,6 +135,8 @@
     display: flex;
     -webkit-box-align: center;
     align-items: center;
+    font-family: cursive;
+    justify-content: center;
 }
 .talent {
     width: 100%;
@@ -154,4 +158,8 @@
     flex: 1 1 0%;
     padding: 16px 0px;
     direction: ltr;
+    font-family: cursive;
+}
+.skill-body-item-2 {
+    display: block;
 }
