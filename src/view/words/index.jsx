@@ -18,44 +18,12 @@ class Words extends Component {
     componentDidMount() {
         api.get("/vocabulary").then((response) => {
             if (response && response.status === 200) {
+                console.log(response.data);
                 this.setState({
                     list_vocabulary: response.data,
                 })
             }
         })
-    }
-    itemWords = (title, num_of_word,) => {
-        return (
-            <Button
-                className='button-word'
-                style={{ borderRadius: '20px', marginLeft: '20px', display: 'block', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px' }}
-                onClick={() => redirectRouter(this.props, ROUTE.LIST_WORD)}
-            >
-                <div className='button-top'>
-                    <span className='button-top-top'>{title}</span>
-                    <span className='button-top-bottom'>{num_of_word} words</span>
-                </div >
-                <div className='button-bottom'>
-                    <div style={{ display: 'block' }}>
-                        <div className='sidebar' style={{ width: '80px' }}>
-                            <div className='sidebar-point'>
-                            </div>
-                            <Rating
-                                style={{ fontSize: '17px' }}
-                                name="customized-empty"
-                                defaultValue={2}
-                                precision={0.5}
-                                emptyIcon={<StarBorderIcon fontSize="inherit" />}
-                                max={3}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <img style={{ width: '50px', height: '50px', zIndex: '1' }} src='https://lmscdn.org/storage/RD9eBBBRFTtHByxMTD5ZHg0iZgMhRUYwWhEtRww2bhEIPF1YKUAPPEcRHX0mD3cpLH9JAyM=?v=151&c=_EEFAEE.png'></img>
-                    </div>
-                </div>
-            </Button>
-        )
     }
     render() {
         return (
@@ -89,24 +57,22 @@ class Words extends Component {
                 </div>
                 <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold', marginBottom: '0px' }}>In progress</h1>
                 <div style={{ display: 'flex' }}>
+                    {/* {this.itemWords()}
                     {this.itemWords()}
-                    {this.itemWords()}
-                    {this.itemWords()}
+                    {this.itemWords()} */}
                 </div>
-                {this.state.list_vocabulary.map((item) => {
+                {this.state.list_vocabulary.map((item, key) => {
                     return (
-                        <div>
+                        <div key={key}>
                             <div className='header-item'>
-                                <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold', marginBottom: '0px' }}>{item.topic}</h1>
+                                <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold', marginBottom: '0px' }}>{item.titleNative}</h1>
                                 <Button className='button-see-all' style={{ textTransform: 'none' }}>
                                     See all
                                     <NavigateNextIcon />
                                 </Button>
                             </div>
                             <div style={{ display: 'flex' }}>
-                                {item.types.map((item_vocabulary) => (
-                                    this.itemWords(item_vocabulary.type, item_vocabulary.numOfWords)
-                                ))}
+                                {item.wordSets.map((item_vocabulary, key) => <ItemWords key={key} {...item_vocabulary} onClick={() => redirectRouter(this.props, ROUTE.LIST_WORD)} />)}
                             </div>
                         </div>
                     )
@@ -114,6 +80,39 @@ class Words extends Component {
             </div >
         )
     }
+}
+
+function ItemWords({ title, titleNative, stars, wordsCount, linkPic, onClick }) {
+    return (
+        <Button
+            className='button-word'
+            style={{ borderRadius: '20px', marginLeft: '20px', display: 'block', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px' }}
+            onClick={onClick}
+        >
+            <div className='button-top'>
+                <span className='button-top-top'>{title}</span>
+                <span className='button-top-bottom'>{wordsCount} words</span>
+            </div >
+            <div className='button-bottom'>
+                <div style={{ display: 'block' }}>
+                    {/* <div className='sidebar' style={{ width: '80px' }}>
+                    </div> */}
+                    <progress value="32" max="100" style={{ width: '80px'}} backGround="red" > 32% </progress>
+                    <Rating
+                        style={{ fontSize: '17px', width: '80px' }}
+                        name="customized-empty"
+                        defaultValue={stars}
+                        emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                        max={3}
+                        disabled={true}
+                    />
+                </div>
+                <div>
+                    <img style={{ width: '50px', height: '50px', zIndex: '1' }} src={linkPic}></img>
+                </div>
+            </div>
+        </Button>
+    )
 }
 
 export default Words

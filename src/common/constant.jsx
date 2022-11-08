@@ -9,6 +9,7 @@ export const ROUTE = {
     GRAMMAR: '/learn/grammar',
     GRAMMAR_ALL: '/learn/grammar/lesson_all',
     ACCOUNT: '/account',
+    SELECT_CHARACTER: '/select_character',
 };
 
 export const ROUTER_KEY = {

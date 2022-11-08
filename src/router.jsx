@@ -9,6 +9,7 @@ import Account from './view/account';
 import Page from './view/page';
 import LessonAll from './view/grammar/lesson_all';
 import ListWord from './view/words/list-word';
+import SelectCharacter from './view/account/setting';
 const router = [
     {
         path: ROUTE.HOME,
@@ -71,6 +72,13 @@ const router = [
         pathActive: ROUTE.ACCOUNT,
         key: ROUTER_KEY.PAGE_LAYOUT,
         component: Account,
+        layout: ROUTE.LAYOUT,
+    },
+    {
+        path: ROUTE.SELECT_CHARACTER,
+        pathActive: ROUTE.SELECT_CHARACTER,
+        key: ROUTER_KEY.PAGE_LAYOUT,
+        component: SelectCharacter,
         layout: ROUTE.LAYOUT,
     },
 ];

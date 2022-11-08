@@ -27,7 +27,7 @@ class Account extends Component {
                         </div>
                     </div >
                     <div className='header-right'>
-                        <Button>
+                        <Button onClick={() => redirectRouter(this.props, '/select_character')}>
                             <SettingsIcon style={{ color: 'black', marginRight: '12px' }} />
                         </Button>
                         <Button onClick={() => redirectRouter(this.props, '/login')}>
