@@ -8,6 +8,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { redirectRouter } from '../../utils/common';
 import { ROUTE } from '../../common/constant';
 import api from '../../service/api';
+import { Link } from 'react-router-dom';
 class Words extends Component {
     constructor(props) {
         super(props);
@@ -72,7 +73,7 @@ class Words extends Component {
                                 </Button>
                             </div>
                             <div style={{ display: 'flex' }}>
-                                {item.wordSets.map((item_vocabulary, key) => <ItemWords key={key} {...item_vocabulary} onClick={() => redirectRouter(this.props, ROUTE.LIST_WORD)} />)}
+                                {item.wordSets.map((item_vocabulary, key) => <ItemWords id={item.id} key={key} {...item_vocabulary} />)}
                             </div>
                         </div>
                     )
@@ -82,36 +83,41 @@ class Words extends Component {
     }
 }
 
-function ItemWords({ title, titleNative, stars, wordsCount, linkPic, onClick }) {
+function ItemWords({ title, titleNative, stars, wordsCount, linkPic, onClick, percentCompleted, id }) {
     return (
-        <Button
-            className='button-word'
-            style={{ borderRadius: '20px', marginLeft: '20px', display: 'block', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px' }}
-            onClick={onClick}
+        <Link
+            style={{ textDecoration: 'none' }} to={{ pathname: ROUTE.LIST_WORD + '/' + id }}
         >
-            <div className='button-top'>
-                <span className='button-top-top'>{title}</span>
-                <span className='button-top-bottom'>{wordsCount} words</span>
-            </div >
-            <div className='button-bottom'>
-                <div style={{ display: 'block' }}>
-                    {/* <div className='sidebar' style={{ width: '80px' }}>
+            <Button
+                className='button-word'
+                style={{ borderRadius: '20px', marginLeft: '20px', display: 'block', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px' }}
+                // onClick={onClick}
+            >
+                <div className='button-top'>
+                    <span className='button-top-top'>{title}</span>
+                    <span className='button-top-bottom'>{wordsCount} words</span>
+                </div >
+                <div className='button-bottom'>
+                    <div style={{ display: 'block' }}>
+                        {/* <div className='sidebar' style={{ width: '80px' }}>
                     </div> */}
-                    <progress value="32" max="100" style={{ width: '80px'}} backGround="red" > 32% </progress>
-                    <Rating
-                        style={{ fontSize: '17px', width: '80px' }}
-                        name="customized-empty"
-                        defaultValue={stars}
-                        emptyIcon={<StarBorderIcon fontSize="inherit" />}
-                        max={3}
-                        disabled={true}
-                    />
+                        <progress value={percentCompleted} max="100" style={{ width: '80px' }} backGround="red" > {percentCompleted}% </progress>
+                        <Rating
+                            style={{ fontSize: '17px', width: '80px' }}
+                            name="customized-empty"
+                            defaultValue={stars}
+                            emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                            max={3}
+                            disabled={true}
+                        />
+                    </div>
+                    <div>
+                        <img style={{ width: '50px', height: '50px', zIndex: '1' }} src={linkPic}></img>
+                    </div>
                 </div>
-                <div>
-                    <img style={{ width: '50px', height: '50px', zIndex: '1' }} src={linkPic}></img>
-                </div>
-            </div>
-        </Button>
+            </Button>
+        </Link>
+
     )
 }
 

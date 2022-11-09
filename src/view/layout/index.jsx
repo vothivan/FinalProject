@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import router from '../../router';
 import Login from '../login';
 import App from '../../App';
-import {ROUTER_KEY} from '../../common/constant';
+import { ROUTER_KEY } from '../../common/constant';
 
 class Layout extends Component {
 
@@ -30,9 +30,14 @@ class Layout extends Component {
      * @return {String}
      */
     getCurrentRoute = () => {
+        console.log(router);
         for (let i = 0; i < router.length; i++) {
             const route = router[i];
-            if (window.location.pathname === route.pathActive) {
+            if (route.pathActive === '/') {
+                if (window.location.pathname === route.pathActive) {
+                    return route;
+                }
+            } else if (window.location.pathname.startsWith(route.pathActive)) {
                 return route;
             }
         }
@@ -41,27 +46,28 @@ class Layout extends Component {
 
     render() {
         const currentRoute = this.getCurrentRoute();
+
         return (
             <div>
-                {this.getCurrentRoute().key === ROUTER_KEY.PAGE_VIEW ?
-                (window.location.pathname === '/' ?
-                    <Route path='/' render={(props) => <Login {...props}/>}/>:
-                    <Switch currentRoute={currentRoute}>
-                        {this.getRouter(router)}
-                    </Switch>
-                ) :
-                (
-                    <div>
-                        <App
-                          mainPage={
-                            <Switch currentRoute={currentRoute}>
-                              {this.getRouter(router)}
-                            </Switch>
-                          }  
-                        />
-                    </div>
-                )
-            }
+                {currentRoute.key === ROUTER_KEY.PAGE_VIEW ?
+                    (window.location.pathname === '/' ?
+                        <Route path='/' render={(props) => <Login {...props} />} /> :
+                        <Switch currentRoute={currentRoute}>
+                            {this.getRouter(router)}
+                        </Switch>
+                    ) :
+                    (
+                        <div>
+                            <App
+                                mainPage={
+                                    <Switch currentRoute={currentRoute}>
+                                        {this.getRouter(router)}
+                                    </Switch>
+                                }
+                            />
+                        </div>
+                    )
+                }
 
             </div>
         )

@@ -211,6 +211,7 @@
 .item-left-2 {
     display: flex;
     flex-direction: column;
+    text-align: left;
 }
 .item-right {
     width: 28px;

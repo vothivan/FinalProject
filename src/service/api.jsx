@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const BASE_URL = 'http://10.1.44.104:8888/';
-const BASE_URL = 'http://localhost:8888/';
+const BASE_URL = 'http://learn-to-earn.io:8888/';
 
 const api = axios.create({
     'baseURL': BASE_URL,

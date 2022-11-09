@@ -3,6 +3,7 @@ import { ArrowBack } from "@material-ui/icons";
 import React, { Component } from "react";
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import { redirectRouter } from "../../utils/common";
+import api from "../../service/api";
 const list_Word = {
   'Juxtaposition': 'Tương quan',
   'Mesmerizing': 'Mê hoặc',
@@ -17,19 +18,42 @@ const list_Word = {
 }
 
 class listWord extends Component {
-  listWordItem = () => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      list_vocabulary: [],
+    }
+  }
+  componentDidMount() {
+    api.get("/vocabulary/" + this.props.match.params.id).then((res) => {
+      if (res && res.status === 200) {
+        this.setState({
+          list_vocabulary: res.data,
+        })
+      }
+    })
+  }
+
+  playAudio = (urlAudio) => {
+    const audio = new Audio(urlAudio);
+    audio.play();
+  }
+
+  listWordItem = (word, translate, audio) => {
     return (
       <div>
         <div className="item-left">
           <div className="item-left-1">
-            <VolumeUpIcon style={{ color: 'rgb(70, 177, 255)' }} />
+            <Button onClick={() => this.playAudio(audio)} >
+              <VolumeUpIcon style={{ color: 'rgb(70, 177, 255)' }} />
+            </Button>
           </div>
           <div className="item-left-2">
             <span>
-              Juxtaposition
+              {word}
             </span>
             <span>
-              Tương quan
+              {translate}
             </span>
           </div>
         </div>
@@ -52,6 +76,9 @@ class listWord extends Component {
         <div className="body">
           <h4>Phổ biến</h4>
           <h1>Từ ngữ cho những chuyên gia</h1>
+          {this.state.list_vocabulary.map((item) => {
+            return this.listWordItem(item.word, item.translate, item.audio)
+          })}
         </div>
       </div>
     )

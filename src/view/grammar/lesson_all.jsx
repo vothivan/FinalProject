@@ -6,8 +6,6 @@ import './style.css';
 import api from '../../service/api';
 class LessonAll extends Component {
     componentDidMount() {
-        console.log("*****************");
-        console.log(this.props.match.params);
         const {id} = this.props.match.params;
         api.get("/grammar", id).then((res) => {
             console.log(res);

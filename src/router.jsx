@@ -47,7 +47,7 @@ const router = [
         layout: ROUTE.LAYOUT,
     },
     {
-        path: ROUTE.LIST_WORD,
+        path: ROUTE.LIST_WORD + '/:id',
         pathActive: ROUTE.LIST_WORD,
         key: ROUTER_KEY.PAGE_LAYOUT,
         component: ListWord,
