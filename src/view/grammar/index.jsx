@@ -68,9 +68,9 @@ class Grammar extends Component {
                     </div>
                     <div style={{ textAlign: 'right', minWidth: '95px' }}>
                         <div style={{ height: '26px', marginBottom: '16px' }}>
-                            <img src='https://cdn-icons-png.flaticon.com/128/1985/1985836.png' style={{ width: '20px', marginRight: '7px' }} />
-                            <img src='https://cdn-icons-png.flaticon.com/128/1985/1985836.png' style={{ width: '20px', marginRight: '7px' }} />
-                            <img src='https://cdn-icons-png.flaticon.com/128/1985/1985836.png' style={{ width: '20px', marginRight: '7px' }} />
+                            <img alt='' src='https://cdn-icons-png.flaticon.com/128/1985/1985836.png' style={{ width: '20px', marginRight: '7px' }} />
+                            <img alt='' src='https://cdn-icons-png.flaticon.com/128/1985/1985836.png' style={{ width: '20px', marginRight: '7px' }} />
+                            <img alt='' src='https://cdn-icons-png.flaticon.com/128/1985/1985836.png' style={{ width: '20px', marginRight: '7px' }} />
                         </div>
                         <div style={{ display: 'flex', width: '47px', height: '39px' }}>
                             <div className='point'>

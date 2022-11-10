@@ -15,4 +15,5 @@ export const ROUTE = {
 export const ROUTER_KEY = {
     PAGE_VIEW: 1,
     PAGE_LAYOUT: 2,
+    PAGE_NOT_NAV: 3,
 }

@@ -25,7 +25,7 @@ class LoginUser extends Component {
     }
     api.post("/accounts/login", payload).then((res) => {
       if (res && res.status === 200) {
-        if(res.data.token) {
+        if (res.data.token) {
           localStorage.setItem("jwt_token", res.data.token)
           redirectRouter(this.props, '/page')
         }
@@ -34,17 +34,17 @@ class LoginUser extends Component {
   }
   render() {
     return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className='paper'>
-        <div style={{ display: 'flex' }}>
-          <div alignItems='center' justify='flex-start'>
-            <Button onClick={() => redirectRouter(this.props, '/')}><ArrowBack/></Button>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className='paper'>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{marginLeft: '0px'}}>
+              <Button onClick={() => redirectRouter(this.props, '/')}><ArrowBack /></Button>
+            </div>
+            <Typography component="h1" variant="h5">
+              Đăng nhập tài khoản
+            </Typography>
           </div>
-          <Typography component="h1" variant="h5" alignItems='center' justify='center'>
-            Đăng nhập tài khoản
-          </Typography>
-        </div>
           <TextField
             variant="outlined"
             margin="normal"
@@ -78,7 +78,7 @@ class LoginUser extends Component {
             color="primary"
             // className={classes.submit}
             onClick={() => this.onClickSignIn()}
-            style={{marginTop: '20px', marginBottom: '20px'}}
+            style={{ marginTop: '20px', marginBottom: '20px' }}
           >
             Đăng nhập
           </Button>
@@ -95,9 +95,9 @@ class LoginUser extends Component {
               </Link>
             </Grid>
           </Grid>
-      </div>
-    </Container>
-  );
-  }  
+        </div>
+      </Container>
+    );
+  }
 }
 export default LoginUser

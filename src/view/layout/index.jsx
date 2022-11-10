@@ -30,15 +30,22 @@ class Layout extends Component {
      * @return {String}
      */
     getCurrentRoute = () => {
-        console.log(router);
         for (let i = 0; i < router.length; i++) {
             const route = router[i];
+            console.log(route.path);
+            console.log(route.path.includes('id'));
             if (route.pathActive === '/') {
                 if (window.location.pathname === route.pathActive) {
                     return route;
                 }
-            } else if (window.location.pathname.startsWith(route.pathActive)) {
-                return route;
+            } else {
+                if (route.path.endsWith('id') && window.location.pathname.startsWith(route.pathActive)) {    
+                    return route;
+                } else {
+                    if (window.location.pathname.startsWith(route.pathActive)) {
+                        return route;
+                    }
+                }
             }
         }
         return [];
@@ -59,6 +66,7 @@ class Layout extends Component {
                     (
                         <div>
                             <App
+                                notNav={currentRoute.key === ROUTER_KEY.PAGE_NOT_NAV ? true : false}
                                 mainPage={
                                     <Switch currentRoute={currentRoute}>
                                         {this.getRouter(router)}

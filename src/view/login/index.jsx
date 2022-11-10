@@ -5,7 +5,6 @@ import './style.css';
 class Login extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             status: '',
         }
@@ -24,7 +23,6 @@ class Login extends Component {
      */
     render() {
         const props = this.props;
-        console.log(props);
         return (
             <React.Fragment>
                 <CssBaseline />
@@ -48,8 +46,8 @@ class Login extends Component {
                                 <h1 className='header'>Chào mừng đến với thế giới của Let Me Speak</h1>
                                 <span className='header-child'>Bạn sẽ bắt đầu học tiếng Anh hôm nay!</span>
                                 <div className='button'>
-                                    <Button className='button-child' onClick={() => redirectRouter(this.props, '/register')}>Tôi là người mới</Button>
-                                    <div style={{ width: '100%', margin: '16px 0px 0px' }}><Button className='button-child' onClick={() => redirectRouter(this.props, '/login')}>Tôi đã có tài khoản</Button></div>
+                                    <Button className='button-child' style={{width: '100%', borderRadius: '20px', textTransform: 'none', fontWeight: 'bold', fontSize: '18px'}} onClick={() => redirectRouter(this.props, '/register')}>Tôi là người mới</Button>
+                                    <div style={{ width: '100%', margin: '16px 0px 0px' }}><Button className='button-child' style={{fontWeight: 'bold', width: '100%', borderRadius: '20px', textTransform: 'none', fontSize: '18px'}} onClick={() => redirectRouter(this.props, '/login')}>Tôi đã có tài khoản</Button></div>
                                 </div>
                             </div>
                         }

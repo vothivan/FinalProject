@@ -220,6 +220,18 @@
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
 }
+.level {
+    display: block;
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 17px;
+    line-height: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.translate {
+    font-size: 12px;
+    line-height: 13px;
+    color: rgba(0, 0, 0, 0.3);
+}
 progress::-moz-progress-bar { background: rgb(22, 212, 70); }
 progress::-webkit-progress-value { background: rgb(22, 212, 70); }
 progress { color: rgb(22, 212, 70); }

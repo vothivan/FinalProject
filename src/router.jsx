@@ -49,7 +49,7 @@ const router = [
     {
         path: ROUTE.LIST_WORD + '/:id',
         pathActive: ROUTE.LIST_WORD,
-        key: ROUTER_KEY.PAGE_LAYOUT,
+        key: ROUTER_KEY.PAGE_NOT_NAV,
         component: ListWord,
         layout: ROUTE.LAYOUT,
     },
@@ -63,7 +63,7 @@ const router = [
     {
         path: ROUTE.GRAMMAR_ALL + '/:id',
         pathActive: ROUTE.GRAMMAR_ALL,
-        key: ROUTER_KEY.PAGE_LAYOUT,
+        key: ROUTER_KEY.PAGE_NOT_NAV,
         component: LessonAll,
         layout: ROUTE.LAYOUT,
     },

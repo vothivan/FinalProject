@@ -8,6 +8,10 @@ import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
 import FaceIcon from '@material-ui/icons/Face';
 import './App.css';
 class App extends Component {
+    componentDidMount(){
+        console.log(this.props.notNav);
+        console.log(this.props.mainPage);
+    }
     render() {
         return (
             <React.Fragment>
@@ -32,34 +36,34 @@ class App extends Component {
                         </div>
 
                         {/* <Grammar/> */}
-                        <nav style={{ height: '72px', display: 'grid', borderTop: '1px solid rgb(242, 242, 242)', gridTemplateColumns: 'repeat(4, auto)', backgroundColor: '#fff' }}>
-                            <Link className='footer-child' to={'/page'}>
-                                <div className='footer-nav'>
-                                    <HomeIcon />
-                                    <span>Home</span>
-                                </div>
-
-                            </Link>
-                            <Link className='footer-child' to={'/learn/word'}>
-                                <div className='footer-nav'>
-                                    <MenuBookIcon />
-                                    Words
-                                </div>
-
-                            </Link>
-                            <Link className='footer-child' to={'/learn/grammar'}>
-                                <div className='footer-nav'>
-                                    <LibraryAddCheckIcon />
-                                    Grammar
-                                </div>
-                            </Link>
-                            <Link className='footer-child' to={'/account'}>
-                                <div className='footer-nav'>
-                                    <FaceIcon />
-                                    Account
-                                </div>
-                            </Link>
-                        </nav>
+                        {this.props.notNav === false &&
+                            <nav style={{ height: '72px', display: 'grid', borderTop: '1px solid rgb(242, 242, 242)', gridTemplateColumns: 'repeat(4, auto)', backgroundColor: '#fff' }}>
+                                <Link className='footer-child' to={'/page'}>
+                                    <div className='footer-nav'>
+                                        <HomeIcon />
+                                        <span>Home</span>
+                                    </div>
+                                </Link>
+                                <Link className='footer-child' to={'/learn/word'}>
+                                    <div className='footer-nav'>
+                                        <MenuBookIcon />
+                                        Words
+                                    </div>
+                                </Link>
+                                <Link className='footer-child' to={'/learn/grammar'}>
+                                    <div className='footer-nav'>
+                                        <LibraryAddCheckIcon />
+                                        Grammar
+                                    </div>
+                                </Link>
+                                <Link className='footer-child' to={'/account'}>
+                                    <div className='footer-nav'>
+                                        <FaceIcon />
+                                        Account
+                                    </div>
+                                </Link>
+                            </nav>
+                        }
                     </Card>
                 </Container>
             </React.Fragment>

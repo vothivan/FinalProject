@@ -40,7 +40,7 @@
     align-items: center;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    margin: auto 0px 0px;
+    margin-bottom: 0px;
 }
 .point {
     width: 50px;

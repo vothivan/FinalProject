@@ -1,4 +1,4 @@
-import { Button, Grid } from '@material-ui/core';
+import { Button} from '@material-ui/core';
 import React from 'react';
 import { Component } from 'react';
 import { redirectRouter } from '../../utils/common';
@@ -19,7 +19,7 @@ class Account extends Component {
                 <div className='header'>
                     <div className='header-left' style={{ display: 'flex' }}>
                         <div>
-                            <img src='https://s2.coinmarketcap.com/static/img/coins/64x64/20581.png' style={{ width: '30px', height: '30px' }} />
+                            <img alt='' src='https://s2.coinmarketcap.com/static/img/coins/64x64/20581.png' style={{ width: '30px', height: '30px' }} />
                         </div>
                         <div className='header-left-right' style={{ display: 'block', fontSize: '19px', lineHeight: '24px', marginLeft: '6px' }}>
                             <div style={{ fontSize: '16px', lineHeight: '13px', color: 'black', fontWeight: 'bold' }}>1.26</div>

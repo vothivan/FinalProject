@@ -5,7 +5,6 @@ import { Button } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { redirectRouter } from '../../utils/common';
 import { ROUTE } from '../../common/constant';
 import api from '../../service/api';
 import { Link } from 'react-router-dom';
@@ -13,15 +12,22 @@ class Words extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list_vocabulary: []
+            list_vocabulary: [],
+            vocabulary_progress: [],
         }
     }
     componentDidMount() {
         api.get("/vocabulary").then((response) => {
             if (response && response.status === 200) {
-                console.log(response.data);
                 this.setState({
                     list_vocabulary: response.data,
+                })
+            }
+        })
+        api.get("/vocabulary/in-progress").then((response) => {
+            if (response && response.status === 200) {
+                this.setState({
+                    vocabulary_progress: response.data,
                 })
             }
         })
@@ -53,14 +59,14 @@ class Words extends Component {
                     </div>
                     <div className='continue-button'>
                         <Button className='button-child' style={{ borderRadius: '20px', textTransform: 'none', fontWeight: 'bold', fontSize: '25px' }}>Continue</Button>
-                        <img style={{ width: '64px', height: '64px', zIndex: '1' }} src='https://lmscdn.org/storage/RD9eBBBRFTtHByxMTD5ZHg0iZgMhRUYwWhEtRww2bhEIPF1YKUAPPEcRHX0mD3cpLH9JAyM=?v=151&c=_EEFAEE.png'></img>
+                        <img alt='' style={{ width: '64px', height: '64px', zIndex: '1' }} src='https://lmscdn.org/storage/RD9eBBBRFTtHByxMTD5ZHg0iZgMhRUYwWhEtRww2bhEIPF1YKUAPPEcRHX0mD3cpLH9JAyM=?v=151&c=_EEFAEE.png'></img>
                     </div>
                 </div>
                 <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold', marginBottom: '0px' }}>In progress</h1>
                 <div style={{ display: 'flex' }}>
-                    {/* {this.itemWords()}
-                    {this.itemWords()}
-                    {this.itemWords()} */}
+                    {this.state.vocabulary_progress.map((item, key) => {
+                        return <ItemWords key={key} {...item}/>
+                    })}
                 </div>
                 {this.state.list_vocabulary.map((item, key) => {
                     return (
@@ -91,7 +97,6 @@ function ItemWords({ title, titleNative, stars, wordsCount, linkPic, onClick, pe
             <Button
                 className='button-word'
                 style={{ borderRadius: '20px', marginLeft: '20px', display: 'block', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px' }}
-                // onClick={onClick}
             >
                 <div className='button-top'>
                     <span className='button-top-top'>{title}</span>
@@ -99,8 +104,6 @@ function ItemWords({ title, titleNative, stars, wordsCount, linkPic, onClick, pe
                 </div >
                 <div className='button-bottom'>
                     <div style={{ display: 'block' }}>
-                        {/* <div className='sidebar' style={{ width: '80px' }}>
-                    </div> */}
                         <progress value={percentCompleted} max="100" style={{ width: '80px' }} backGround="red" > {percentCompleted}% </progress>
                         <Rating
                             style={{ fontSize: '17px', width: '80px' }}
@@ -112,7 +115,7 @@ function ItemWords({ title, titleNative, stars, wordsCount, linkPic, onClick, pe
                         />
                     </div>
                     <div>
-                        <img style={{ width: '50px', height: '50px', zIndex: '1' }} src={linkPic}></img>
+                        <img alt='' style={{ width: '50px', height: '50px', zIndex: '1' }} src={linkPic}></img>
                     </div>
                 </div>
             </Button>

@@ -4,65 +4,25 @@ import React, { Component } from "react";
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import { redirectRouter } from "../../utils/common";
 import api from "../../service/api";
-const list_Word = {
-  'Juxtaposition': 'Tương quan',
-  'Mesmerizing': 'Mê hoặc',
-  'Lullaby': 'Lời ru',
-  'Pristine': 'Tinh khôi',
-  'Confluence': 'Tụ họp',
-  'Tranquility': 'Sự thanh bình',
-  'Euphoria': 'Sự khoan khoái',
-  'Aurora': 'Cực quang',
-  'Serendipity': 'Tình cờ gặp may',
-  'Taciturn': 'Lâm li',
-}
 
 class listWord extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      list_vocabulary: [],
+      info: '',
+      words: [],
     }
   }
-  componentDidMount() {
-    api.get("/vocabulary/" + this.props.match.params.id).then((res) => {
-      if (res && res.status === 200) {
-        this.setState({
-          list_vocabulary: res.data,
-        })
-      }
-    })
+  async componentDidMount() {
+
+    const res = await api.get("/vocabulary/" + this.props.match.params.id);
+    if (res.status === 200) {
+      this.setState({
+        ...res.data,
+      })
+    }
   }
 
-  playAudio = (urlAudio) => {
-    const audio = new Audio(urlAudio);
-    audio.play();
-  }
-
-  listWordItem = (word, translate, audio) => {
-    return (
-      <div>
-        <div className="item-left">
-          <div className="item-left-1">
-            <Button onClick={() => this.playAudio(audio)} >
-              <VolumeUpIcon style={{ color: 'rgb(70, 177, 255)' }} />
-            </Button>
-          </div>
-          <div className="item-left-2">
-            <span>
-              {word}
-            </span>
-            <span>
-              {translate}
-            </span>
-          </div>
-        </div>
-        <div className="item-right">
-
-        </div>
-      </div>
-    );
-  }
   render() {
     return (
       <div className="total">
@@ -73,15 +33,57 @@ class listWord extends Component {
         >
           <ArrowBack style={{ marginRight: 'auto' }} />
         </Button>
-        <div className="body">
-          <h4>Phổ biến</h4>
-          <h1>Từ ngữ cho những chuyên gia</h1>
-          {this.state.list_vocabulary.map((item) => {
-            return this.listWordItem(item.word, item.translate, item.audio)
-          })}
+        <div style={{ width: '100%' }}>
+          <h2>{this.state.info.topicNative}</h2>
+          <h1>{this.state.info.titleNative}</h1>
+          <span className="level">Beginner</span>
+          {
+            this.state.words.filter((itemWord) => itemWord.level === 'EASY')
+              .map((item, key) => <ListWordItem key={key} {...item} />)
+          }
+          <span className="level">Intermediate</span>
+          {
+            this.state.words.filter((itemWord) => itemWord.level === 'MEDIUM')
+              .map((item, key) => <ListWordItem key={key} {...item} />)
+          }
+          <span className="level">Advanced</span>
+          {
+            this.state.words.filter((itemWord) => itemWord.level === 'HARD')
+              .map((item, key) => <ListWordItem key={key} {...item} />)
+          }
         </div>
       </div>
     )
   }
 }
 export default listWord;
+
+function ListWordItem({ word, translate, audio }) {
+
+  const playAudio = (urlAudio) => {
+    new Audio(urlAudio).play();
+  }
+
+  return (
+    <div>
+      <div className="item-left">
+        <div className="item-left-1">
+          <Button onClick={() => playAudio(audio)} >
+            <VolumeUpIcon style={{ color: 'rgb(70, 177, 255)' }} />
+          </Button>
+        </div>
+        <div className="item-left-2">
+          <span>
+            {word}
+          </span>
+          <span className="translate">
+            {translate}
+          </span>
+        </div>
+      </div>
+      <div className="item-right">
+
+      </div>
+    </div>
+  );
+}
