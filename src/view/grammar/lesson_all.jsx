@@ -28,7 +28,7 @@ class LessonAll extends Component {
      */
     render() {
         return (
-            <div style={{height: '100%',alignContent: 'space-between'}}>
+            <div style={{height: '100%'}}>
                 <div style={{ display: 'flex' }}>
                     <div style={{display: 'flex', alignItems: 'flex-start'}}>
                         <Button onClick={() => redirectRouter(this.props, '/learn/grammar')}><ArrowBack /></Button>

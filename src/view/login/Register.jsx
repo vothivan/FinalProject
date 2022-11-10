@@ -15,17 +15,10 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isChecked: false,
       email: '',
       password: '',
     }
   };
-
-  handleChangeChecked = (event) => {
-    this.setState({
-      isChecked: event.target.checked
-    })
-  }
 
   onClickRegister = () => {
     const payload = {
@@ -73,25 +66,14 @@ class Register extends Component {
             value={this.state.password}
             onChange={(event) => this.setState({ password: event.target.value })}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                value="remember"
-                color="primary"
-                checked={this.state.isChecked}
-                onChange={(event) => this.handleChangeChecked(event)}
-              />}
-            label="Tôi đồng ý với Điều kiện sử dụng và chính sách quyền riêng tư"
-            style={{marginTop: '20px', marginBottom: '20px'}}
-          />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className='submit'
-            disabled={!this.state.isChecked}
             onClick={() => this.onClickRegister()}
+            className='button-child'
+            style={{ width: '100%', alignItems: 'center', borderRadius: '20px', marginBottom: '10px', marginTop: '10px', color: 'black', textTransform: 'none', fontWeight: 'bold', fontSize: '18px' }}
           >
             Tạo tài khoản
           </Button>

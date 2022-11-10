@@ -37,12 +37,10 @@ class LoginUser extends Component {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className='paper'>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div style={{marginLeft: '0px'}}>
-              <Button onClick={() => redirectRouter(this.props, '/')}><ArrowBack /></Button>
-            </div>
-            <Typography component="h1" variant="h5">
-              Đăng nhập tài khoản
+          <div style={{ display: 'flex' }}>
+            <Button onClick={() => redirectRouter(this.props, '/')} style={{ marginLeft: '-24px' }}><ArrowBack /></Button>
+            <Typography component="h1" variant="h5" style={{ marginLeft: '134px', fontWeight: 'bold' }}>
+              Login
             </Typography>
           </div>
           <TextField
@@ -78,23 +76,11 @@ class LoginUser extends Component {
             color="primary"
             // className={classes.submit}
             onClick={() => this.onClickSignIn()}
-            style={{ marginTop: '20px', marginBottom: '20px' }}
+            className='button-child'
+            style={{ width: '100%', alignItems: 'center', borderRadius: '20px', marginBottom: '10px', marginTop: '10px', color: 'black', textTransform: 'none', fontWeight: 'bold', fontSize: '18px' }}
           >
-            Đăng nhập
+            Login
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Quên mật khẩu?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Tạo tài khoản mới"}
-                {/* {redirectRouter(this.props, '/register')} */}
-              </Link>
-            </Grid>
-          </Grid>
         </div>
       </Container>
     );
