@@ -9,8 +9,6 @@ import FaceIcon from '@material-ui/icons/Face';
 import './App.css';
 class App extends Component {
     componentDidMount(){
-        console.log(this.props.notNav);
-        console.log(this.props.mainPage);
     }
     render() {
         return (

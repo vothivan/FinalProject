@@ -28,7 +28,7 @@ class listWord extends Component {
       <div className="total">
         <Button
           className="button-return"
-          style={{ marginRight: 'auto', borderRadius: '50%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px' }}
+          style={{ marginRight: 'auto' }}
           onClick={() => redirectRouter(this.props, '/learn/word')}
         >
           <ArrowBack style={{ marginRight: 'auto' }} />
@@ -81,9 +81,7 @@ function ListWordItem({ word, translate, audio }) {
           </span>
         </div>
       </div>
-      <div className="item-right">
-
-      </div>
+      <Button className='button-child' style={{ width: '100%', alignItems: 'end', borderRadius: '20px' }}>Learn</Button>
     </div>
   );
 }

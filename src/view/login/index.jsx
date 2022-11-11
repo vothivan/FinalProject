@@ -22,7 +22,6 @@ class Login extends Component {
      * @returns 
      */
     render() {
-        const props = this.props;
         return (
             <React.Fragment>
                 <CssBaseline />

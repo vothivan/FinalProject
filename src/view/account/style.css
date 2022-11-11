@@ -24,7 +24,6 @@
 
 .header-left-right {
     margin: 0px 0px 0px 6px;
-    font-family: cursive;
     font-size: 19px;
     line-height: 21px;
     display: block;
@@ -49,7 +48,6 @@
     margin: 3px 0px 11px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-family: cursive;
     font-size: 25px;
     line-height: 33px;
     font-weight: bold;
@@ -100,7 +98,6 @@
     -webkit-box-pack: justify;
     justify-content: space-between;
     margin-bottom: 4px;
-    font-family: cursive;
 }
 .level-right-bottom {
     width: 100%;
@@ -119,7 +116,6 @@
 }
 .title-skill {
     margin-bottom: 16px;
-    font-family: cursive;
     font-size: 21px;
     font-weight: bold;
     line-height: 24px;
@@ -135,7 +131,6 @@
     display: flex;
     -webkit-box-align: center;
     align-items: center;
-    font-family: cursive;
     justify-content: center;
 }
 .talent {
@@ -158,7 +153,6 @@
     flex: 1 1 0%;
     padding: 16px 0px;
     direction: ltr;
-    font-family: cursive;
 }
 .skill-body-item-2 {
     display: block;

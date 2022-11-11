@@ -9,6 +9,7 @@ import Account from './view/account';
 import Page from './view/page';
 import LessonAll from './view/grammar/lesson_all';
 import ListWord from './view/words/list-word';
+import SeeAll from './view/words/seeAll';
 import SelectCharacter from './view/account/setting';
 const router = [
     {
@@ -51,6 +52,13 @@ const router = [
         pathActive: ROUTE.LIST_WORD,
         key: ROUTER_KEY.PAGE_NOT_NAV,
         component: ListWord,
+        layout: ROUTE.LAYOUT,
+    },
+    {
+        path: ROUTE.SEE_ALL + '/:id',
+        pathActive: ROUTE.SEE_ALL,
+        key: ROUTER_KEY.PAGE_NOT_NAV,
+        component: SeeAll,
         layout: ROUTE.LAYOUT,
     },
     {

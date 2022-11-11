@@ -8,6 +8,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { ROUTE } from '../../common/constant';
 import api from '../../service/api';
 import { Link } from 'react-router-dom';
+import { redirectRouter } from '../../utils/common';
 class Words extends Component {
     constructor(props) {
         super(props);
@@ -65,31 +66,37 @@ class Words extends Component {
                 <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold', marginBottom: '0px' }}>In progress</h1>
                 <div style={{ display: 'flex' }}>
                     {this.state.vocabulary_progress.map((item, key) => {
-                        return <ItemWords key={key} {...item}/>
+                        return <ItemWords key={key} {...item} />
                     })}
                 </div>
-                {this.state.list_vocabulary.map((item, key) => {
-                    return (
-                        <div key={key}>
-                            <div className='header-item'>
-                                <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold', marginBottom: '0px' }}>{item.titleNative}</h1>
-                                <Button className='button-see-all' style={{ textTransform: 'none' }}>
-                                    See all
-                                    <NavigateNextIcon />
-                                </Button>
+                {this.state.list_vocabulary.forEach((item, key) => {
+                    var myOjb = item.wordSets;
+                    var size = Object.keys(myOjb).length;
+                    console.log(size);
+                    if (size > 0) {
+                        return (
+                            <div key={key}>
+                                <div className='header-item'>
+                                    <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold', marginBottom: '0px' }}>{item.titleNative}</h1>
+                                    <Button className='button-see-all' style={{ textTransform: 'none' }} onClick={() => redirectRouter(this.props, ROUTE.SEE_ALL + '/' + item.id)}>
+                                        See all
+                                        <NavigateNextIcon />
+                                    </Button>
+                                </div>
+                                <div style={{ display: 'flex' }}>
+                                    {item.wordSets.map((item_vocabulary, key) => <ItemWords id={item.id} key={key} {...item_vocabulary} />)}
+                                </div>
                             </div>
-                            <div style={{ display: 'flex' }}>
-                                {item.wordSets.map((item_vocabulary, key) => <ItemWords id={item.id} key={key} {...item_vocabulary} />)}
-                            </div>
-                        </div>
-                    )
+                        )
+                    }
+
                 })}
             </div >
         )
     }
 }
 
-function ItemWords({ title, titleNative, stars, wordsCount, linkPic, onClick, percentCompleted, id }) {
+function ItemWords({ title, titleNative, stars, wordsCount, linkPic, percentCompleted, id }) {
     return (
         <Link
             style={{ textDecoration: 'none' }} to={{ pathname: ROUTE.LIST_WORD + '/' + id }}

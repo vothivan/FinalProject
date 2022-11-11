@@ -2,8 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { Component } from 'react';
@@ -37,11 +35,9 @@ class Register extends Component {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className='paper'>
-          <div style={{display: 'flex'}}>
-            <div alignItems='center' justify='flex-start'>
-              <Button onClick={() => redirectRouter(this.props, '/')}><ArrowBack /></Button>
-            </div>
-            <Typography component="h1" variant="h5" alignItems='center' justify='center'>
+          <div style={{ display: 'flex' }}>
+            <Button onClick={() => redirectRouter(this.props, '/')} style={{ marginLeft: '-24px' }}><ArrowBack /></Button>
+            <Typography component="h1" variant="h5" style={{ marginLeft: '84px', fontWeight: 'bold' }}>
               Tài khoản mới
             </Typography>
           </div>
@@ -73,7 +69,7 @@ class Register extends Component {
             color="primary"
             onClick={() => this.onClickRegister()}
             className='button-child'
-            style={{ width: '100%', alignItems: 'center', borderRadius: '20px', marginBottom: '10px', marginTop: '10px', color: 'black', textTransform: 'none', fontWeight: 'bold', fontSize: '18px' }}
+            style={{ boxShadow: 'rgb(242 153 74) 0px 4px 0px', width: '100%', alignItems: 'center', borderRadius: '20px', marginBottom: '10px', marginTop: '10px', color: 'black', textTransform: 'none', fontWeight: 'bold', fontSize: '18px' }}
           >
             Tạo tài khoản
           </Button>

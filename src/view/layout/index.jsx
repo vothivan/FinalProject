@@ -32,8 +32,6 @@ class Layout extends Component {
     getCurrentRoute = () => {
         for (let i = 0; i < router.length; i++) {
             const route = router[i];
-            console.log(route.path);
-            console.log(route.path.includes('id'));
             if (route.pathActive === '/') {
                 if (window.location.pathname === route.pathActive) {
                     return route;
