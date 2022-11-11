@@ -4,16 +4,8 @@ import { Link } from 'react-router-dom';
 import { ROUTE } from '../../common/constant';
 import FlashOnIcon from '@material-ui/icons/FlashOn';
 import api from '../../service/api';
-
 import './style.css'
 
-const listCategory = new Map([
-    ['QUESTION_WORDS', 'Question words'],
-    ['PRESENT_SIMPLE', 'Present simple'],
-    ['PRONOUNS', 'Pronouns'],
-    ['MODAL_VERBS', 'Modal verb'],
-    ['PAST_SIMPLE', 'Past simple'],
-])
 class Grammar extends Component {
 
     constructor(props) {
@@ -38,29 +30,30 @@ class Grammar extends Component {
      * @param {*} item 
      * @returns 
      */
-    itemTopic(item) {
+    itemTopic({id, tags, header, name}) {
         return (
             <Link
                 style={{ textDecoration: 'none' }}
                 to={
-                    ROUTE.GRAMMAR_ALL + '/' + item.id
+                    ROUTE.GRAMMAR_ALL + '/' + id
                 }
             >
                 <Button style={{ height: '110px', borderRadius: '20px', marginBottom: '20px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', justifyContent: 'space-between' }}>
                     <div style={{ paddingLeft: '10px', display: 'block', textTransform: 'none', textAlign: 'left' }}>
-                        <div>
+                        {/* <div>
                             {listCategory.forEach((value, key) => {
                                 if (key === item.category) {
                                     return value
                                 }
                             })}
-                        </div>
-                        <div>{item.title}</div>
+                        </div> */}
+                        <div>{header}</div>
+                        <div>{name}</div>
                         <div style={{ display: 'flex' }}>
-                            {item.descriptions.map((des) => {
+                            {tags.map((tag) => {
                                 return (
                                     <div style={{ marginRight: '5px' }}>
-                                        <Chip size='small' label={des} style={{ background: 'rgb(241, 136, 129)', fontSize: '11px' }} />
+                                        <Chip size='small' label={tag} style={{ background: 'rgb(241, 136, 129)', fontSize: '11px' }} />
                                     </div>
                                 )
                             })}
@@ -95,9 +88,9 @@ class Grammar extends Component {
                 <h4 style={{ fontFamily: 'cursive' }}>Practice grammar rules and earn stars</h4>
                 <div>
                     <h3>Intermediate</h3>
-                    {this.state.listTopic.filter((item) => item.level === 'INTERMEDIATE').map((itemTopic) => <div>{this.itemTopic(itemTopic)}</div>)}
+                    {this.state.listTopic.filter((item) => item.level === 'INTERMEDIATE').map((itemTopic) => <div>{this.itemTopic({itemTopic})}</div>)}
                     <h3>Advanced</h3>
-                    {this.state.listTopic.filter((item) => item.level === 'ADVANCED').map((itemTopic) => <div>{this.itemTopic(itemTopic)}</div>)}
+                    {this.state.listTopic.filter((item) => item.level === 'ADVANCED').map((itemTopic) => <div>{this.itemTopic({itemTopic})}</div>)}
                 </div>
             </div>
         )
