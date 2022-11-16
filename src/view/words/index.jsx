@@ -88,7 +88,7 @@ class Words extends Component {
                             </div>
                         )
                     }
-
+                    return (<div></div>)
                 })}
             </div >
         )
