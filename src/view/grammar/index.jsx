@@ -25,12 +25,24 @@ class Grammar extends Component {
         })
     }
 
-    /**
-     * itemTopic
-     * @param {*} item 
-     * @returns 
-     */
-    itemTopic({id, tags, header, name}) {
+    render() {
+        return (
+            <div className='root'>
+                <h1 className='title'>
+                    Grammar
+                </h1>
+                <h4 style={{ fontFamily: 'cursive' }}>Practice grammar rules and earn stars</h4>
+                <div>
+                    <h3>Intermediate</h3>
+                    {this.state.listTopic.filter((item) => item.level === 'INTERMEDIATE').map((itemTopic, key) => <ItemTopic key={key} {...itemTopic}/>)}
+                    <h3>Advanced</h3>
+                    {this.state.listTopic.filter((item) => item.level === 'ADVANCED').map((itemTopic, key) => <ItemTopic key={key} {...itemTopic}/>)}
+                </div>
+            </div>
+        )
+    }
+};
+function ItemTopic({id, header, tags}) {
         return (
             <Link
                 style={{ textDecoration: 'none' }}
@@ -48,7 +60,7 @@ class Grammar extends Component {
                             })}
                         </div> */}
                         <div>{header}</div>
-                        <div>{name}</div>
+                        {/* <div>{name}</div> */}
                         <div style={{ display: 'flex' }}>
                             {tags.map((tag) => {
                                 return (
@@ -74,27 +86,7 @@ class Grammar extends Component {
                     </div>
                 </Button>
             </Link>
-
-
-        )
-    }
-
-    render() {
-        return (
-            <div className='root'>
-                <h1 className='title'>
-                    Grammar
-                </h1>
-                <h4 style={{ fontFamily: 'cursive' }}>Practice grammar rules and earn stars</h4>
-                <div>
-                    <h3>Intermediate</h3>
-                    {this.state.listTopic.filter((item) => item.level === 'INTERMEDIATE').map((itemTopic) => <div>{this.itemTopic({itemTopic})}</div>)}
-                    <h3>Advanced</h3>
-                    {this.state.listTopic.filter((item) => item.level === 'ADVANCED').map((itemTopic) => <div>{this.itemTopic({itemTopic})}</div>)}
-                </div>
-            </div>
-        )
-    }
-}
+        );
+    };
 
 export default Grammar

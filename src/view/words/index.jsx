@@ -69,10 +69,9 @@ class Words extends Component {
                         return <ItemWords key={key} {...item} />
                     })}
                 </div>
-                {this.state.list_vocabulary.forEach((item, key) => {
+                {this.state.list_vocabulary.map((item, key) => {
                     var myOjb = item.wordSets;
                     var size = Object.keys(myOjb).length;
-                    console.log(size);
                     if (size > 0) {
                         return (
                             <div key={key}>
