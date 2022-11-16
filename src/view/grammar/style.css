@@ -13,11 +13,12 @@
     color: rgb(16, 17, 17);
     font-family: cursive;
 }
+
 .chip {
     color: linear-gradient(rgb(231, 110, 135) 0%, rgb(227 133 80) 100%);
     background-color: '#ff7777';
     background: rgb(241, 136, 129);
-    
+
 }
 
 .button {
@@ -30,6 +31,7 @@
     flex-shrink: 0;
     width: 100%;
 }
+
 .total {
     height: 100%;
     padding: 24px 16px;
@@ -42,6 +44,7 @@
     justify-content: space-between;
     margin-bottom: 0px;
 }
+
 .point {
     width: 50px;
     height: 20px;
@@ -56,4 +59,9 @@
     line-height: 20px;
     background: rgb(169, 128, 255);
     border-radius: 100px;
+}
+
+span.txt_guide {
+    font-weight: var(--font_weight);
+    color: var(--color);
 }
