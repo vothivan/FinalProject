@@ -52,6 +52,7 @@ class listWord extends Component {
               .map((item, key) => <ListWordItem key={key} {...item} />)
           }
         </div>
+        <Button className='button-child' style={{ width: '100%', alignItems: 'end', borderRadius: '20px' }}>Learn</Button>
       </div>
     )
   }
@@ -81,7 +82,6 @@ function ListWordItem({ word, translate, audio }) {
           </span>
         </div>
       </div>
-      <Button className='button-child' style={{ width: '100%', alignItems: 'end', borderRadius: '20px' }}>Learn</Button>
     </div>
   );
 }
