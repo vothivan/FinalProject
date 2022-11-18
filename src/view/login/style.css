@@ -37,7 +37,7 @@
 .header-child {
   white-space: pre-line;
     font-size: min(2.6vh, 17px);
-    font-weight: 400;
+    font-weight: bold;
     line-height: min(3vh, 20px);
     display: block;
     margin: min(1.8vh, 12px) 0px min(3.8vh, 24px);

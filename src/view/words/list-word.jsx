@@ -52,7 +52,7 @@ class listWord extends Component {
               .map((item, key) => <ListWordItem key={key} {...item} />)
           }
         </div>
-        <Button className='button-child' style={{ width: '100%', alignItems: 'end', borderRadius: '20px' }}>Learn</Button>
+         <Button className='button-child' style={{ width: '100%', alignItems: 'end', borderRadius: '20px' }}>Learn</Button>     
       </div>
     )
   }
@@ -66,7 +66,7 @@ function ListWordItem({ word, translate, audio }) {
   }
 
   return (
-    <div>
+    <div style={{marginBottom: '20px'}}>
       <div className="item-left">
         <div className="item-left-1">
           <Button onClick={() => playAudio(audio)} >
