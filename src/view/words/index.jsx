@@ -14,7 +14,7 @@ class Words extends Component {
         super(props);
         this.state = {
             list_vocabulary: [],
-            vocabulary_progress: [],
+            // vocabulary_progress: [],
         }
     }
     componentDidMount() {
@@ -25,18 +25,18 @@ class Words extends Component {
                 })
             }
         })
-        api.get("/vocabulary/in-progress").then((response) => {
-            if (response && response.status === 200) {
-                this.setState({
-                    vocabulary_progress: response.data,
-                })
-            }
-        })
+        // api.get("/vocabulary/in-progress").then((response) => {
+        //     if (response && response.status === 200) {
+        //         this.setState({
+        //             vocabulary_progress: response.data,
+        //         })
+        //     }
+        // })
     }
     render() {
         return (
-            <div>
-                <h1 className='title' style={{ fontWeight: 'bold', marginBottom: '24px' }}>Words</h1>
+            <div className='root'>
+                <h1 style={{ fontWeight: 'bold', fontSize: '40px' }}>Words</h1>
                 <div className='topic-continue'>
                     <span className='title-small'>Thức ăn</span>
                     <span className='title-big'>Trái cây và rau củ</span>
@@ -63,39 +63,36 @@ class Words extends Component {
                         <img alt='' style={{ width: '64px', height: '64px', zIndex: '1' }} src='https://lmscdn.org/storage/RD9eBBBRFTtHByxMTD5ZHg0iZgMhRUYwWhEtRww2bhEIPF1YKUAPPEcRHX0mD3cpLH9JAyM=?v=151&c=_EEFAEE.png'></img>
                     </div>
                 </div>
-                <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold', marginBottom: '0px' }}>In progress</h1>
-                <div style={{ display: 'flex' }}>
-                    {this.state.vocabulary_progress.map((item, key) => {
-                        return <ItemWords key={key} {...item} />
+                <div>
+                    {this.state.list_vocabulary.map((item, key) => {
+                        var myOjb = item.wordSets;
+                        var size = Object.keys(myOjb).length;
+                        if (size > 0) {
+                            return (
+                                <div key={key} style={{ marginTop: '20px' }}>
+                                    <div className='header-item'>
+                                        <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold' }}>{item.titleNative}</h1>
+                                        <Button className='button-see-all' style={{ textTransform: 'none', fontWeight: 'bold' }} onClick={() => redirectRouter(this.props, ROUTE.SEE_ALL + '/' + item.id)}>
+                                            See all
+                                            <NavigateNextIcon />
+                                        </Button>
+                                    </div>
+                                    <div style={{ display: 'flex' }}>
+                                        {item.wordSets.map((item_vocabulary, key) => <ItemWords id={item.id} key={key} {...item_vocabulary} />)}
+                                    </div>
+                                </div>
+                            )
+                        }
+                        return (<div></div>)
                     })}
                 </div>
-                {this.state.list_vocabulary.map((item, key) => {
-                    var myOjb = item.wordSets;
-                    var size = Object.keys(myOjb).length;
-                    if (size > 0) {
-                        return (
-                            <div key={key}>
-                                <div className='header-item'>
-                                    <h1 className='title' style={{ fontSize: '21px', fontWeight: 'bold', marginBottom: '0px' }}>{item.titleNative}</h1>
-                                    <Button className='button-see-all' style={{ textTransform: 'none' }} onClick={() => redirectRouter(this.props, ROUTE.SEE_ALL + '/' + item.id)}>
-                                        See all
-                                        <NavigateNextIcon />
-                                    </Button>
-                                </div>
-                                <div style={{ display: 'flex' }}>
-                                    {item.wordSets.map((item_vocabulary, key) => <ItemWords id={item.id} key={key} {...item_vocabulary} />)}
-                                </div>
-                            </div>
-                        )
-                    }
-                    return (<div></div>)
-                })}
+
             </div >
         )
     }
 }
 
-function ItemWords({ title, titleNative, stars, wordsCount, linkPic, percentCompleted, id }) {
+function ItemWords({ title, titleNative, star, stars, wordsCount, linkPic, percentCompleted, id }) {
     return (
         <Link
             style={{ textDecoration: 'none' }} to={{ pathname: ROUTE.LIST_WORD + '/' + id }}
@@ -110,11 +107,11 @@ function ItemWords({ title, titleNative, stars, wordsCount, linkPic, percentComp
                 </div >
                 <div className='button-bottom'>
                     <div style={{ display: 'block' }}>
-                        <progress value={percentCompleted} max="100" style={{ width: '80px' }} backGround="red" > {percentCompleted}% </progress>
+                        <progress value={percentCompleted ? percentCompleted : 60} max="100" style={{ width: '80px' }} backGround="red" > {percentCompleted ? percentCompleted : ''}% </progress>
                         <Rating
                             style={{ fontSize: '17px', width: '80px' }}
                             name="customized-empty"
-                            defaultValue={stars}
+                            defaultValue={star ? star : 2}
                             emptyIcon={<StarBorderIcon fontSize="inherit" />}
                             max={3}
                             disabled={true}

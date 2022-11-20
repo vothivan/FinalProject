@@ -33,11 +33,11 @@ class LessonAll extends Component {
         const { grammarDetail } = this.state;
         return (
             <div style={{ height: '100%' }}>
-                <div style={{ display: 'flex' }}>
+                <div>
                     <div style={{ display: 'flex', alignItems: 'flex-start' }}>
                         <Button onClick={() => redirectRouter(this.props, '/learn/grammar')}><ArrowBack /></Button>
                     </div>
-                    <div style={{ alignItems: 'center', justify: 'flex-end' }}>
+                    <div style={{ alignItems: 'center', margin: '0px 16px 0px 16px' }}>
                         <Guide guide={grammarDetail.descriptions} />
                     </div>
                 </div>

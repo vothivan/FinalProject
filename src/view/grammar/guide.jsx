@@ -18,8 +18,8 @@ function Guide({ guide = {} }) {
     const { items=[], title, header } = guide;
     return (
         <div>
-            <h2>{title}</h2>
-            <h1>{header}</h1>
+            <h2 style={{textAlign: 'center'}}>{title}</h2>
+            <h1 style={{textAlign: 'center'}}>{header}</h1>
             {
                 items.map((item, index) => <GuideItem key={index} item={item} />)
             }

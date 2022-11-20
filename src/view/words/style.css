@@ -33,7 +33,6 @@
 }
 .topic-continue {
     position: relative;
-    margin: 0px 16px;
     padding: 24px 16px 16px 32px;
     background: rgb(99, 97, 233);
     border-radius: 20px; 
@@ -155,7 +154,7 @@
     font-family: NexaText-ExtraBold, sans-serif;
     font-size: 17px;
     line-height: 20px;
-    margin: 0px 0px 2px;
+    margin: 0px 0px 0px;
     font-weight: bold;
 }
 .button-top-bottom {
@@ -182,7 +181,7 @@
     justify-content: space-between;
     -webkit-box-align: center;
     align-items: center;
-    margin: 24px 0px 12px;
+    max-height: 50px;
     padding: 0px 16px;
 }
 .total {

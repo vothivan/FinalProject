@@ -23,11 +23,11 @@ function ItemWords({ title, titleNative, stars, wordsCount, linkPic, onClick, pe
                 </div >
                 <div className='button-bottom'>
                     <div style={{ display: 'block' }}>
-                        <progress value={percentCompleted} max="100" style={{ width: '80px' }} backGround="red" > {percentCompleted}% </progress>
+                        <progress value={percentCompleted ? percentCompleted : 60} max="100" style={{ width: '80px' }} backGround="red" > {percentCompleted}% </progress>
                         <Rating
                             style={{ fontSize: '17px', width: '80px' }}
                             name="customized-empty"
-                            defaultValue={stars}
+                            defaultValue={stars ? stars : 2}
                             emptyIcon={<StarBorderIcon fontSize="inherit" />}
                             max={3}
                             disabled={true}
@@ -80,7 +80,7 @@ class SeeAll extends Component {
                 >
                     <ArrowBack style={{ marginRight: 'auto' }} />
                 </Button>
-                <p style={{fontSize: '48px', textAlign: 'center', fontWeight: 'bold'}}>{list_vocabulary.titleNative}</p>
+                <div style={{fontSize: '40px', textAlign: 'center', fontWeight: 'bold', height: '60px'}}>{list_vocabulary.titleNative}</div>
                 <div style={{ margin: 'auto', display: 'flex', flexWrap: 'wrap' }}>
                     {wordSets.map((item) => {
                         return (

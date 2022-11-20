@@ -6,6 +6,7 @@ export const ROUTE = {
     PAGE: '/page',
     WORD: '/learn/word',
     LIST_WORD: '/learn/word/list-word',
+    LEARN_WORD: '/learn-words',
     SEE_ALL: '/learn/word/see-all',
     GRAMMAR: '/learn/grammar',
     GRAMMAR_ALL: '/learn/grammar/lesson_all',
