@@ -14,10 +14,15 @@ class LoginUser extends Component {
     this.state = {
       email: '',
       password: '',
+      error: ''
     }
   }
   onClickSignIn = () => {
-    const payload = {
+    if (this.state.email && this.state.password) {
+      this.setState({
+        error: ''
+      })
+      const payload = {
       email: this.state.email,
       password: this.state.password,
     }
@@ -29,6 +34,12 @@ class LoginUser extends Component {
         }
       }
     })
+    } else {
+      this.setState({
+        error: 'Please fill in all the information.'
+      })
+    }
+    
   }
   render() {
     return (
@@ -37,10 +48,12 @@ class LoginUser extends Component {
         <div className='paper'>
           <div style={{ display: 'flex' }}>
             <Button onClick={() => redirectRouter(this.props, '/')} style={{ marginLeft: '-24px' }}><ArrowBack /></Button>
-            <Typography component="h1" variant="h5" style={{ marginLeft: '134px', fontWeight: 'bold' }}>
-              Login
+            <Typography component="h1" variant="h5" style={{ marginLeft: '47px', fontWeight: 'bold' }}>
+              I have got an account
             </Typography>
           </div>
+          <br></br>
+          {this.state.error && <span style={{color: 'red'}}>{this.state.error}</span>}
           <TextField
             variant="outlined"
             margin="normal"
@@ -53,6 +66,7 @@ class LoginUser extends Component {
             autoFocus
             value={this.state.email}
             onChange={(event) => this.setState({ email: event.target.value })}
+            placeholder='Please enter the email address.'
           />
           <TextField
             variant="outlined"
@@ -66,7 +80,9 @@ class LoginUser extends Component {
             autoComplete="current-password"
             value={this.state.password}
             onChange={(event) => this.setState({ password: event.target.value })}
+            placeholder='Please enter the password.'
           />
+          <br></br>
           <Button
             type="submit"
             fullWidth

@@ -15,11 +15,16 @@ class Register extends Component {
     this.state = {
       email: '',
       password: '',
+      error: '',
     }
   };
 
   onClickRegister = () => {
-    const payload = {
+    if (this.state.email && this.state.password) {
+      this.setState({
+        error: ''
+      })
+      const payload = {
       email: this.state.email,
       password: this.state.password,
     }
@@ -28,6 +33,12 @@ class Register extends Component {
         redirectRouter(this.props, '/page')
       }
     })
+    } else {
+      this.setState({
+        error: 'Please fill in all the information.'
+      })
+    }
+    
   }
 
   render() {
@@ -38,9 +49,11 @@ class Register extends Component {
           <div style={{ display: 'flex' }}>
             <Button onClick={() => redirectRouter(this.props, '/')} style={{ marginLeft: '-24px' }}><ArrowBack /></Button>
             <Typography component="h1" variant="h5" style={{ marginLeft: '84px', fontWeight: 'bold' }}>
-              Tài khoản mới
+              I'm new here
             </Typography>
           </div>
+          <br></br>
+          {this.state.error && <span style={{color: 'red'}}>{this.state.error}</span>}
           <TextField
             variant="outlined"
             margin="normal"
@@ -51,6 +64,7 @@ class Register extends Component {
             autoFocus
             value={this.state.email}
             onChange={(event) => this.setState({ email: event.target.value })}
+            placeholder='Please enter the email address.'
           />
           <TextField
             variant="outlined"
@@ -61,7 +75,9 @@ class Register extends Component {
             autoComplete="current-password"
             value={this.state.password}
             onChange={(event) => this.setState({ password: event.target.value })}
+            placeholder='Please enter the password.'
           />
+          <br/>
           <Button
             type="submit"
             fullWidth
@@ -71,7 +87,7 @@ class Register extends Component {
             className='button-child'
             style={{ boxShadow: 'rgb(242 153 74) 0px 4px 0px', width: '100%', alignItems: 'center', borderRadius: '20px', marginBottom: '10px', marginTop: '10px', color: 'black', textTransform: 'none', fontWeight: 'bold', fontSize: '18px' }}
           >
-            Tạo tài khoản
+            Register
           </Button>
         </div>
       </Container>

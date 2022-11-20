@@ -49,38 +49,6 @@ class Account extends Component {
                         </div>
                     </div>
                 </div>
-                <div className='level'>
-                    <span className='level-left'>3</span>
-                    <div className='level-right'>
-                        <div className='level-right-top'>
-                            <span>
-                                Level 3
-                            </span>
-                            <span>
-                                1436 / 2500 XP
-                            </span>
-                        </div>
-                        <div className='level-right-bottom'>
-
-                        </div>
-                    </div>
-                </div>
-                <div className='level'>
-                    <span className='day-left'></span>
-                    <div className='level-right'>
-                        <div className='level-right-top'>
-                            <span>
-                                Visa days
-                            </span>
-                            <span>
-                                0 / 30
-                            </span>
-                        </div>
-                        <div className='level-right-bottom'>
-
-                        </div>
-                    </div>
-                </div>
                 <h3 className='title-skill'>
                     Skills
                 </h3>

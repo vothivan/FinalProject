@@ -23,7 +23,7 @@
 
 .image {
   height: 50%;
-  margin: auto 0px;
+  margin-top: 20px;
 }
 
 .header {
@@ -36,12 +36,12 @@
 }
 .header-child {
   white-space: pre-line;
-    font-size: min(2.6vh, 17px);
-    font-weight: bold;
-    line-height: min(3vh, 20px);
-    display: block;
-    margin: min(1.8vh, 12px) 0px min(3.8vh, 24px);
-    text-align: center;
+  font-size: min(2.6vh, 17px);
+  font-weight: bold;
+  line-height: min(3vh, 20px);
+  display: block;
+  margin-top: -130px;
+  text-align: center;
 }
 .button {
   display: flex;

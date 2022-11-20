@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 const { ethers } = require("ethers");
 
 const { ethereum } = window;
-const provider = new ethers.providers.Web3Provider(ethereum);
-
+// const provider = new ethers.providers.Web3Provider(ethereum);
+const provider = ((window.ethereum != null) ? new ethers.providers.Web3Provider(window.ethereum) : ethers.providers.getDefaultProvider());
 export function useMetamaskWallet() {
 
     const [accountAddress, setAccountAddress] = useState('');
