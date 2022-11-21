@@ -12,6 +12,7 @@ import ListWord from './view/words/list-word';
 import SeeAll from './view/words/seeAll';
 import SelectCharacter from './view/account/setting';
 import LearnWords from './view/words/learn';
+import LearnGrammar from './view/grammar/learn';
 const router = [
     {
         path: ROUTE.HOME,
@@ -56,7 +57,7 @@ const router = [
         layout: ROUTE.LAYOUT,
     },
     {
-        path: ROUTE.LEARN_WORD,
+        path: ROUTE.LEARN_WORD+ '/:id',
         pathActive: ROUTE.LEARN_WORD,
         key: ROUTER_KEY.PAGE_NOT_NAV,
         component: LearnWords,
@@ -81,6 +82,13 @@ const router = [
         pathActive: ROUTE.GRAMMAR_ALL,
         key: ROUTER_KEY.PAGE_NOT_NAV,
         component: LessonAll,
+        layout: ROUTE.LAYOUT,
+    },
+    {
+        path: ROUTE.LEARN_GRAMMAR,
+        pathActive: ROUTE.LEARN_GRAMMAR,
+        key: ROUTER_KEY.PAGE_NOT_NAV,
+        component: LearnGrammar,
         layout: ROUTE.LAYOUT,
     },
     {

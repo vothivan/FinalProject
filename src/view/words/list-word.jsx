@@ -54,8 +54,8 @@ class listWord extends Component {
         </div>
         <Button
           className='button-child'
-          style={{ width: '100%', alignItems: 'end', borderRadius: '20px' }}
-          onClick={() => redirectRouter(this.props, '/learn-words')}
+          style={{fontSize: '17px', width: '100%', alignItems: 'center', borderRadius: '20px', textTransform: 'none', fontWeight: 'bold' }}
+          onClick={() => redirectRouter(this.props, '/learn-words/' + this.props.match.params.id)}
         >
           Learn
         </Button>

@@ -49,7 +49,7 @@ class LoginUser extends Component {
           <div style={{ display: 'flex' }}>
             <Button onClick={() => redirectRouter(this.props, '/')} style={{ marginLeft: '-24px' }}><ArrowBack /></Button>
             <Typography component="h1" variant="h5" style={{ marginLeft: '47px', fontWeight: 'bold' }}>
-              I have got an account
+              I've got an account
             </Typography>
           </div>
           <br></br>

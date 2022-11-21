@@ -10,6 +10,7 @@ export const ROUTE = {
     SEE_ALL: '/learn/word/see-all',
     GRAMMAR: '/learn/grammar',
     GRAMMAR_ALL: '/learn/grammar/lesson_all',
+    LEARN_GRAMMAR: '/learn-grammar',
     ACCOUNT: '/account',
     SELECT_CHARACTER: '/select_character',
 };

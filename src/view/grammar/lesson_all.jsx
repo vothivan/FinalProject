@@ -43,7 +43,7 @@ class LessonAll extends Component {
                 </div>
                 <div className='total' style={{ display: 'flex', alignItems: 'flex-end' }}>
                     <div className='button'>
-                        <div style={{ width: '100%', margin: '16px 0px 0px' }}><Button className='button-child' style={{ width: '100%', alignItems: 'end', borderRadius: '20px' }} onClick={() => redirectRouter(this.props, '/login')}>Learn</Button></div>
+                        <div style={{ width: '100%', margin: '16px 0px 0px' }}><Button className='button-child' style={{fontSize: '17px', width: '100%', alignItems: 'center', borderRadius: '20px', textTransform: 'none', fontWeight: 'bold' }} onClick={() => redirectRouter(this.props, '/learn-grammar/' + this.props.match.params.id)}>Learn</Button></div>
                     </div>
                 </div>
             </div>
