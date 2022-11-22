@@ -6,7 +6,9 @@ import LoginUser from './view/login/LoginUser';
 import Words from './view/words';
 import Grammar from './view/grammar';
 import Account from './view/account';
-import Page from './view/page';
+import BuyEnergy from './view/setting/buyEnergy';
+import TransferMoney from './view/setting/transferMoney';
+import PayIn from './view/setting/payIn';
 import LessonAll from './view/grammar/lesson_all';
 import ListWord from './view/words/list-word';
 import SeeAll from './view/words/seeAll';
@@ -36,10 +38,24 @@ const router = [
         layout: ROUTE.LAYOUT,
     },
     {
-        path: ROUTE.PAGE,
-        pathActive: ROUTE.PAGE,
+        path: ROUTE.BUY_ENERGY,
+        pathActive: ROUTE.BUY_ENERGY,
         key: ROUTER_KEY.PAGE_LAYOUT,
-        component: Page,
+        component: BuyEnergy,
+        layout: ROUTE.LAYOUT,
+    },
+    {
+        path: ROUTE.PAY_IN,
+        pathActive: ROUTE.PAY_IN,
+        key: ROUTER_KEY.PAGE_LAYOUT,
+        component: PayIn,
+        layout: ROUTE.LAYOUT,
+    },
+    {
+        path: ROUTE.TRANSFER_MONEY,
+        pathActive: ROUTE.TRANSFER_MONEY,
+        key: ROUTER_KEY.PAGE_LAYOUT,
+        component: TransferMoney,
         layout: ROUTE.LAYOUT,
     },
     {

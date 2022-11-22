@@ -20,6 +20,7 @@
 
 .header-right {
     display: flex;
+    margin-left: auto;
 }
 
 .header-left-right {
@@ -115,7 +116,7 @@
     margin: 0px 16px 0px 0px;
 }
 .title-skill {
-    margin-bottom: 16px;
+    margin-top: 80px;
     font-size: 21px;
     font-weight: bold;
     line-height: 24px;
@@ -135,7 +136,6 @@
 }
 .talent {
     width: 100%;
-    min-height: 73px;
     height: auto;
     display: flex;
     border: 2px solid rgba(5, 5, 5, 0.1);
@@ -153,6 +153,8 @@
     flex: 1 1 0%;
     padding: 16px 0px;
     direction: ltr;
+    text-transform: none;
+    font-weight: 600;
 }
 .skill-body-item-2 {
     display: block;

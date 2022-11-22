@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
-import FaceIcon from '@material-ui/icons/Face';
+import SettingsIcon from '@material-ui/icons/Settings';
 import './App.css';
 class App extends Component {
     componentDidMount(){
@@ -35,11 +35,11 @@ class App extends Component {
 
                         {/* <Grammar/> */}
                         {this.props.notNav === false &&
-                            <nav style={{ height: '72px', display: 'grid', borderTop: '1px solid rgb(242, 242, 242)', gridTemplateColumns: 'repeat(4, auto)', backgroundColor: '#fff' }}>
-                                <Link className='footer-child' to={'/page'}>
+                            <nav style={{ height: '72px', display: 'grid', borderTop: '1px solid rgb(242, 242, 242)', gridTemplateColumns: 'repeat(3, auto)', backgroundColor: '#fff' }}>
+                                <Link className='footer-child' to={'/account'}>
                                     <div className='footer-nav'>
                                         <HomeIcon />
-                                        <span>Home</span>
+                                        Home
                                     </div>
                                 </Link>
                                 <Link className='footer-child' to={'/learn/word'}>
@@ -54,12 +54,12 @@ class App extends Component {
                                         Grammar
                                     </div>
                                 </Link>
-                                <Link className='footer-child' to={'/account'}>
+                                {/* <Link className='footer-child' to={'/page'}>
                                     <div className='footer-nav'>
-                                        <FaceIcon />
-                                        Account
+                                        <SettingsIcon />
+                                        <span>Setting</span>
                                     </div>
-                                </Link>
+                                </Link> */}
                             </nav>
                         }
                     </Card>
