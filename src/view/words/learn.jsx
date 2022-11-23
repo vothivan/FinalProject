@@ -11,7 +11,7 @@ class LearnWords extends Component {
         super(props);
         this.state = {
             status: 'question',
-            check: false,
+            check: null,
             gameId: '',
             exercise: [],
         }
@@ -56,7 +56,7 @@ class LearnWords extends Component {
                 </Button>
                 <div style={{ margin: '30px auto 30px auto', textAlign: 'center', fontWeight: '600', color: '#a1a1a1' }}>Choose the correct anwser!</div>
                 <div style={{ textAlign: 'center' }}>
-                    {this.state.check === true ?
+                    {this.state.check && (this.state.check === true ?
                         <div style={{ display: 'block' }}>
                             <CheckIcon style={{ color: 'green', fontSize: '40px' }} />
                             <div>Correct!</div>
@@ -64,14 +64,14 @@ class LearnWords extends Component {
                         <div style={{ display: 'block' }}>
                             <ClearIcon style={{ color: 'red', fontSize: '40px' }} />
                             <div>Incorrect!</div>
-                        </div>}
+                        </div>)}
                 </div>
                 <div>
                     {exercise.map((item, index) => {
                         if (item.submitAt === null) {
                             const chooses = item.chooses;
                             return (
-                                <div style={{ width: '100%' }}>
+                                <div style={{ width: '100%', textAlign: 'center' }}>
                                     <TypeOfQuestion key={index} {...item} />
                                     {chooses.map((it) => {
                                         return (
@@ -95,15 +95,15 @@ function TypeOfQuestion({ type, question }) {
     }
     switch (type) {
         case 'TRANSLATE_EN_VI':
-            return <h3>{question}</h3>
+            return <h1>{question}</h1>
         case 'TRANSLATE_VI_EN':
-            return <h3>{question}</h3>
+            return <h1>{question}</h1>
         case 'IMAGE':
-            return <img alt="" src={question} />
+            return <img alt="" src={question} style={{ width: '100%', height: '300px' }} />
         case 'LISTEN':
             return (
                 <Button onClick={() => playAudio(question)} >
-                    <VolumeUpIcon style={{ color: 'rgb(70, 177, 255)' }} />
+                    <VolumeUpIcon style={{ color: 'rgb(70, 177, 255)', width: '150px', height: '200px' }} />
                 </Button>
             )
         default:
