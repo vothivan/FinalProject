@@ -3,13 +3,9 @@ import { ArrowBack } from '@material-ui/icons';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useMetamaskWallet } from '../../common/hooks';
+import { useWallet } from 'use-wallet';
 
 function SelectCharacter(props) {
-
-    const wallet = useMetamaskWallet();
-
-    console.log(wallet);
 
     return (
         <div style={{ paddingLeft: '15px', paddingRight: '15px' }}>
@@ -27,21 +23,34 @@ function SelectCharacter(props) {
                 <div><h4>You'll be able to learn and earn</h4></div>
                 <Button href='' style={{ textTransform: 'none', color: 'rgb(45, 129, 255)', fontSize: '18px', fontWeight: '400', alignItems: 'center' }}>Go to marker place <ArrowForwardIcon /></Button>
             </Button>
-            {
-                wallet.isInstalled ? <Button onClick={wallet.connectWallet} style={{ width: '100%', height: '250px', borderRadius: '20px', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', marginTop: '30px' }}>
-                    {
-                        wallet.isConnected ? 'Connected wallet address ' + wallet.accountAddress + ' Balance ' + wallet.balance : 'Connect Metamask'
-                    }
-                </Button>
-                    :
-                    <Button style={{ width: '100%', height: '250px', borderRadius: '20px', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', marginTop: '30px' }}>
-                        <a href='https://metamask.io/' rel="noopener noreferrer" target='_blank'> <span>Please install Metamask</span></a>
-                    </Button>
-            }
-
+            <WalletFracment />
 
         </div>
     )
 
 }
-export default SelectCharacter
+export default SelectCharacter;
+
+function WalletFracment() {
+    const wallet = useWallet()
+
+    return (
+        <div>
+            <h1>Wallet</h1>
+            {wallet.status === 'connected' ? (
+                <div>
+                    <div>Account: {wallet.account}</div>
+                    <div>Balance: {wallet.balance}</div>
+                    <button onClick={() => wallet.reset()}>disconnect</button>
+                </div>
+            ) : (
+                <div>
+                    Connect:
+                    <button onClick={() => wallet.connect()}>MetaMask</button>
+                    <button onClick={() => wallet.connect('frame')}>Frame</button>
+                    <button onClick={() => wallet.connect('portis')}>Portis</button>
+                </div>
+            )}
+        </div>
+    )
+}

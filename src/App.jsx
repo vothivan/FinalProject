@@ -7,12 +7,18 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
 import SettingsIcon from '@material-ui/icons/Settings';
 import './App.css';
+import bsc from '@binance-chain/bsc-use-wallet'
+import { UseWalletProvider } from 'use-wallet';
+
 class App extends Component {
     componentDidMount(){
     }
     render() {
         return (
             <React.Fragment>
+            <UseWalletProvider connectors={{
+                portis: { dAppId: 'my-dapp-id-learn-to-earn' }
+            }} >
                 <CssBaseline />
                 <Container maxWidth='sm'>
                     <Card
@@ -64,6 +70,7 @@ class App extends Component {
                         }
                     </Card>
                 </Container>
+                </UseWalletProvider>
             </React.Fragment>
         );
     }
