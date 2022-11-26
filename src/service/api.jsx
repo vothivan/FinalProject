@@ -30,8 +30,8 @@ api.interceptors.request.use(function (config) {
 api.interceptors.response.use((response) => {
     return response
 }, async function (error) {
-    if (error.response?.status == 403 || error.response?.status == 401) {
-        location.replace("/")
+    if (error.response.status == 403 || error.response.status == 401) {
+        window.location.replace("/")
     }
     return Promise.reject(error);
 });
