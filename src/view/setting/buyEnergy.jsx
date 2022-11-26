@@ -12,6 +12,20 @@ const chooseEnergys = [10, 20, 50, 100, 200, 500];
 
 const APP_WALLET = "0x3241441B278dfc05C600FE5824ea36a498E730f5";
 
+async function postBscTransfer(txHash) {
+
+    for (let i = 0; i < 3; i++) {
+        try {
+            return await api.post('/bsc-transfer/' + txHash);
+        } catch (error) {
+            if (i === 2) {
+                throw error;
+            }
+        }
+    }
+
+}
+
 export default function BuyEnergy(props) {
 
     const [energy, setEnergy] = useState(0);
@@ -55,9 +69,9 @@ export default function BuyEnergy(props) {
                     value: hexValue
                 },
             ],
-        }).then((txHash) => api.post('/bsc-transfer/' + txHash))
+        }).then(postBscTransfer)
             .catch((error) => console.error);
-        
+
     }
 
 
