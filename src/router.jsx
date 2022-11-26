@@ -1,4 +1,4 @@
-import {ROUTE, ROUTER_KEY} from './common/constant';
+import { ROUTE, ROUTER_KEY } from './common/constant';
 
 import Register from './view/login/Register';
 import Login from './view/login/index';
@@ -73,7 +73,7 @@ const router = [
         layout: ROUTE.LAYOUT,
     },
     {
-        path: ROUTE.LEARN_WORD+ '/:id',
+        path: ROUTE.LEARN_WORD + '/:id',
         pathActive: ROUTE.LEARN_WORD,
         key: ROUTER_KEY.PAGE_NOT_NAV,
         component: LearnWords,
@@ -101,7 +101,7 @@ const router = [
         layout: ROUTE.LAYOUT,
     },
     {
-        path: ROUTE.LEARN_GRAMMAR,
+        path: ROUTE.LEARN_GRAMMAR + '/:id',
         pathActive: ROUTE.LEARN_GRAMMAR,
         key: ROUTER_KEY.PAGE_NOT_NAV,
         component: LearnGrammar,

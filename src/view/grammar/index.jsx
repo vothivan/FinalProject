@@ -30,21 +30,23 @@ class Grammar extends Component {
     render() {
         return (
             <div className='root'>
-                <h1 style={{fontSize: '40px'}}>
+                <h1 style={{ fontSize: '40px' }}>
                     Grammar
                 </h1>
                 <h4>Practice grammar rules and earn stars</h4>
                 <div>
                     <h3 className='level'>Intermediate</h3>
-                    {this.state.listTopic.filter((item) => item.level === 'INTERMEDIATE').map((itemTopic, key) => <ItemTopic key={key} {...itemTopic} />)}
+                    {this.state.listTopic.filter((item) => item.level === 'INTERMEDIATE').map((itemTopic, key) => <ItemTopic key={itemTopic.id} {...itemTopic} />)}
                     <h3 className='level'>Advanced</h3>
-                    {this.state.listTopic.filter((item) => item.level === 'ADVANCED').map((itemTopic, key) => <ItemTopic key={key} {...itemTopic} />)}
+                    {this.state.listTopic.filter((item) => item.level === 'ADVANCED').map((itemTopic, key) => <ItemTopic key={itemTopic.id} {...itemTopic} />)}
                 </div>
             </div>
         )
     }
 };
-function ItemTopic({ id, header, tags, name, trainingEnergy, star }) {
+function ItemTopic(props) {
+    const { id, header, tags, name, trainingEnergy, star } = props;
+    console.log(props);
     return (
         <Link
             style={{ textDecoration: 'none' }}
@@ -61,8 +63,8 @@ function ItemTopic({ id, header, tags, name, trainingEnergy, star }) {
                                 }
                             })}
                         </div> */}
-                    <div style={{fontSize: '13px', fontWeight: '600'}}>{header}</div>
-                    <div style={{fontSize: '13px', fontWeight: '600'}}>{name}</div>
+                    <div style={{ fontSize: '13px', fontWeight: '600' }}>{header}</div>
+                    <div style={{ fontSize: '13px', fontWeight: '600' }}>{name}</div>
                     <div style={{ display: 'flex' }}>
                         {tags.map((tag) => {
                             return (
@@ -77,7 +79,7 @@ function ItemTopic({ id, header, tags, name, trainingEnergy, star }) {
                     <Rating
                         style={{ fontSize: '20px', width: '80px', justifyContent: 'center' }}
                         name="customized-empty"
-                        defaultValue={star ? star : 2}
+                        defaultValue={star || 0}
                         emptyIcon={<StarBorderIcon fontSize="inherit" />}
                         max={3}
                         disabled={true}
