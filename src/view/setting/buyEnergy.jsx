@@ -78,9 +78,19 @@ export default function BuyEnergy(props) {
     if (wallet.status !== 'connected') {
         return (
             <div>
-                <Button type='primary' onClick={() => wallet.connect()}>
-                    Please connect the wallet
+                <Button>
+                    <Link to={'/account'}>
+                        <ArrowBack style={{ marginRight: 'auto' }} />
+                    </Link>
                 </Button>
+                <div style={{ display: 'block', textAlign: 'center', textTransform: 'none', fontWeight: '600' }}>
+                    <div style={{ marginBottom: '50px' }}>Do you have your wallet?</div>
+
+                    <Button type='primary' onClick={() => wallet.connect()} style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', marginBottom: '10px', marginTop: '10px', color: 'black', textTransform: 'none', fontWeight: 'bold', fontSize: '18px', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}>
+                        <span>Please connect the wallet</span>
+                    </Button>
+                </div>
+
             </div>
         )
     }
@@ -89,26 +99,40 @@ export default function BuyEnergy(props) {
         <div className='title-setting'>
 
             <div>
-                <Button>
-                    <Link to={'/account'}>
-                        <ArrowBack style={{ marginRight: 'auto' }} />
-                    </Link>
-                </Button>
-                <div style={{ textAlign: 'center' }}><h2>Buy Energy</h2></div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Button>
+                        <Link to={'/account'}>
+                            <ArrowBack style={{ marginRight: 'auto' }} />
+                        </Link>
+                    </Button>
+                    <div style={{ marginRight: '10px' }}>
+                        <a style={{ textDecoration: 'none', color: 'black', fontWeight: '600' }} href={"https://testnet.bscscan.com/address/" + wallet.account} target="_blank" rel="noopener noreferrer">
+                            <Button
+                                variant="contained"
+                                style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
+                            >
+                                Wallet
+                            </Button>
+                        </a>
+                    </div>
+                </div>
+
+                <div style={{ textAlign: 'center' }}>
+                    <h2>Buy Energy</h2>
+                    <h4>Balance: {wallet.balance == '-1' ? '0' : Web3.utils.fromWei(wallet.balance)} BNB</h4>
+                </div>
+
             </div>
-            <div style={{ textAlign: 'center' }}>
-                <h4 >Please enter enery (1000 energy ~ 1 BNB)</h4>
-                <h4>Selected: {energy} energy ~ {energy / 1000.0} BNB</h4>
+            <div style={{ textAlign: 'center', justifyContent: 'center' }}>
+                <h5 style={{ color: 'rgb(0 0 0 / 54%)' }}>Please enter energy (1000 energy ~ 1 BNB)</h5>
+                <h5 style={{ color: 'rgb(0 0 0 / 54%)' }}>Selected: {energy} energy ~ {energy / 1000.0} BNB</h5>
             </div>
-            <div style={{ flexGrow: '1', textAlign: 'center', marginTop: '30px' }}>
-                <div> <a href={"https://testnet.bscscan.com/address/" + wallet.account} target="_blank" rel="noopener noreferrer">
-                    {wallet.account}</a></div>
-                <div>Balance: {wallet.balance == '-1' ? '0' : Web3.utils.fromWei(wallet.balance)} BNB</div>
+            <div style={{ flexGrow: '1', textAlign: 'center', marginTop: '20px' }}>
                 <Grid container spacing={1}>
-                    <Grid container item xs={12} spacing={3} style={{ marginLeft: '1px' }}>
+                    <Grid container item xs={12} spacing={3} style={{ marginLeft: '30px', marginRight: '30px' }}>
                         {chooseEnergys.map((_energy) => (
                             <Grid key={_energy} item xs={4}>
-                                <Button color={_energy !== energy ? 'primary' : 'secondary'} className='energy-item' style={{ fontSize: '20px', fontWeight: '600', borderRadius: '20px' }}
+                                <Button color={_energy !== energy ? 'primary' : 'secondary'} className='energy-item' style={{ fontSize: '20px', fontWeight: '600', borderRadius: '20px', background: '#e1bec3', height: '80px', fontSize:'16px' }}
                                     onClick={() => chooseEnergy(_energy)}>
                                     {_energy}
                                 </Button>
@@ -117,7 +141,7 @@ export default function BuyEnergy(props) {
                     </Grid>
                 </Grid>
             </div>
-            <div style={{ marginTop: '25px', textAlign: 'center' }}>
+            <div style={{ marginTop: '18px', textAlign: 'center' }}>
                 <Button
                     onClick={buyEnergy}
                     variant="contained"

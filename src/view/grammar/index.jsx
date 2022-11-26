@@ -45,8 +45,8 @@ class Grammar extends Component {
     }
 };
 function ItemTopic(props) {
-    const { id, header, tags, name, trainingEnergy, star } = props;
-    console.log(props);
+    const { id, header, tags, name, trainingEnergy } = props;
+    const star = Math.floor(Math.random() * 4) + 0;
     return (
         <Link
             style={{ textDecoration: 'none' }}
@@ -56,13 +56,6 @@ function ItemTopic(props) {
         >
             <Button style={{ height: '110px', borderRadius: '20px', marginBottom: '20px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', justifyContent: 'space-between' }}>
                 <div style={{ paddingLeft: '10px', display: 'block', textTransform: 'none', textAlign: 'left' }}>
-                    {/* <div>
-                            {listCategory.forEach((value, key) => {
-                                if (key === item.category) {
-                                    return value
-                                }
-                            })}
-                        </div> */}
                     <div style={{ fontSize: '13px', fontWeight: '600' }}>{header}</div>
                     <div style={{ fontSize: '13px', fontWeight: '600' }}>{name}</div>
                     <div style={{ display: 'flex' }}>

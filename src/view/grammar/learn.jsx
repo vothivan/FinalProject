@@ -80,25 +80,24 @@ export default function LearnGrammar(props) {
 
     return (
         <div className="root">
-
             <Link to={'/learn/grammar/lesson_all/' + id}>
                 <CancelIcon />
             </Link>
-            <div>
-                <progress value={questionIndex + 1} max={questions.length}></progress>
-                {questionIndex + 1}/{questions.length} questions
+            <div style={{ textAlign: 'center', fontWeight: '600' }}>
+                <progress value={questionIndex + 1} max={questions.length} style={{ marginRight: '5px' }}></progress>
+                <span>{questionIndex + 1}/{questions.length} questions</span>
             </div>
             <div style={{ margin: '30px auto 30px auto', textAlign: 'center', fontWeight: '600', color: '#a1a1a1' }}>{question.questionNative}</div>
-            <h3 style={{ textAlign: 'center' }}>{question.contentNative}</h3>
+            <h3 style={{ textAlign: 'center'}}>{question.contentNative}</h3>
 
             {/* ---------------------CHOOSE-------------------- */}
             {
                 (question.type === 'WRITE') && <div>
-                    <h4 style={{ textAlign: 'center' }}>
+                    <h3 style={{ textAlign: 'center', marginBottom: '50px'  }}>
                         {splitQuestion[0]}
                         <Chip size="small" label={userChoose} variant="outlined" style={{ minWidth: 40 }} />
                         {splitQuestion[1]}
-                    </h4>
+                    </h3>
                     {
                         (questionState === 'start') && (
                             <LoadingOverlay active={checking} spinner>
@@ -166,7 +165,13 @@ export default function LearnGrammar(props) {
                             </div>
                         )}
                     </div>
-                    <Button variant="outlined" onClick={onNextQuestion}>Next</Button>
+                    <Button
+                        onClick={onNextQuestion}
+                        variant="contained"
+                        style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px', marginTop: '30px', fontSize: '20px' }}
+                    >
+                        Next
+                    </Button>
                 </div>
             }
         </div>

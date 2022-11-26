@@ -2,14 +2,8 @@ import React, { Component } from 'react';
 import { Card, Container, CssBaseline, Button } from '@material-ui/core';
 import { redirectRouter } from '../../utils/common';
 import './style.css';
+import api from '../../service/api';
 class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            status: '',
-        }
-    }
-
     /**
      * onClickRedirect
      */
@@ -43,8 +37,8 @@ class Login extends Component {
                                 <img className='image' src='https://scontent.xx.fbcdn.net/v/t1.15752-9/313199148_1949018905301733_8909389498709606620_n.png?_nc_cat=107&ccb=1-7&_nc_sid=aee45a&_nc_ohc=C6c1p8hjJE4AX-QMdjL&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRRSIlocV7uqiSeL5bKT9k76eWsWlThe_ulXCsdKbmK9w&oe=639EB0EC' alt='' />
                                 <span className='header-child'>Learning English is very easy with me!</span>
                                 <div className='button'>
-                                    <Button className='button-child' style={{width: '100%', borderRadius: '20px', textTransform: 'none', fontWeight: 'bold', fontSize: '18px'}} onClick={() => redirectRouter(this.props, '/register')}>Register</Button>
-                                    <div style={{ width: '100%', margin: '16px 0px 0px' }}><Button className='button-child' style={{fontWeight: 'bold', width: '100%', borderRadius: '20px', textTransform: 'none', fontSize: '18px'}} onClick={() => redirectRouter(this.props, '/login')}>Login</Button></div>
+                                    <Button className='button-child' style={{ width: '100%', borderRadius: '20px', textTransform: 'none', fontWeight: 'bold', fontSize: '18px' }} onClick={() => redirectRouter(this.props, '/register')}>Register</Button>
+                                    <div style={{ width: '100%', margin: '16px 0px 0px' }}><Button className='button-child' style={{ fontWeight: 'bold', width: '100%', borderRadius: '20px', textTransform: 'none', fontSize: '18px' }} onClick={() => redirectRouter(this.props, '/login')}>Login</Button></div>
                                 </div>
                             </div>
                         }

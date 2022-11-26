@@ -11,10 +11,40 @@ import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
 import MusicVideoIcon from '@material-ui/icons/MusicVideo';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import api from '../../service/api';
 import './style.css'
 
 class Account extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            rewards: 0,
+            energyValue: 100,
+            skillGrammar: 0,
+            skillListening: 0,
+            skillPronouncing: 0,
+            skillVocabulary: 0,
+            xp: 0,
+        }
+    }
+    async componentDidMount() {
+        const res = await api.get('/accounts/profile');
+        if (res && res.status === 200) {
+            this.setState({
+                energyValue: res.data.energyValue,
+                rewards: res.data.rewards,
+                skillGrammar: res.data.skillGrammar,
+                skillListening: res.data.skillListening,
+                skillPronouncing: res.data.skillPronouncing,
+                skillVocabulary: res.data.skillVocabulary,
+                xp: res.data.xp,
+            })
+        }
+
+    }
+
     render() {
+        const { energyValue, xp, rewards, skillGrammar, skillListening, skillPronouncing, skillVocabulary } = this.state;
         return (
             <div style={{ paddingLeft: '10px', paddingRight: '6px' }}>
                 <div className='header'>
@@ -23,22 +53,19 @@ class Account extends Component {
                             <img alt='' src='https://s2.coinmarketcap.com/static/img/coins/64x64/20581.png' style={{ width: '30px', height: '30px' }} />
                         </div>
                         <div className='header-left-right' style={{ display: 'block', fontSize: '19px', lineHeight: '24px', marginLeft: '6px', marginRight: '6px' }}>
-                            <div style={{ fontSize: '16px', lineHeight: '13px', color: 'black', fontWeight: 'bold' }}>1.26</div>
-                            <div className='header-left-right-right' style={{ fontSize: '12px', lineHeight: '13px' }}>=0.00 USDC</div>
+                            <div style={{ fontSize: '16px', lineHeight: '13px', color: 'black', fontWeight: 'bold' }}>{xp}</div>
+                            <div className='header-left-right-right' style={{ fontSize: '12px', lineHeight: '13px' }}>= {rewards} USDC</div>
                         </div>
                         <div>
                             <div style={{ display: 'flex' }}>
                                 <div className='point'>
                                     <FlashOnIcon style={{ color: 'yellow' }} />
-                                    100
+                                    {energyValue}
                                 </div>
                             </div>
                         </div>
                     </div >
                     <div className='header-right'>
-                        <Button onClick={() => redirectRouter(this.props, '/select_character')}>
-                            <AccountBalanceWalletIcon style={{ color: 'black', marginRight: '8px' }} />
-                        </Button>
                         <Button onClick={() => redirectRouter(this.props, '/login')}>
                             <ExitToAppIcon style={{ color: 'black' }} />
                         </Button>
@@ -49,14 +76,11 @@ class Account extends Component {
                         Buy Genery
                     </Button>
                     <Button className='talent-item' style={{ textTransform: 'none', fontWeight: '600' }} onClick={() => redirectRouter(this.props, '/pay-in')}>
-                        Pay In
-                    </Button>
-                    <Button className='talent-item' style={{ textTransform: 'none', fontWeight: '600' }} onClick={() => redirectRouter(this.props, '/transfer-money')}>
                         Transfer Money
                     </Button>
                 </div>
                 <h3 className='title-skill'>
-                    Skills
+                    Review statistics
                 </h3>
                 <div className='skill-body'>
                     <div className='skill-body-item'>
@@ -65,7 +89,7 @@ class Account extends Component {
                         </div>
                         <div className='skill-body-item-2'>
                             <div>Vocabulary</div>
-                            <div style={{ fontWeight: 'bold', fontSize: '22px' }}>22</div>
+                            <div style={{ fontWeight: 'bold', fontSize: '22px' }}>{skillVocabulary}</div>
                         </div>
 
                     </div>
@@ -75,7 +99,7 @@ class Account extends Component {
                         </div>
                         <div className='skill-body-item-2'>
                             <div>Speaking</div>
-                            <div style={{ fontWeight: 'bold', fontSize: '22px' }}>18</div>
+                            <div style={{ fontWeight: 'bold', fontSize: '22px' }}>{skillPronouncing}</div>
                         </div>
 
                     </div>
@@ -85,7 +109,7 @@ class Account extends Component {
                         </div>
                         <div className='skill-body-item-2'>
                             <div>Listening</div>
-                            <div style={{ fontWeight: 'bold', fontSize: '22px' }}>18</div>
+                            <div style={{ fontWeight: 'bold', fontSize: '22px' }}>{skillListening}</div>
                         </div>
 
                     </div>
@@ -95,7 +119,7 @@ class Account extends Component {
                         </div>
                         <div className='skill-body-item-2'>
                             <div>Grammar</div>
-                            <div style={{ fontWeight: 'bold', fontSize: '22px' }}>20</div>
+                            <div style={{ fontWeight: 'bold', fontSize: '22px' }}>{skillGrammar}</div>
                         </div>
 
                     </div>

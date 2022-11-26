@@ -4,7 +4,23 @@ import { Component } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { ArrowBack } from '@material-ui/icons';
+import api from '../../service/api';
 class PayIn extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        rewards: 0,
+    }
+}
+async componentDidMount() {
+    const res = await api.get('/accounts/profile');
+    if (res && res.status === 200) {
+        this.setState({
+            rewards: res.data.rewards,
+        })
+    }
+
+}
   render() {
     return (
       <div className='title-setting'>
@@ -14,14 +30,18 @@ class PayIn extends Component {
               <ArrowBack style={{ marginRight: 'auto' }} />
             </Link>
           </Button>
-          <div style={{ textAlign: 'center', marginBottom: '50px' }}><h2>Pay In</h2></div>
+          <div style={{ textAlign: 'center', marginBottom: '50px' }}><h2>Transfer Money</h2></div>
           <div style={{marginBlock: 'auto'}}>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <div style={{ width: '110px', marginBlock: 'auto', fontWeight: '600' }}><span>Your point</span></div>
               <TextField
                 variant='outlined'
-                value='1.26'
+                value={this.state.rewards}
                 disabled={true}
+                inputProps={{
+                  style: {color: 'black', fontWeight: '600'}
+                }
+                }
               />
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
