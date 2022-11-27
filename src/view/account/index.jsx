@@ -19,7 +19,7 @@ class Account extends Component {
         super(props);
         this.state = {
             rewards: 0,
-            energyValue: 100,
+            energyValue: 0,
             skillGrammar: 0,
             skillListening: 0,
             skillPronouncing: 0,

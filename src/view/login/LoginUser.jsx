@@ -30,7 +30,7 @@ class LoginUser extends Component {
       if (res && res.status === 200) {
         if (res.data.token) {
           localStorage.setItem("jwt_token", res.data.token)
-          redirectRouter(this.props, '/page')
+          redirectRouter(this.props, '/account')
         }
       }
     })

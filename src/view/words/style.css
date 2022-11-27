@@ -182,7 +182,6 @@
     -webkit-box-align: center;
     align-items: center;
     max-height: 50px;
-    padding: 0px 16px;
 }
 .total {
     -webkit-box-pack: justify;

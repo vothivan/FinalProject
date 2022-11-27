@@ -8,14 +8,28 @@ import LibraryAddCheckIcon from '@material-ui/icons/LibraryAddCheck';
 import SettingsIcon from '@material-ui/icons/Settings';
 import './App.css';
 import bsc from '@binance-chain/bsc-use-wallet'
+import { Button } from '@material-ui/core';
 import { UseWalletProvider } from 'use-wallet';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+const list_menu = ['/account', '/learn/word', '/learn/grammar']
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            hover_color_status: '/account',
+        }
+    }
     componentDidMount() {
     }
+    chooseMenu = (item) => {
+        this.setState({
+            hover_color_status: item
+        })
+    }
     render() {
+        const {hover_color_status} = this.state;
         return (
             <React.Fragment>
                 <MuiThemeProvider muiTheme={getMuiTheme()}>
@@ -41,41 +55,59 @@ class App extends Component {
                                         {this.props.mainPage}
                                     </main>
                                 </div>
-
                                 {/* <Grammar/> */}
                                 {this.props.notNav === false &&
                                     <nav style={{ height: '72px', display: 'grid', borderTop: '1px solid rgb(242, 242, 242)', gridTemplateColumns: 'repeat(3, auto)', backgroundColor: '#fff' }}>
-                                        <Link className='footer-child' to={'/account'}>
-                                            <div className='footer-nav'>
+                                        {list_menu.map((item) => {
+                                            return (
+                                                <Button className='footer-nav' onClick={() => this.chooseMenu(item)}>
+                                                    {item === '/account' ?
+                                                        <Link className='footer-child' to={item}>
+                                                            <HomeIcon style= {{color: item === hover_color_status ? '#f1762f' : 'black'}}/>
+                                                            Home
+                                                        </Link>
+                                                        : (
+                                                            item === '/learn/word' ?
+                                                                <Link className='footer-child' to={item}>
+                                                                    <MenuBookIcon style= {{color: item === hover_color_status ? '#f1762f' : 'black'}}/>
+                                                                    Words
+                                                                </Link>
+                                                                :
+                                                                <Link className='footer-child' to={item}>
+                                                                    <LibraryAddCheckIcon style= {{color: item === hover_color_status ? '#f1762f' : 'black'}}/>
+                                                                    Grammar
+                                                                </Link>
+                                                        )
+                                                    }
+                                                </Button>
+                                            )
+
+                                        })}
+                                        {/* <Link className='footer-child' to={'/account'}>
+                                            <Button key={'/account'} className='footer-nav' color={event.target.key ? 'primary' : 'secondary'} onClick={(event) => this.setState({})}>
                                                 <HomeIcon />
                                                 Home
-                                            </div>
+                                            </Button>
                                         </Link>
                                         <Link className='footer-child' to={'/learn/word'}>
-                                            <div className='footer-nav'>
+                                            <Button className='footer-nav'>
                                                 <MenuBookIcon />
                                                 Words
-                                            </div>
+                                            </Button>
                                         </Link>
                                         <Link className='footer-child' to={'/learn/grammar'}>
-                                            <div className='footer-nav'>
+                                            <Button className='footer-nav'>
                                                 <LibraryAddCheckIcon />
                                                 Grammar
-                                            </div>
-                                        </Link>
-                                        {/* <Link className='footer-child' to={'/page'}>
-                                    <div className='footer-nav'>
-                                        <SettingsIcon />
-                                        <span>Setting</span>
-                                    </div>
-                                </Link> */}
+                                            </Button>
+                                        </Link> */}
                                     </nav>
                                 }
                             </Card>
                         </Container>
                     </UseWalletProvider>
                 </MuiThemeProvider>
-            </React.Fragment>
+            </React.Fragment >
         );
     }
 }

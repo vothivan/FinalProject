@@ -30,7 +30,7 @@ class Register extends Component {
     }
     api.post("/accounts/login", payload).then((res) => {
       if (res && res.status === 200) {
-        redirectRouter(this.props, '/page')
+        redirectRouter(this.props, '/account')
       }
     })
     } else {

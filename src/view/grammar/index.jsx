@@ -30,11 +30,13 @@ class Grammar extends Component {
     render() {
         return (
             <div className='root'>
-                <h1 style={{ fontSize: '40px' }}>
+                <h2 style={{ fontSize: '40px' }}>
                     Grammar
-                </h1>
+                </h2>
                 <h4>Practice grammar rules and earn stars</h4>
                 <div>
+                    <h3 className='level'>Beginner</h3>
+                    {this.state.listTopic.filter((item) => item.level === 'BEGINNER').map((itemTopic, key) => <ItemTopic key={itemTopic.id} {...itemTopic} />)}
                     <h3 className='level'>Intermediate</h3>
                     {this.state.listTopic.filter((item) => item.level === 'INTERMEDIATE').map((itemTopic, key) => <ItemTopic key={itemTopic.id} {...itemTopic} />)}
                     <h3 className='level'>Advanced</h3>

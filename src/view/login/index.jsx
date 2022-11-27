@@ -32,7 +32,6 @@ class Login extends Component {
                             position: 'relative',
                         }}
                     >
-                        {this.state.status === '' &&
                             <div className='total'>
                                 <img className='image' src='https://scontent.xx.fbcdn.net/v/t1.15752-9/313199148_1949018905301733_8909389498709606620_n.png?_nc_cat=107&ccb=1-7&_nc_sid=aee45a&_nc_ohc=C6c1p8hjJE4AX-QMdjL&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRRSIlocV7uqiSeL5bKT9k76eWsWlThe_ulXCsdKbmK9w&oe=639EB0EC' alt='' />
                                 <span className='header-child'>Learning English is very easy with me!</span>
@@ -41,8 +40,6 @@ class Login extends Component {
                                     <div style={{ width: '100%', margin: '16px 0px 0px' }}><Button className='button-child' style={{ fontWeight: 'bold', width: '100%', borderRadius: '20px', textTransform: 'none', fontSize: '18px' }} onClick={() => redirectRouter(this.props, '/login')}>Login</Button></div>
                                 </div>
                             </div>
-                        }
-
                     </Card>
                 </Container>
             </React.Fragment>

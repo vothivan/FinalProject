@@ -1,8 +1,9 @@
 import axios from "axios";
 
 // const BASE_URL = 'http://10.1.44.104:8888/';
-// const BASE_URL = 'http://localhost:8888/';
-const BASE_URL = 'http://learntoearn-env.eba-6ffku9u2.ap-southeast-1.elasticbeanstalk.com/';
+const BASE_URL = 'http://localhost:8888/';
+// const BASE_URL = 'http://learntoearn-env.eba-6ffku9u2.ap-southeast-1.elasticbeanstalk.com/';
+// const BASE_URL = 'http://learn-to-earn.cloud/';
 
 const api = axios.create({
     'baseURL': BASE_URL,
@@ -30,7 +31,7 @@ api.interceptors.request.use(function (config) {
 api.interceptors.response.use((response) => {
     return response
 }, async function (error) {
-    if (error.response.status == 403 || error.response.status == 401) {
+    if ((error.response?.status == 403 || error.response?.status == 401)) {
         window.location.replace("/")
     }
     return Promise.reject(error);

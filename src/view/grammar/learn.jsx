@@ -88,12 +88,12 @@ export default function LearnGrammar(props) {
                 <span>{questionIndex + 1}/{questions.length} questions</span>
             </div>
             <div style={{ margin: '30px auto 30px auto', textAlign: 'center', fontWeight: '600', color: '#a1a1a1' }}>{question.questionNative}</div>
-            <h3 style={{ textAlign: 'center'}}>{question.contentNative}</h3>
+            <h3 style={{ textAlign: 'center' }}>{question.contentNative}</h3>
 
             {/* ---------------------CHOOSE-------------------- */}
             {
                 (question.type === 'WRITE') && <div>
-                    <h3 style={{ textAlign: 'center', marginBottom: '50px'  }}>
+                    <h3 style={{ textAlign: 'center', marginBottom: '50px' }}>
                         {splitQuestion[0]}
                         <Chip size="small" label={userChoose} variant="outlined" style={{ minWidth: 40 }} />
                         {splitQuestion[1]}
@@ -117,37 +117,45 @@ export default function LearnGrammar(props) {
             {
                 (question.type === 'SORT' && questionState === 'start') && (
                     <div>
-                        <div>
-                            Answer: {[...userChoose].map(a => (
-                                <Button size="small" variant="outlined" key={a}
-                                    onClick={() => setUserChoose(old => {
-                                        old.delete(a);
-                                        return new Set(old);
-                                    })}
-                                >
-                                    {a}
-                                </Button>
-                            ))}
+                        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+                            <span style={{ marginRight: '10px', fontWeight: '600' }}>Answer:</span>
+                            <div style={{ textAlign: 'center' }}>
+                                {[...userChoose].map(a => (
+                                    <Button size="small" variant="outlined" key={a}
+                                        onClick={() => setUserChoose(old => {
+                                            old.delete(a);
+                                            return new Set(old);
+                                        })}
+                                        style={{ marginRight: '10px', borderRadius: '20px', textTransform: 'none', fontWeight: '600' }}
+                                    >
+                                        {a}
+                                    </Button>
+                                ))}
+                            </div>
+
                         </div>
                         <LoadingOverlay active={checking} spinner>
-                            <div>
+                            <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                                 {question.choose?.map(choose => (
-                                    <Button variant="outlined" key={choose} onClick={() => addChoose(choose)} >
+                                    <Button variant="outlined" key={choose} onClick={() => addChoose(choose)} style={{ marginRight: '10px', borderRadius: '20px', textTransform: 'none', fontWeight: '600' }}>
                                         {choose}
                                     </Button>
                                 ))}
                             </div>
-                            <div>
-                                <Button variant="outlined" disabled={userChoose.size == 0} onClick={() => onCheckAnswer([...userChoose])} >
+                            <div style={{ textAlign: 'center' }}>
+                                <Button
+                                    disabled={userChoose.size === 0}
+                                    onClick={() => onCheckAnswer([...userChoose])}
+                                    variant="contained"
+                                    style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
+                                >
                                     Submit
                                 </Button>
                             </div>
                         </LoadingOverlay>
                     </div>
                 )
-
             }
-
             {
                 (questionState == 'end') &&
                 <div style={{ textAlign: 'center' }}>
@@ -158,7 +166,7 @@ export default function LearnGrammar(props) {
                                 <div>Correct!</div>
                             </div>
                         ) : (
-                            <div>
+                            <div style={{ fontWeight: '600' }}>
                                 <ClearIcon style={{ color: 'red', fontSize: '40px' }} />
                                 <div>Incorrect!</div>
                                 <div>Correct answer: {serverAnswer.correctAnswers}</div>
