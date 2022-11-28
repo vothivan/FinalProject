@@ -1,5 +1,5 @@
 .main_card_min_size {
-  overflow: auto;
+  overflow: hidden;
   width: 60%;
   font-size: 14px;
   margin-left: auto;

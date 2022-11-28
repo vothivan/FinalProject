@@ -6,16 +6,25 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import api from '../../service/api';
 import { Link, useParams } from "react-router-dom";
 import LoadingOverlay from 'react-loading-overlay';
+import Dialog from "@material-ui/core/Dialog";
+import { withStyles } from "@material-ui/core/styles";
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import { redirectRouter } from "../../utils/common";
 LoadingOverlay.propTypes = undefined
 
 const btnStyle = { fontWeight: 'bold', fontSize: '17px', textTransform: 'none', height: '50px', borderRadius: '20px', marginBottom: '10px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', textAlign: 'center', alignItems: 'center' };
 
 const correctAudio = new Audio("/audio/correct-6033.mp3");
 const errorAudio = new Audio("/audio/windows-error-sound-effect.mp3");
+const congraAudio = new Audio("/audio/congratulation.mp3");
 
 export default function LearnGrammar(props) {
 
     const { id } = useParams();
+    const [openDialog, setOpenDialog] = useState(false)
+
+    const [countCorrect, setCountCorrect] = useState(0)
 
     const [questions, setQuestions] = useState([]);
 
@@ -52,6 +61,7 @@ export default function LearnGrammar(props) {
             setIsCorrect(data.correct)
             setServerAnswer(data);
             if (data.correct) {
+                setCountCorrect(countCorrect + 1)
                 correctAudio.play();
             } else {
                 errorAudio.play();
@@ -65,6 +75,14 @@ export default function LearnGrammar(props) {
     const checkAnswer = async (choose) => {
         setUserChoose([choose])
         onCheckAnswer([choose])
+        if (questionIndex + 1 === questions.length) {
+            {congraAudio.play()}
+            setOpenDialog(true)
+
+        };
+    }
+    const handleClose = () => {
+        redirectRouter(props, '/learn/grammar/lesson_all/' + id)
     }
 
     const addChoose = choose => {
@@ -126,7 +144,7 @@ export default function LearnGrammar(props) {
                                             old.delete(a);
                                             return new Set(old);
                                         })}
-                                        style={{ marginRight: '10px', borderRadius: '20px', textTransform: 'none', fontWeight: '600' }}
+                                        style={{ marginRight: '10px', marginBottom: '10px', borderRadius: '20px', textTransform: 'none', fontWeight: '600' }}
                                     >
                                         {a}
                                     </Button>
@@ -137,7 +155,7 @@ export default function LearnGrammar(props) {
                         <LoadingOverlay active={checking} spinner>
                             <div style={{ textAlign: 'center', marginBottom: '20px' }}>
                                 {question.choose?.map(choose => (
-                                    <Button variant="outlined" key={choose} onClick={() => addChoose(choose)} style={{ marginRight: '10px', borderRadius: '20px', textTransform: 'none', fontWeight: '600' }}>
+                                    <Button variant="outlined" key={choose} onClick={() => addChoose(choose)} style={{ marginRight: '10px', marginBottom: '10px', borderRadius: '20px', textTransform: 'none', fontWeight: '600' }}>
                                         {choose}
                                     </Button>
                                 ))}
@@ -182,6 +200,36 @@ export default function LearnGrammar(props) {
                     </Button>
                 </div>
             }
+            <Dialog
+                aria-labelledby="customized-dialog-title"
+                open={openDialog}
+                style={{overflow: 'hidden'}}
+                scroll='body'
+            >
+                <DialogContent style={{overflow: 'hidden', fontWeight: '600'}}>
+                    Congratulations on completing {countCorrect}/10 questions
+                    <div style={{height: '100%', width: '100%'}} class="pyro"><div class="before"></div><div class="after"></div></div>
+                </DialogContent>
+                <DialogActions style={{justifyContent: 'center'}}>
+                    <Button onClick={handleClose} color="primary" style={{fontWeight: '600', fontSize: '18px'}}>
+                        OK
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     )
 }
+const DialogContent = withStyles((theme) => ({
+    root: {
+        padding: theme.spacing(2),
+        overflow: 'hidden',
+    }
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+    root: {
+        margin: 0,
+        padding: theme.spacing(1),
+        overflow: 'hidden',
+    }
+}))(MuiDialogActions);

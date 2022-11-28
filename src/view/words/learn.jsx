@@ -14,6 +14,7 @@ import MuiDialogActions from "@material-ui/core/DialogActions";
 
 const correctAudio = new Audio("/audio/correct-6033.mp3");
 const errorAudio = new Audio("/audio/windows-error-sound-effect.mp3");
+const congraAudio = new Audio("/audio/congratulation.mp3");
 class LearnWords extends Component {
     constructor(props) {
         super(props);
@@ -26,6 +27,7 @@ class LearnWords extends Component {
             check_status: false,
             question_length: 0,
             open: false,
+            count_correct_answer: 0,
         }
     }
     async componentDidMount() {
@@ -60,6 +62,7 @@ class LearnWords extends Component {
             if (Number(res.data.incrementRewards) !== 0) {
                 this.setState({
                     check: true,
+                    count_correct_answer: this.state.count_correct_answer + 1,
                 });
                 correctAudio.play();
             } else {
@@ -72,6 +75,7 @@ class LearnWords extends Component {
         };
         if ((id_exercise_current + 1) === exercise.length) {
             setTimeout(() => this.openDialog(), 1000);
+            congraAudio.play()
         }
 
     }
@@ -82,7 +86,6 @@ class LearnWords extends Component {
         })
     }
     handleClose = () => {
-        this.setState({ open: false })
         redirectRouter(this.props, '/learn/word/list-word/' + this.props.match.params.id)
     }
     render() {
@@ -145,16 +148,17 @@ class LearnWords extends Component {
                     }
                 </div>
                 <Dialog
-                    onClose={() => this.handleClose()}
+                    // onClose={() => this.handleClose()}
                     aria-labelledby="customized-dialog-title"
                     open={this.state.open}
+                    scroll='body'
                 >
-                    <DialogContent>
-                        You done 10 question!
-                        Congratulation
+                    <DialogContent style={{fontWeight: '600'}}>
+                        Congratulations on completing {this.state.count_correct_answer}/10 questions
+                        <div style={{height: '100%', width: '100%'}} class="pyro"><div class="before"></div><div class="after"></div></div>
                     </DialogContent>
-                    <DialogActions>
-                        <Button autoFocus onClose={() => this.handleClose()} color="primary">
+                    <DialogActions style={{justifyContent: 'center'}}>
+                        <Button onClick={() => this.handleClose()} color="primary" style={{fontWeight: '600', fontSize: '18px'}}>
                             OK
                         </Button>
                     </DialogActions>

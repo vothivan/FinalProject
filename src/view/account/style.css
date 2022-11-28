@@ -54,14 +54,14 @@
     font-weight: bold;
 }
 .point {
-    min-width: 66px;
+    min-width: 80px;
     height: 32px;
     display: inline-flex;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
-    padding: 0px 12px 0px 4px;
+    padding: 0px 12px 0px 10px;
     color: white;
     font-family: 'NexaText-ExtraBold', sans-serif;
     font-size: 21px;
