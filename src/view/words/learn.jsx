@@ -39,7 +39,7 @@ class LearnWords extends Component {
 
     getExercise = async (gameId) => {
         const res = await api.get("/vocabulary/game/" + gameId)
-        const exercise_copy = (res.data.exercise.filter((item) => item.submitAt === null)).filter((it, index) => index < 10);
+        const exercise_copy = res.data.exercise.filter((it, index) => index < 10);
         this.setState({ exercise: exercise_copy, question_length: exercise_copy.length })
     }
     openDialog = () => {

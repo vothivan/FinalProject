@@ -7,6 +7,7 @@ import Container from '@material-ui/core/Container';
 import { redirectRouter } from '../../utils/common';
 import { ArrowBack } from '@material-ui/icons';
 import api from '../../service/api';
+import { Link } from 'react-router-dom';
 class LoginUser extends Component {
 
   constructor(props) {
@@ -91,10 +92,14 @@ class LoginUser extends Component {
             // className={classes.submit}
             onClick={() => this.onClickSignIn()}
             className='button-child'
-            style={{ width: '100%', alignItems: 'center', borderRadius: '20px', marginBottom: '10px', marginTop: '10px', color: 'black', textTransform: 'none', fontWeight: 'bold', fontSize: '18px', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
+            style={{ width: '100%', alignItems: 'center', borderRadius: '20px', marginBottom: '25px', marginTop: '10px', color: 'black', textTransform: 'none', fontWeight: 'bold', fontSize: '18px', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
           >
             Login
           </Button>
+          <div style={{textAlign: 'center'}}>
+            <Link style={{textDecoration: 'none', fontWeight: '600'}} to={'/register'}>I don't have account</Link>
+          </div>
+          
         </div>
       </Container>
     );
