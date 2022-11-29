@@ -53,8 +53,8 @@ class Account extends Component {
                             <img alt='' src='https://s2.coinmarketcap.com/static/img/coins/64x64/20581.png' style={{ width: '30px', height: '30px' }} />
                         </div>
                         <div className='header-left-right' style={{ display: 'block', fontSize: '19px', lineHeight: '24px', marginLeft: '6px', marginRight: '6px' }}>
-                            <div style={{ fontSize: '16px', lineHeight: '13px', color: 'black', fontWeight: 'bold' }}>{rewards}</div>
-                            <div className='header-left-right-right' style={{ fontSize: '12px', lineHeight: '13px' }}>= 0.5 BNB</div>
+                            <div style={{ fontSize: '16px', lineHeight: '18px', color: 'black', fontWeight: 'bold' }}>{rewards}</div>
+                            <div className='header-left-right-right' style={{ fontSize: '12px', lineHeight: '13px' }}>= 2.58 BNB</div>
                         </div>
                         <div>
                             <div style={{ display: 'flex' }}>

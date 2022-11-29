@@ -204,7 +204,6 @@ export default function LearnGrammar(props) {
                 aria-labelledby="customized-dialog-title"
                 open={openDialog}
                 style={{overflow: 'hidden'}}
-                scroll='body'
             >
                 <DialogContent style={{overflow: 'hidden', fontWeight: '600'}}>
                     Congratulations on completing {countCorrect}/10 questions

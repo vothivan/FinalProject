@@ -147,11 +147,11 @@ class LearnWords extends Component {
                         </div>
                     }
                 </div>
-                <Dialog
-                    // onClose={() => this.handleClose()}
+                <div style={{textAlign: 'center'}}>
+                    <Dialog
                     aria-labelledby="customized-dialog-title"
                     open={this.state.open}
-                    scroll='body'
+                    style={{overflowY: 'none'}}
                 >
                     <DialogContent style={{fontWeight: '600'}}>
                         Congratulations on completing {this.state.count_correct_answer}/10 questions
@@ -163,6 +163,8 @@ class LearnWords extends Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                </div>
+                
             </div>
         )
     }
