@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // const BASE_URL = 'http://10.1.44.104:8888/';
-const BASE_URL = 'http://localhost:8888/';
-// const BASE_URL = 'http://learntoearn-env.eba-6ffku9u2.ap-southeast-1.elasticbeanstalk.com/';
+// const BASE_URL = 'http://localhost:8888/';
+const BASE_URL = 'http://learntoearn-env.eba-6ffku9u2.ap-southeast-1.elasticbeanstalk.com/';
 
 
 const api = axios.create({

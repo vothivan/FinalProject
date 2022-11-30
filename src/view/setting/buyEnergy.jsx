@@ -101,7 +101,7 @@ export default function BuyEnergy(props) {
 
     return (
         <div className='title-setting'>
-            <LoadingOverlay active={loading} spinner>
+            <LoadingOverlay active={loading} spinner position = 'inherit' >
                 <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Button>

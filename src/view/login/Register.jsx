@@ -8,6 +8,8 @@ import { Component } from 'react';
 import { redirectRouter } from '../../utils/common';
 import api from '../../service/api';
 import { ArrowBack } from '@material-ui/icons';
+import SimpleReactValidator from 'simple-react-validator';
+import { FormHelperText } from '@material-ui/core';
 
 class Register extends Component {
   constructor(props) {
@@ -16,29 +18,33 @@ class Register extends Component {
       email: '',
       password: '',
       error: '',
+      isSubmitForm: false,
     }
+    this.validator = new SimpleReactValidator()
   };
 
-  onClickRegister = () => {
+  onClickRegister = (e) => {
+    e.preventDefault();
     if (this.state.email && this.state.password) {
       this.setState({
-        error: ''
+        error: '',
+        isSubmitForm: true,
       })
       const payload = {
-      email: this.state.email,
-      password: this.state.password,
-    }
-    api.post("/accounts/login", payload).then((res) => {
-      if (res && res.status === 200) {
-        redirectRouter(this.props, '/account')
+        email: this.state.email,
+        password: this.state.password,
       }
-    })
+      api.post("/accounts/login", payload).then((res) => {
+        if (res && res.status === 200) {
+          redirectRouter(this.props, '/account')
+        }
+      })
     } else {
       this.setState({
         error: 'Please fill in all the information.'
       })
     }
-    
+
   }
 
   render() {
@@ -53,42 +59,46 @@ class Register extends Component {
             </Typography>
           </div>
           <br></br>
-          {this.state.error && <span style={{color: 'red'}}>{this.state.error}</span>}
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label="Email Address"
-            autoComplete="email"
-            autoFocus
-            value={this.state.email}
-            onChange={(event) => this.setState({ email: event.target.value })}
-            placeholder='Please enter the email address.'
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            label="Password"
-            autoComplete="current-password"
-            value={this.state.password}
-            onChange={(event) => this.setState({ password: event.target.value })}
-            placeholder='Please enter the password.'
-          />
-          <br/>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={() => this.onClickRegister()}
-            className='button-child'
-            style={{ boxShadow: 'rgb(242 153 74) 0px 4px 0px', width: '100%', alignItems: 'center', borderRadius: '20px', marginBottom: '10px', marginTop: '10px', color: 'black', textTransform: 'none', fontWeight: 'bold', fontSize: '18px' }}
-          >
-            Register
-          </Button>
+          <form onSubmit={this.onClickRegister}>
+            {this.state.error && <span style={{ color: 'red' }}>{this.state.error}</span>}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Email Address"
+              autoComplete="email"
+              autoFocus
+              value={this.state.email}
+              onChange={(event) => this.setState({ email: event.target.value })}
+              placeholder='Please enter the email address.'
+              type='email'
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Password"
+              autoComplete="current-password"
+              value={this.state.password}
+              onChange={(event) => this.setState({ password: event.target.value })}
+              placeholder='Please enter the password.'
+              inputProps={{ minLength: 6 }}
+              type="password"
+            />
+            <br />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className='button-child'
+              style={{ boxShadow: 'rgb(242 153 74) 0px 4px 0px', width: '100%', alignItems: 'center', borderRadius: '20px', marginBottom: '10px', marginTop: '10px', color: 'black', textTransform: 'none', fontWeight: 'bold', fontSize: '18px' }}
+            >
+              Register
+            </Button>
+          </form>
         </div>
       </Container>
     );
