@@ -7,6 +7,7 @@ import { ArrowBack } from '@material-ui/icons';
 import { useWallet } from 'use-wallet';
 import Web3 from 'web3';
 import api from '../../service/api';
+import LoadingOverlay from 'react-loading-overlay';
 
 const chooseEnergys = [10, 20, 50, 100, 200, 500];
 
@@ -29,6 +30,7 @@ async function postBscTransfer(txHash) {
 export default function BuyEnergy(props) {
 
     const [energy, setEnergy] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const chooseEnergy = energy => {
         setEnergy(energy);
@@ -60,6 +62,7 @@ export default function BuyEnergy(props) {
         const hexGas = Web3.utils.toHex(
             Web3.utils.toWei('0.00021')
         )
+        setLoading(true)
         ethereum.request({
             method: 'eth_sendTransaction',
             params: [
@@ -70,7 +73,8 @@ export default function BuyEnergy(props) {
                 },
             ],
         }).then(postBscTransfer)
-            .catch((error) => console.error);
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false))
 
     }
 
@@ -97,59 +101,60 @@ export default function BuyEnergy(props) {
 
     return (
         <div className='title-setting'>
-
-            <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <Button>
-                        <Link to={'/account'}>
-                            <ArrowBack style={{ marginRight: 'auto' }} />
-                        </Link>
-                    </Button>
-                    <div style={{ marginRight: '10px' }}>
-                        <a style={{ textDecoration: 'none', color: 'black', fontWeight: '600' }} href={"https://testnet.bscscan.com/address/" + wallet.account} target="_blank" rel="noopener noreferrer">
-                            <Button
-                                variant="contained"
-                                style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
-                            >
-                                Wallet
-                            </Button>
-                        </a>
-                    </div>
-                </div>
-
-                <div style={{ textAlign: 'center' }}>
-                    <h2>Buy Energy</h2>
-                    <h4>Balance: {wallet.balance == '-1' ? '0' : Web3.utils.fromWei(wallet.balance)} BNB</h4>
-                </div>
-
-            </div>
-            <div style={{ textAlign: 'center', justifyContent: 'center' }}>
-                <h5 style={{ color: 'rgb(0 0 0 / 54%)' }}>Please enter energy (1000 energy ~ 1 BNB)</h5>
-                <h5 style={{ color: 'rgb(0 0 0 / 54%)' }}>Selected: {energy} energy ~ {energy / 1000.0} BNB</h5>
-            </div>
-            <div style={{ flexGrow: '1', textAlign: 'center', marginTop: '20px' }}>
-                <Grid container spacing={1}>
-                    <Grid container item xs={12} spacing={3} style={{ marginLeft: '30px', marginRight: '30px' }}>
-                        {chooseEnergys.map((_energy) => (
-                            <Grid key={_energy} item xs={4}>
-                                <Button color={_energy !== energy ? 'primary' : 'secondary'} className='energy-item' style={{ fontSize: '20px', fontWeight: '600', borderRadius: '20px', background: '#e1bec3', height: '80px', fontSize:'16px' }}
-                                    onClick={() => chooseEnergy(_energy)}>
-                                    {_energy}
+            <LoadingOverlay active={loading} spinner>
+                <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Button>
+                            <Link to={'/account'}>
+                                <ArrowBack style={{ marginRight: 'auto' }} />
+                            </Link>
+                        </Button>
+                        <div style={{ marginRight: '10px' }}>
+                            <a style={{ textDecoration: 'none', color: 'black', fontWeight: '600' }} href={"https://testnet.bscscan.com/address/" + wallet.account} target="_blank" rel="noopener noreferrer">
+                                <Button
+                                    variant="contained"
+                                    style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
+                                >
+                                    Wallet
                                 </Button>
-                            </Grid>
-                        ))}
+                            </a>
+                        </div>
+                    </div>
+
+                    <div style={{ textAlign: 'center' }}>
+                        <h2>Buy Energy</h2>
+                        <h4>Balance: {wallet.balance == '-1' ? '0' : Web3.utils.fromWei(wallet.balance)} BNB</h4>
+                    </div>
+
+                </div>
+                <div style={{ textAlign: 'center', justifyContent: 'center' }}>
+                    <h5 style={{ color: 'rgb(0 0 0 / 54%)' }}>Please enter energy (1000 energy ~ 1 BNB)</h5>
+                    <h5 style={{ color: 'rgb(0 0 0 / 54%)' }}>Selected: {energy} energy ~ {energy / 1000.0} BNB</h5>
+                </div>
+                <div style={{ flexGrow: '1', textAlign: 'center', marginTop: '20px' }}>
+                    <Grid container spacing={1}>
+                        <Grid container item xs={12} spacing={3} style={{ marginLeft: '30px', marginRight: '30px' }}>
+                            {chooseEnergys.map((_energy) => (
+                                <Grid key={_energy} item xs={4}>
+                                    <Button color={_energy !== energy ? 'primary' : 'secondary'} className='energy-item' style={{ fontSize: '20px', fontWeight: '600', borderRadius: '20px', background: '#e1bec3', height: '80px', fontSize: '16px' }}
+                                        onClick={() => chooseEnergy(_energy)}>
+                                        {_energy}
+                                    </Button>
+                                </Grid>
+                            ))}
+                        </Grid>
                     </Grid>
-                </Grid>
-            </div>
-            <div style={{ marginTop: '18px', textAlign: 'center' }}>
-                <Button
-                    onClick={buyEnergy}
-                    variant="contained"
-                    style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
-                >
-                    Buy
-                </Button>
-            </div>
+                </div>
+                <div style={{ marginTop: '18px', textAlign: 'center' }}>
+                    <Button
+                        onClick={buyEnergy}
+                        variant="contained"
+                        style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
+                    >
+                        Buy
+                    </Button>
+                </div>
+            </LoadingOverlay>
 
         </div >
     )
