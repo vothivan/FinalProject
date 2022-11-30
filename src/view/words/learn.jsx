@@ -40,8 +40,9 @@ class LearnWords extends Component {
     }
 
     getExercise = async (gameId) => {
-        const res = await api.get("/vocabulary/game/" + gameId)
-        const exercise_copy = res.data.exercise.filter((it, index) => index < 10);
+        const res = await api.get("/vocabulary/game/" + gameId);
+        const list_exercise = res.data.exercise.sort(() => Math.random() - 0.5);
+        const exercise_copy = list_exercise.filter((it, index) => index < 10);
         this.setState({ exercise: exercise_copy, question_length: exercise_copy.length })
     }
     openDialog = () => {
@@ -147,24 +148,24 @@ class LearnWords extends Component {
                         </div>
                     }
                 </div>
-                <div style={{textAlign: 'center'}}>
+                <div style={{ textAlign: 'center' }}>
                     <Dialog
-                    aria-labelledby="customized-dialog-title"
-                    open={this.state.open}
-                    style={{overflowY: 'none'}}
-                >
-                    <DialogContent style={{fontWeight: '600'}}>
-                        Congratulations on completing {this.state.count_correct_answer}/10 questions
-                        <div style={{height: '100%', width: '100%'}} class="pyro"><div class="before"></div><div class="after"></div></div>
-                    </DialogContent>
-                    <DialogActions style={{justifyContent: 'center'}}>
-                        <Button onClick={() => this.handleClose()} color="primary" style={{fontWeight: '600', fontSize: '18px'}}>
-                            OK
-                        </Button>
-                    </DialogActions>
-                </Dialog>
+                        aria-labelledby="customized-dialog-title"
+                        open={this.state.open}
+                        style={{ overflowY: 'none' }}
+                    >
+                        <DialogContent style={{ fontWeight: '600' }}>
+                            Congratulations on completing {this.state.count_correct_answer}/10 questions
+                            <div style={{ height: '100%', width: '100%' }} class="pyro"><div class="before"></div><div class="after"></div></div>
+                        </DialogContent>
+                        <DialogActions style={{ justifyContent: 'center' }}>
+                            <Button onClick={() => this.handleClose()} color="primary" style={{ fontWeight: '600', fontSize: '18px' }}>
+                                OK
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </div>
-                
+
             </div>
         )
     }
