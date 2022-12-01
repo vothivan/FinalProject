@@ -2,8 +2,6 @@ import { Button } from '@material-ui/core';
 import React from 'react';
 import { Component } from 'react';
 import { redirectRouter } from '../../utils/common';
-import SettingsIcon from '@material-ui/icons/Settings';
-import Avatar from '@material-ui/core/Avatar';
 import FlashOnIcon from '@material-ui/icons/FlashOn';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
@@ -13,6 +11,8 @@ import EventAvailableIcon from '@material-ui/icons/EventAvailable';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 import api from '../../service/api';
 import './style.css'
+import { connect } from 'react-redux';
+import { getProfile } from '../../store/account/action';
 
 class Account extends Component {
     constructor(props) {
@@ -129,4 +129,17 @@ class Account extends Component {
     }
 }
 
-export default Account
+// const mapStateToProps = (state) => {
+//     return {
+//         profile: state.profile,
+//     }
+// }
+
+// const mapDispatchToProps = () => {
+//     return {
+//         getProfile: () => dispatch(getProfile()),
+//     }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps(Account));
+export default Account;
