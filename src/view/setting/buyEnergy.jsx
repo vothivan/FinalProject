@@ -28,34 +28,23 @@ async function postBscTransfer(txHash) {
 }
 
 export default function BuyEnergy(props) {
-
     const [energy, setEnergy] = useState(0);
     const [loading, setLoading] = useState(false);
-
     const chooseEnergy = energy => {
         setEnergy(energy);
     }
-
     const wallet = useWallet();
-
     console.log(wallet);
-
     useEffect(() => {
 
         if (wallet.account) {
             api.post('/accounts/profile', { nftWalletAddress: wallet.account })
         }
     }, [wallet.account || "-1"])
-
-
-
     const buyEnergy = () => {
-
-
         if (energy <= 0) {
             return;
         }
-
         const bnbValue = String(energy / 1000);
         const wei = Web3.utils.toWei(bnbValue);
         const hexValue = Web3.utils.toHex(wei);
@@ -75,10 +64,7 @@ export default function BuyEnergy(props) {
         }).then(postBscTransfer)
             .catch((error) => console.error(error))
             .finally(() => setLoading(false))
-
     }
-
-
     if (wallet.status !== 'connected') {
         return (
             <div>
