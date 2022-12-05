@@ -61,8 +61,8 @@ export default function LearnGrammar(props) {
             setIsCorrect(data.correct)
             setServerAnswer(data);
             if (data.correct) {
-                setCountCorrect(countCorrect + 1)
                 correctAudio.play();
+                setCountCorrect(countCorrect + 1)
             } else {
                 errorAudio.play();
             }
@@ -76,7 +76,7 @@ export default function LearnGrammar(props) {
         setUserChoose([choose])
         onCheckAnswer([choose])
         if (questionIndex + 1 === questions.length) {
-            {congraAudio.play()}
+            { congraAudio.play() }
             setOpenDialog(true)
 
         };
@@ -201,20 +201,23 @@ export default function LearnGrammar(props) {
                 </div>
             }
             {openDialog && <div class="pyro"><div class="before"></div><div class="after"></div></div>}
-            <Dialog
-                aria-labelledby="customized-dialog-title"
-                open={openDialog}
-                style={{overflow: 'hidden'}}
-            >
-                <DialogContent style={{overflow: 'hidden', fontWeight: '600'}}>
-                    Congratulations on completing {countCorrect}/10 questions
-                </DialogContent>
-                <DialogActions style={{justifyContent: 'center'}}>
-                    <Button onClick={handleClose} color="primary" style={{fontWeight: '600', fontSize: '18px'}}>
-                        OK
-                    </Button>
-                </DialogActions>
-            </Dialog>
+
+            <div style={{ textAlign: 'center' }}>
+                <Dialog
+                    aria-labelledby="customized-dialog-title"
+                    open={openDialog}
+                    style={{ overflowY: 'none' }}
+                >
+                    <DialogContent style={{fontWeight: '600' }}>
+                        Congratulations on completing {countCorrect}/10 questions
+                    </DialogContent>
+                    <DialogActions style={{ justifyContent: 'center' }}>
+                        <Button onClick={handleClose} color="primary" style={{ fontWeight: '600', fontSize: '18px' }}>
+                            OK
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
         </div>
     )
 }
