@@ -200,6 +200,7 @@ export default function LearnGrammar(props) {
                     </Button>
                 </div>
             }
+            {openDialog && <div class="pyro"><div class="before"></div><div class="after"></div></div>}
             <Dialog
                 aria-labelledby="customized-dialog-title"
                 open={openDialog}
@@ -207,7 +208,6 @@ export default function LearnGrammar(props) {
             >
                 <DialogContent style={{overflow: 'hidden', fontWeight: '600'}}>
                     Congratulations on completing {countCorrect}/10 questions
-                    <div style={{height: '100%', width: '100%'}} class="pyro"><div class="before"></div><div class="after"></div></div>
                 </DialogContent>
                 <DialogActions style={{justifyContent: 'center'}}>
                     <Button onClick={handleClose} color="primary" style={{fontWeight: '600', fontSize: '18px'}}>

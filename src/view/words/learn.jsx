@@ -11,7 +11,6 @@ import { withStyles } from "@material-ui/core/styles";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
 
-
 const correctAudio = new Audio("/audio/correct-6033.mp3");
 const errorAudio = new Audio("/audio/windows-error-sound-effect.mp3");
 const congraAudio = new Audio("/audio/congratulation.mp3");
@@ -52,7 +51,6 @@ class LearnWords extends Component {
         const { id_exercise_current, exercise } = this.state;
         this.setState({
             status: 'answer',
-            check_status: true,
         })
         const payload = {
             choose: answer,
@@ -78,6 +76,9 @@ class LearnWords extends Component {
             setTimeout(() => this.openDialog(), 1000);
             congraAudio.play()
         }
+        this.setState({
+            check_status: true,
+        })
 
     }
     onNextQuestion = (id_exercise_current) => {
@@ -148,6 +149,7 @@ class LearnWords extends Component {
                         </div>
                     }
                 </div>
+                {this.state.open && <div class="pyro"><div class="before"></div><div class="after"></div></div>}
                 <div style={{ textAlign: 'center' }}>
                     <Dialog
                         aria-labelledby="customized-dialog-title"

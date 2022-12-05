@@ -47,8 +47,8 @@ class Grammar extends Component {
     }
 };
 function ItemTopic(props) {
-    const { id, header, tags, name, trainingEnergy } = props;
-    const star = Math.floor(Math.random() * 4) + 0;
+    const { id, header, tags, name, trainingEnergy, star } = props;
+    const star_fake = Math.floor(Math.random() * 4) + 0;
     return (
         <Link
             style={{ textDecoration: 'none' }}
@@ -74,7 +74,7 @@ function ItemTopic(props) {
                     <Rating
                         style={{ fontSize: '20px', width: '80px', justifyContent: 'center' }}
                         name="customized-empty"
-                        defaultValue={star || 0}
+                        defaultValue={star ? star : star_fake}
                         emptyIcon={<StarBorderIcon fontSize="inherit" />}
                         max={3}
                         disabled={true}

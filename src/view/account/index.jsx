@@ -45,6 +45,7 @@ class Account extends Component {
 
     render() {
         const { energyValue, xp, rewards, skillGrammar, skillListening, skillPronouncing, skillVocabulary } = this.state;
+        const num = rewards/200;
         return (
             <div style={{ paddingLeft: '10px', paddingRight: '6px' }}>
                 <div className='header'>
@@ -54,7 +55,7 @@ class Account extends Component {
                         </div>
                         <div className='header-left-right' style={{ display: 'block', fontSize: '19px', lineHeight: '24px', marginLeft: '6px', marginRight: '6px' }}>
                             <div style={{ fontSize: '16px', lineHeight: '18px', color: 'black', fontWeight: 'bold' }}>{rewards}</div>
-                            <div className='header-left-right-right' style={{ fontSize: '12px', lineHeight: '13px' }}>= 2.58 BNB</div>
+                            <div className='header-left-right-right' style={{ fontSize: '12px', lineHeight: '13px' }}>= {num.toFixed(2)} BNB</div>
                         </div>
                         <div>
                             <div style={{ display: 'flex' }}>

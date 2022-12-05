@@ -14,7 +14,7 @@ const chooseEnergys = [10, 20, 50, 100, 200, 500];
 const APP_WALLET = "0x3241441B278dfc05C600FE5824ea36a498E730f5";
 
 async function postBscTransfer(txHash) {
-
+    console.log(txHash);
     for (let i = 0; i < 3; i++) {
         try {
             return await api.post('/bsc-transfer/' + txHash);
@@ -38,8 +38,6 @@ export default function BuyEnergy(props) {
 
     const wallet = useWallet();
 
-    console.log(wallet);
-
     useEffect(() => {
 
         if (wallet.account) {
@@ -50,12 +48,9 @@ export default function BuyEnergy(props) {
 
 
     const buyEnergy = () => {
-
-
         if (energy <= 0) {
             return;
         }
-
         const bnbValue = String(energy / 1000);
         const wei = Web3.utils.toWei(bnbValue);
         const hexValue = Web3.utils.toHex(wei);
@@ -75,7 +70,6 @@ export default function BuyEnergy(props) {
         }).then(postBscTransfer)
             .catch((error) => console.error(error))
             .finally(() => setLoading(false))
-
     }
 
 
@@ -101,7 +95,7 @@ export default function BuyEnergy(props) {
 
     return (
         <div className='title-setting'>
-            <LoadingOverlay active={loading} spinner position = 'inherit' >
+            <LoadingOverlay active={loading} spinner position='inherit' >
                 <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Button>
@@ -149,7 +143,7 @@ export default function BuyEnergy(props) {
                     <Button
                         onClick={buyEnergy}
                         variant="contained"
-                        style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
+                        style={{ background: energy > 0 ? 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)' : '', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
                     >
                         Buy
                     </Button>

@@ -3,15 +3,22 @@ import './style.css';
 import { Component } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { ArrowBack } from '@material-ui/icons';
+import { ArrowBack, RestoreSharp } from '@material-ui/icons';
 import api from '../../service/api';
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import Dialog from "@material-ui/core/Dialog";
+import { withStyles } from "@material-ui/core/styles";
 class PayIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rewards: 0,
       total_coin: 0,
-      swap_coin: 0,
+      swap_coin: null,
+      open_popup: false,
+      open_popup_success: false,
+      nftWalletAddress: ''
     }
   }
   async componentDidMount() {
@@ -19,14 +26,32 @@ class PayIn extends Component {
     if (res && res.status === 200) {
       this.setState({
         total_coin: res.data.rewards,
+        nftWalletAddress: res.data.nftWalletAddress,
       })
     }
   }
   actionBuy = (event) => {
     event.preventDefault();
-    alert('You buy successfully');
+    this.setState({ open_popup: true })
   }
+  handleClose = () => {
+    this.setState({ open_popup: false })
+  }
+  handleSwap = () => {
+    this.setState({ open_popup: false, open_popup_success: true, })
+    const payload = {
+      claimRewards: this.state.swap_coin ? Number(this.state.swap_coin) : null,
+      nftWalletAddress: this.state.nftWalletAddress,
+    }
+    api.post('/accounts/profile', payload).then((res) => {
+      if (res && res.status === 200) {
 
+      }
+    });
+  }
+  handleCloseSwap = () => {
+    this.setState({ open_popup_success: false })
+  }
   render() {
     return (
       <div className='title-setting'>
@@ -60,7 +85,7 @@ class PayIn extends Component {
                   }}
                   name='swap_coin'
                   value={this.state.swap_coin}
-                  onChange={(event) => this.setState({swap_coin: event.target.value})}
+                  onChange={(event) => this.setState({ swap_coin: event.target.value })}
                 />
               </div>
             </div>
@@ -68,16 +93,61 @@ class PayIn extends Component {
               <Button
                 type='submit'
                 variant="contained"
-                style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
+                style={{ background: this.state.swap_coin ? 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)' : '', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
               >
                 Swap
               </Button>
             </div>
           </form>
+          <div style={{ textAlign: 'center' }}>
+            <Dialog
+              aria-labelledby="customized-dialog-title"
+              open={this.state.open_popup}
+              style={{ overflowY: 'none' }}
+            >
+              <DialogContent style={{ fontWeight: '600', width: '200px', textAlign: 'center' }}>
+                Are you swap?
+              </DialogContent>
+              <DialogActions style={{ justifyContent: 'center', width: '200px' }}>
+                <Button onClick={() => this.handleSwap()} color="primary" style={{ fontWeight: '600', fontSize: '18px', textTransform: 'none' }}>
+                  Yes
+                </Button>
+                <Button onClick={() => this.handleClose()} color="primary" style={{ fontWeight: '600', fontSize: '18px', textTransform: 'none' }}>
+                  No
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <Dialog
+              aria-labelledby="customized-dialog-title"
+              open={this.state.open_popup_success}
+              style={{ overflowY: 'none' }}
+            >
+              <DialogContent style={{ fontWeight: '600', width: '200px', textAlign: 'center' }}>
+                Swap Successfully!
+              </DialogContent>
+              <DialogActions style={{ justifyContent: 'center', width: '200px' }}>
+                <Button onClick={() => this.handleCloseSwap()} color="primary" style={{ fontWeight: '600', fontSize: '18px', textTransform: 'none' }}>
+                  OK
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
         </div>
       </div>
     )
   }
 }
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2)
+  }
+}))(MuiDialogContent);
+
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1)
+  }
+}))(MuiDialogActions);
 
 export default PayIn
