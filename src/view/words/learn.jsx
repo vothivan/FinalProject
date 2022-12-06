@@ -10,6 +10,7 @@ import api from "../../service/api";
 import { withStyles } from "@material-ui/core/styles";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
+import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition";
 
 const correctAudio = new Audio("/audio/correct-6033.mp3");
 const errorAudio = new Audio("/audio/windows-error-sound-effect.mp3");
@@ -108,7 +109,7 @@ class LearnWords extends Component {
                         <span>{id_exercise_current + 1}/{exercise.length} questions</span>
                     </div>
                 </div>
-                <div style={{ margin: '10px auto 10px auto', textAlign: 'center', fontWeight: '600', color: '#a1a1a1' }}>Choose the correct anwser!</div>
+                <div style={{ margin: '10px auto 10px auto', textAlign: 'center', fontWeight: '600', color: '#a1a1a1' }}>Choose the correct answer!</div>
                 <div style={{ textAlign: 'center', marginTop: '30px' }}>
                     {this.state.check_status === true &&
                         <div>
@@ -138,7 +139,7 @@ class LearnWords extends Component {
                 <div>
                     {this.state.check_status !== true &&
                         <div style={{ width: '100%', textAlign: 'center' }}>
-                            {exercise_current && <TypeOfQuestion {...exercise_current} />}
+                            exercise_current && <TypeOfQuestion {...exercise_current} />
                             {chooses && chooses.map((it) => {
                                 return (
                                     <Button onClick={(event) => this.checkQuestion(it.id, exercise_current.id)} style={{ fontWeight: 'bold', fontSize: '17px', textTransform: 'none', height: '50px', borderRadius: '20px', marginBottom: '10px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', textAlign: 'center', alignItems: 'center' }}>
@@ -146,6 +147,7 @@ class LearnWords extends Component {
                                     </Button>
                                 )
                             })}
+                            {/* <Dictaphone /> */}
                         </div>
                     }
                 </div>
@@ -158,7 +160,6 @@ class LearnWords extends Component {
                     >
                         <DialogContent style={{ fontWeight: '600' }}>
                             Congratulations on completing {this.state.count_correct_answer}/10 questions
-                            {/* <div style={{ height: '100%', width: '100%' }} class="pyro"><div class="before"></div><div class="after"></div></div> */}
                         </DialogContent>
                         <DialogActions style={{ justifyContent: 'center' }}>
                             <Button onClick={() => this.handleClose()} color="primary" style={{ fontWeight: '600', fontSize: '18px' }}>
@@ -206,4 +207,26 @@ const DialogActions = withStyles((theme) => ({
         padding: theme.spacing(1)
     }
 }))(MuiDialogActions);
+function Dictaphone() {
+    const {
+        transcript,
+        listening,
+        resetTranscript,
+        browserSupportsSpeechRecognition
+    } = useSpeechRecognition();
+
+    if (!browserSupportsSpeechRecognition) {
+        return <span>Browser doesn't support speech recognition.</span>;
+    }
+
+    return (
+        <div>
+            <p>Microphone: {listening ? "on" : "off"}</p>
+            <button onClick={SpeechRecognition.startListening}>Start</button>
+            <button onClick={SpeechRecognition.stopListening}>Stop</button>
+            <button onClick={resetTranscript}>Reset</button>
+            <p>{transcript}</p>
+        </div>
+    );
+};
 export default LearnWords;
