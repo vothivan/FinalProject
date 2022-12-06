@@ -158,7 +158,7 @@ class LearnWords extends Component {
                     >
                         <DialogContent style={{ fontWeight: '600' }}>
                             Congratulations on completing {this.state.count_correct_answer}/10 questions
-                            <div style={{ height: '100%', width: '100%' }} class="pyro"><div class="before"></div><div class="after"></div></div>
+                            {/* <div style={{ height: '100%', width: '100%' }} class="pyro"><div class="before"></div><div class="after"></div></div> */}
                         </DialogContent>
                         <DialogActions style={{ justifyContent: 'center' }}>
                             <Button onClick={() => this.handleClose()} color="primary" style={{ fontWeight: '600', fontSize: '18px' }}>

@@ -83,24 +83,6 @@ class App extends Component {
                                             )
 
                                         })}
-                                        {/* <Link className='footer-child' to={'/account'}>
-                                            <Button key={'/account'} className='footer-nav' color={event.target.key ? 'primary' : 'secondary'} onClick={(event) => this.setState({})}>
-                                                <HomeIcon />
-                                                Home
-                                            </Button>
-                                        </Link>
-                                        <Link className='footer-child' to={'/learn/word'}>
-                                            <Button className='footer-nav'>
-                                                <MenuBookIcon />
-                                                Words
-                                            </Button>
-                                        </Link>
-                                        <Link className='footer-child' to={'/learn/grammar'}>
-                                            <Button className='footer-nav'>
-                                                <LibraryAddCheckIcon />
-                                                Grammar
-                                            </Button>
-                                        </Link> */}
                                     </nav>
                                 }
                             </Card>
