@@ -49,7 +49,7 @@ class Account extends Component {
         const { energyValue, xp, rewards, skillGrammar, skillListening, skillPronouncing, skillVocabulary, claimingRewards } = this.state;
         const num = (rewards - claimingRewards)/200;
         return (
-            <div style={{ paddingLeft: '10px', paddingRight: '6px' }}>
+            <div style={{ paddingLeft: '10px', paddingRight: '10px', overflow: 'hidden' }}>
                 <div className='header'>
                     <div className='header-left' style={{ display: 'flex' }}>
                         <div>
@@ -76,7 +76,7 @@ class Account extends Component {
                 </div>
                 <div className='talent' style={{ marginTop: '20px' }}>
                     <Button className='talent-item' style={{ textTransform: 'none', fontWeight: '600' }} onClick={() => redirectRouter(this.props, '/buy-energy')}>
-                        Buy Genery
+                        Buy Energy
                     </Button>
                     <Button className='talent-item' style={{ textTransform: 'none', fontWeight: '600' }} onClick={() => redirectRouter(this.props, '/pay-in')}>
                         Transfer Money
