@@ -9,6 +9,7 @@ import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
 import Dialog from "@material-ui/core/Dialog";
 import { withStyles } from "@material-ui/core/styles";
+import { redirectRouter } from '../../utils/common';
 class PayIn extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,8 @@ class PayIn extends Component {
       swap_coin: null,
       open_popup: false,
       open_popup_success: false,
-      nftWalletAddress: ''
+      nftWalletAddress: '',
+      claimingRewards: 0,
     }
   }
   async componentDidMount() {
@@ -27,6 +29,7 @@ class PayIn extends Component {
       this.setState({
         total_coin: res.data.rewards,
         nftWalletAddress: res.data.nftWalletAddress,
+        claimingRewards: res.data.claimingRewards,
       })
     }
   }
@@ -50,9 +53,11 @@ class PayIn extends Component {
     });
   }
   handleCloseSwap = () => {
-    this.setState({ open_popup_success: false })
+    redirectRouter(this.props, '/account')
   }
   render() {
+    const {total_coin, claimingRewards} = this.state;
+    const coin_use = total_coin - claimingRewards;
     return (
       <div className='title-setting'>
         <div>
@@ -61,14 +66,17 @@ class PayIn extends Component {
               <ArrowBack style={{ marginRight: 'auto' }} />
             </Link>
           </Button>
-          <div style={{ textAlign: 'center', marginBottom: '50px' }}><h2>Transfer Money</h2></div>
+          <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+            <h2>Transfer Money</h2>
+            <h4>1 BNB = 200 point</h4>
+          </div>
           <form onSubmit={this.actionBuy}>
             <div style={{ marginBlock: 'auto' }}>
               <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div style={{ width: '110px', marginBlock: 'auto', fontWeight: '600' }}><span>Your point</span></div>
                 <TextField
                   variant='outlined'
-                  value={this.state.total_coin}
+                  value={coin_use}
                   disabled={true}
                   inputProps={{
                     style: { color: 'black', fontWeight: '600' }
@@ -105,10 +113,10 @@ class PayIn extends Component {
               open={this.state.open_popup}
               style={{ overflowY: 'none' }}
             >
-              <DialogContent style={{ fontWeight: '600', width: '200px', textAlign: 'center' }}>
+              <DialogContent style={{ fontWeight: '600', width: '300px', textAlign: 'center' }}>
                 Are you swap?
               </DialogContent>
-              <DialogActions style={{ justifyContent: 'center', width: '200px' }}>
+              <DialogActions style={{ justifyContent: 'center', width: '300px' }}>
                 <Button onClick={() => this.handleSwap()} color="primary" style={{ fontWeight: '600', fontSize: '18px', textTransform: 'none' }}>
                   Yes
                 </Button>
@@ -122,10 +130,10 @@ class PayIn extends Component {
               open={this.state.open_popup_success}
               style={{ overflowY: 'none' }}
             >
-              <DialogContent style={{ fontWeight: '600', width: '200px', textAlign: 'center' }}>
-                Swap Successfully!
+              <DialogContent style={{ fontWeight: '600', width: '300px', textAlign: 'center' }}>
+                You have successfully swap {this.state.swap_coin} points for {(this.state.swap_coin/200).toFixed(2)} BNB
               </DialogContent>
-              <DialogActions style={{ justifyContent: 'center', width: '200px' }}>
+              <DialogActions style={{ justifyContent: 'center', width: '300px' }}>
                 <Button onClick={() => this.handleCloseSwap()} color="primary" style={{ fontWeight: '600', fontSize: '18px', textTransform: 'none' }}>
                   OK
                 </Button>

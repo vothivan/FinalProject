@@ -51,7 +51,7 @@ class App extends Component {
                                 }}
                             >
                                 <div style={{ height: '100%', overflow: 'hidden auto', padding: '25px 0px 20px' }}>
-                                    <main>
+                                    <main style={{ height: '100%'}}>
                                         {this.props.mainPage}
                                     </main>
                                 </div>

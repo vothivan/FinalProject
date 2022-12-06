@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
-import { Button, Tooltip } from '@material-ui/core';
+import { Button} from '@material-ui/core';
 import { redirectRouter } from '../../utils/common';
 import { ArrowBack } from '@material-ui/icons';
 import './style.css';

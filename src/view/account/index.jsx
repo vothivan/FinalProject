@@ -25,6 +25,7 @@ class Account extends Component {
             skillPronouncing: 0,
             skillVocabulary: 0,
             xp: 0,
+            claimingRewards: 0,
         }
     }
     async componentDidMount() {
@@ -38,14 +39,15 @@ class Account extends Component {
                 skillPronouncing: res.data.skillPronouncing,
                 skillVocabulary: res.data.skillVocabulary,
                 xp: res.data.xp,
+                claimingRewards: res.data.claimingRewards,
             })
         }
 
     }
 
     render() {
-        const { energyValue, xp, rewards, skillGrammar, skillListening, skillPronouncing, skillVocabulary } = this.state;
-        const num = rewards/200;
+        const { energyValue, xp, rewards, skillGrammar, skillListening, skillPronouncing, skillVocabulary, claimingRewards } = this.state;
+        const num = (rewards - claimingRewards)/200;
         return (
             <div style={{ paddingLeft: '10px', paddingRight: '6px' }}>
                 <div className='header'>
@@ -54,7 +56,7 @@ class Account extends Component {
                             <img alt='' src='https://s2.coinmarketcap.com/static/img/coins/64x64/20581.png' style={{ width: '30px', height: '30px' }} />
                         </div>
                         <div className='header-left-right' style={{ display: 'block', fontSize: '19px', lineHeight: '24px', marginLeft: '6px', marginRight: '6px' }}>
-                            <div style={{ fontSize: '16px', lineHeight: '18px', color: 'black', fontWeight: 'bold' }}>{rewards}</div>
+                            <div style={{ fontSize: '16px', lineHeight: '18px', color: 'black', fontWeight: 'bold' }}>{rewards - claimingRewards}</div>
                             <div className='header-left-right-right' style={{ fontSize: '12px', lineHeight: '13px' }}>= {num.toFixed(2)} BNB</div>
                         </div>
                         <div>

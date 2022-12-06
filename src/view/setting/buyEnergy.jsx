@@ -8,13 +8,18 @@ import { useWallet } from 'use-wallet';
 import Web3 from 'web3';
 import api from '../../service/api';
 import LoadingOverlay from 'react-loading-overlay';
+import MuiDialogContent from "@material-ui/core/DialogContent";
+import MuiDialogActions from "@material-ui/core/DialogActions";
+import Dialog from "@material-ui/core/Dialog";
+import { withStyles } from "@material-ui/core/styles";
+import { redirectRouter } from '../../utils/common';
 
 const chooseEnergys = [10, 20, 50, 100, 200, 500];
 
 const APP_WALLET = "0x3241441B278dfc05C600FE5824ea36a498E730f5";
 
 async function postBscTransfer(txHash) {
-    console.log(txHash);
+    // mã giao dịch txHash
     for (let i = 0; i < 3; i++) {
         try {
             return await api.post('/bsc-transfer/' + txHash);
@@ -24,28 +29,25 @@ async function postBscTransfer(txHash) {
             }
         }
     }
-
 }
 
 export default function BuyEnergy(props) {
 
     const [energy, setEnergy] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [popup, setPopup] = useState(false);
 
     const chooseEnergy = energy => {
         setEnergy(energy);
     }
 
     const wallet = useWallet();
-
     useEffect(() => {
 
         if (wallet.account) {
             api.post('/accounts/profile', { nftWalletAddress: wallet.account })
         }
     }, [wallet.account || "-1"])
-
-
 
     const buyEnergy = () => {
         if (energy <= 0) {
@@ -54,9 +56,6 @@ export default function BuyEnergy(props) {
         const bnbValue = String(energy / 1000);
         const wei = Web3.utils.toWei(bnbValue);
         const hexValue = Web3.utils.toHex(wei);
-        const hexGas = Web3.utils.toHex(
-            Web3.utils.toWei('0.00021')
-        )
         setLoading(true)
         ethereum.request({
             method: 'eth_sendTransaction',
@@ -69,9 +68,15 @@ export default function BuyEnergy(props) {
             ],
         }).then(postBscTransfer)
             .catch((error) => console.error(error))
-            .finally(() => setLoading(false))
+            .finally(() => {
+                setLoading(false);
+                setPopup(true);
+            })
     }
 
+    const handleClose = () => {
+        redirectRouter(props, '/account')
+    }
 
     if (wallet.status !== 'connected') {
         return (
@@ -93,9 +98,22 @@ export default function BuyEnergy(props) {
         )
     }
 
+    const DialogContent = withStyles((theme) => ({
+        root: {
+            padding: theme.spacing(2)
+        }
+    }))(MuiDialogContent);
+
+    const DialogActions = withStyles((theme) => ({
+        root: {
+            margin: 0,
+            padding: theme.spacing(1)
+        }
+    }))(MuiDialogActions);
+
     return (
-        <div className='title-setting'>
-            <LoadingOverlay active={loading} spinner position='inherit' >
+        <LoadingOverlay active={loading} style={{ height: '100%', position: 'fixed' }} >
+            <div className='title-setting'>
                 <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <Button>
@@ -123,7 +141,8 @@ export default function BuyEnergy(props) {
                 </div>
                 <div style={{ textAlign: 'center', justifyContent: 'center' }}>
                     <h5 style={{ color: 'rgb(0 0 0 / 54%)' }}>Please enter energy (1000 energy ~ 1 BNB)</h5>
-                    <h5 style={{ color: 'rgb(0 0 0 / 54%)' }}>Selected: {energy} energy ~ {energy / 1000.0} BNB</h5>
+                    <br></br>
+                    <h4>Selected: <b>{energy}</b> energy ~ <b>{energy / 1000.0}</b> BNB</h4>
                 </div>
                 <div style={{ flexGrow: '1', textAlign: 'center', marginTop: '20px' }}>
                     <Grid container spacing={1}>
@@ -139,7 +158,7 @@ export default function BuyEnergy(props) {
                         </Grid>
                     </Grid>
                 </div>
-                <div style={{ marginTop: '18px', textAlign: 'center' }}>
+                <div style={{ marginTop: '40px', textAlign: 'center' }}>
                     <Button
                         onClick={buyEnergy}
                         variant="contained"
@@ -148,8 +167,21 @@ export default function BuyEnergy(props) {
                         Buy
                     </Button>
                 </div>
-            </LoadingOverlay>
-
-        </div >
+            </div >
+            <Dialog
+                aria-labelledby="customized-dialog-title"
+                open={popup}
+                style={{ overflowY: 'none' }}
+            >
+                <DialogContent style={{ fontWeight: '600', width: '300px', textAlign: 'center' }}>
+                    You have successfully bought {energy} energy!
+                </DialogContent>
+                <DialogActions style={{ justifyContent: 'center', width: '300px' }}>
+                    <Button onClick={handleClose} color="primary" style={{ fontWeight: '600', fontSize: '18px', textTransform: 'none' }}>
+                        OK
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </LoadingOverlay>
     )
 }
