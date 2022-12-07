@@ -212,8 +212,9 @@ export default function LearnGrammar(props) {
                     </Button>
                 </div>
             }
-            {openDialog && <div class="pyro"><div class="before"></div><div class="after"></div></div>}
-
+            <div style={{ width: '100%', height: '100%' }}>
+                {openDialog && <div class="pyro"><div class="before"></div><div class="after"></div></div>}
+            </div>
             <div style={{ textAlign: 'center' }}>
                 <Dialog
                     aria-labelledby="customized-dialog-title"

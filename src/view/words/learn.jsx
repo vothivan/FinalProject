@@ -12,6 +12,7 @@ import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import MicIcon from '@material-ui/icons/Mic';
+import { id } from "ethers/lib/utils";
 
 const correctAudio = new Audio("/audio/correct-6033.mp3");
 const errorAudio = new Audio("/audio/windows-error-sound-effect.mp3");
@@ -43,7 +44,7 @@ class LearnWords extends Component {
     getExercise = async (gameId) => {
         const res = await api.get("/vocabulary/game/" + gameId);
         const list_exercise = res.data.exercise.sort(() => Math.random() - 0.5);
-        const exercise_copy = list_exercise.filter((it, index) => index < 10);
+        const exercise_copy = list_exercise.filter((it, index) => index < 10 && it.type === 'SPEAK');
         this.setState({ exercise: exercise_copy, question_length: exercise_copy.length })
     }
     openDialog = () => {
@@ -92,13 +93,60 @@ class LearnWords extends Component {
     handleClose = () => {
         redirectRouter(this.props, '/learn/word/list-word/' + this.props.match.params.id)
     }
+    dataPhone = (props) = () => {
+        console.log(props);
+        const chooses = props?.chooses || [];
+        const {
+            transcript,
+            listening,
+            resetTranscript,
+            browserSupportsSpeechRecognition
+        } = useSpeechRecognition();
+    
+        if (!browserSupportsSpeechRecognition) {
+            return <span>Browser doesn't support speech recognition.</span>;
+        }
+    
+        return (
+            <div>
+                {/* <p>Microphone: {listening ? "on" : "off"}</p> */}
+                <h2>{props.question}</h2>
+                <Button className="hover_record" style={{ marginBottom: '30px' }} onClick={SpeechRecognition.startListening}><MicIcon style={{ fontSize: '100px', color: '#099bd3' }} /></Button>
+                <br></br>
+                <p>Your voice: {transcript}</p>
+                <Button
+                    onClick={(event) => {
+                        const choose_id = (chooses.filter((item) => item.text === transcript)).map((it) => it.id)
+                        return this.checkQuestion(choose_id, props.id)
+                    }}
+                    // onClick={SpeechRecognition.stopListening}
+                    // onClick={() => onCheckAnswer([...userChoose])}
+                    variant="contained"
+                    style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
+                >
+                    Submit
+                </Button>
+                {/* <button onClick={SpeechRecognition.startListening}>Start</button> */}
+                {/* <button onClick={SpeechRecognition.stopListening}>Submit</button> */}
+                {/* <button onClick={resetTranscript}>Reset</button> */}
+    
+            </div>
+        );
+    };
     render() {
         const { exercise, id_exercise_current } = this.state;
+        console.log(exercise);
         const exercise_current = exercise[id_exercise_current];
         let chooses = [];
+        let type = '';
+        if (exercise_current?.type) {
+            type = exercise[id_exercise_current]?.type;
+        }
+        console.log(type);
         if (exercise_current?.chooses) {
             chooses = exercise_current?.chooses;
         }
+        const Dataphone = this.dataPhone;
         return (
             <div className="root">
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -139,20 +187,27 @@ class LearnWords extends Component {
                 </div>
                 <div>
                     {this.state.check_status !== true &&
+                        // (type === ' SPEAK' ?
                         <div style={{ width: '100%', textAlign: 'center' }}>
-                            {/* {exercise_current && <TypeOfQuestion {...exercise_current} />}
-                            {chooses && chooses.map((it) => {
-                                return (
-                                    <Button onClick={(event) => this.checkQuestion(it.id, exercise_current.id)} style={{ fontWeight: 'bold', fontSize: '17px', textTransform: 'none', height: '50px', borderRadius: '20px', marginBottom: '10px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', textAlign: 'center', alignItems: 'center' }}>
-                                        {it.text}
-                                    </Button>
-                                )
-                            })} */}
-                            <Dictaphone />
+                            <Dataphone {...exercise_current}/>
                         </div>
+                        //     :
+                        //     <div style={{ width: '100%', textAlign: 'center' }}>
+                        //         {exercise_current && <TypeOfQuestion {...exercise_current} />}
+                        //         {chooses && chooses.map((it) => {
+                        //             return (
+                        //                 <Button onClick={(event) => this.checkQuestion(it.id, exercise_current.id)} style={{ fontWeight: 'bold', fontSize: '17px', textTransform: 'none', height: '50px', borderRadius: '20px', marginBottom: '10px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', textAlign: 'center', alignItems: 'center' }}>
+                        //                     {it.text}
+                        //                 </Button>
+                        //             )
+                        //         })}
+                        //     </div>
+                        // )
                     }
                 </div>
-                {this.state.open && <div class="pyro"><div class="before"></div><div class="after"></div></div>}
+                <div style={{ width: '100%', height: '100%' }}>
+                    {this.state.open && <div class="pyro"><div class="before"></div><div class="after"></div></div>}
+                </div>
                 <div style={{ textAlign: 'center' }}>
                     <Dialog
                         aria-labelledby="customized-dialog-title"
@@ -208,37 +263,5 @@ const DialogActions = withStyles((theme) => ({
         padding: theme.spacing(1)
     }
 }))(MuiDialogActions);
-function Dictaphone() {
-    const {
-        transcript,
-        listening,
-        resetTranscript,
-        browserSupportsSpeechRecognition
-    } = useSpeechRecognition();
 
-    if (!browserSupportsSpeechRecognition) {
-        return <span>Browser doesn't support speech recognition.</span>;
-    }
-
-    return (
-        <div>
-            {/* <p>Microphone: {listening ? "on" : "off"}</p> */}
-
-            <Button className="hover_record" style={{marginBottom: '30px'}} onClick={SpeechRecognition.startListening}><MicIcon style={{fontSize: '100px', color: '#099bd3'}}/></Button>
-            <br></br>
-            <Button
-                onClick={SpeechRecognition.stopListening}
-                // onClick={() => onCheckAnswer([...userChoose])}
-                variant="contained"
-                style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
-            >
-                Submit
-            </Button>
-            {/* <button onClick={SpeechRecognition.startListening}>Start</button> */}
-            {/* <button onClick={SpeechRecognition.stopListening}>Submit</button> */}
-            {/* <button onClick={resetTranscript}>Reset</button>
-            <p>{transcript}</p> */}
-        </div>
-    );
-};
 export default LearnWords;

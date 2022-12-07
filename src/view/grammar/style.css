@@ -1,9 +1,12 @@
 .root {
     position: relative;
     padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
     width: 100%;
     height: 100%;
     font-family: sans-serif;
+    overflow: hidden;
 }
 
 .title {

@@ -50,7 +50,7 @@ class App extends Component {
                                     boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px',
                                 }}
                             >
-                                <div style={{ height: '100%', overflow: 'hidden auto', padding: '25px 0px 20px' }}>
+                                <div style={{ height: '100%', overflow: 'hidden auto'}}>
                                     <main style={{ height: '100%'}}>
                                         {this.props.mainPage}
                                     </main>
