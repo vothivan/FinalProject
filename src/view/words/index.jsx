@@ -75,7 +75,7 @@ class Words extends Component {
                                         </Button>
                                     </div>
                                     <div style={{ display: 'flex' }}>
-                                        {item.wordSets.map((item_vocabulary, key) => <ItemWords id={item.id} key={key} {...item_vocabulary} />)}
+                                        {item.wordSets.map((item_vocabulary, key) => <div><ItemWords id={item.id} key={key} {...item_vocabulary} /></div>)}
                                     </div>
                                 </div>
                             )
@@ -96,7 +96,7 @@ function ItemWords({ title, titleNative, star, stars, wordsCount, linkPic, perce
         >
             <Button
                 className='button-word'
-                style={{ borderRadius: '20px', marginRight: '20px', display: 'block', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px' }}
+                style={{ borderRadius: '20px', marginLeft: '10px', marginRight: '10px', display: 'block', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px' }}
             >
                 <div className='button-top'>
                     <span className='button-top-top'>{title}</span>

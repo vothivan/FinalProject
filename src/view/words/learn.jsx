@@ -10,7 +10,8 @@ import api from "../../service/api";
 import { withStyles } from "@material-ui/core/styles";
 import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
-import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+import MicIcon from '@material-ui/icons/Mic';
 
 const correctAudio = new Audio("/audio/correct-6033.mp3");
 const errorAudio = new Audio("/audio/windows-error-sound-effect.mp3");
@@ -139,15 +140,15 @@ class LearnWords extends Component {
                 <div>
                     {this.state.check_status !== true &&
                         <div style={{ width: '100%', textAlign: 'center' }}>
-                            exercise_current && <TypeOfQuestion {...exercise_current} />
+                            {/* {exercise_current && <TypeOfQuestion {...exercise_current} />}
                             {chooses && chooses.map((it) => {
                                 return (
                                     <Button onClick={(event) => this.checkQuestion(it.id, exercise_current.id)} style={{ fontWeight: 'bold', fontSize: '17px', textTransform: 'none', height: '50px', borderRadius: '20px', marginBottom: '10px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', textAlign: 'center', alignItems: 'center' }}>
                                         {it.text}
                                     </Button>
                                 )
-                            })}
-                            {/* <Dictaphone /> */}
+                            })} */}
+                            <Dictaphone />
                         </div>
                     }
                 </div>
@@ -221,11 +222,22 @@ function Dictaphone() {
 
     return (
         <div>
-            <p>Microphone: {listening ? "on" : "off"}</p>
-            <button onClick={SpeechRecognition.startListening}>Start</button>
-            <button onClick={SpeechRecognition.stopListening}>Stop</button>
-            <button onClick={resetTranscript}>Reset</button>
-            <p>{transcript}</p>
+            {/* <p>Microphone: {listening ? "on" : "off"}</p> */}
+
+            <Button className="hover_record" style={{marginBottom: '30px'}} onClick={SpeechRecognition.startListening}><MicIcon style={{fontSize: '100px', color: '#099bd3'}}/></Button>
+            <br></br>
+            <Button
+                onClick={SpeechRecognition.stopListening}
+                // onClick={() => onCheckAnswer([...userChoose])}
+                variant="contained"
+                style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
+            >
+                Submit
+            </Button>
+            {/* <button onClick={SpeechRecognition.startListening}>Start</button> */}
+            {/* <button onClick={SpeechRecognition.stopListening}>Submit</button> */}
+            {/* <button onClick={resetTranscript}>Reset</button>
+            <p>{transcript}</p> */}
         </div>
     );
 };

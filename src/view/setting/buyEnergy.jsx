@@ -112,7 +112,7 @@ export default function BuyEnergy(props) {
     }))(MuiDialogActions);
 
     return (
-        <LoadingOverlay active={loading} style={{ height: '100%', position: 'fixed' }} >
+        <LoadingOverlay active={loading} spinner style={{ height: '100%'}} >
             <div className='title-setting'>
                 <div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>

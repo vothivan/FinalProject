@@ -30,6 +30,11 @@
     flex-shrink: 0;
     width: 100%;
 }
+.hover_grammar :hover {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(253 210 197);
+}
 
 .total {
     height: 100%;

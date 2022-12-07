@@ -33,7 +33,7 @@ class listWord extends Component {
         >
           <ArrowBack style={{ marginRight: 'auto' }} />
         </Button>
-        <div style={{ width: '100%' }}>
+        <div style={{ width: '100%', overflow: 'auto' }}>
           <h2>{this.state.info.topicNative}</h2>
           <h1>{this.state.info.titleNative}</h1>
           <span className="level">Beginner</span>
@@ -54,7 +54,7 @@ class listWord extends Component {
         </div>
         <Button
           className='button-child'
-          style={{fontSize: '17px', width: '100%', alignItems: 'center', borderRadius: '20px', textTransform: 'none', fontWeight: 'bold' }}
+          style={{ fontSize: '17px', width: '100%', alignItems: 'center', borderRadius: '20px', textTransform: 'none', fontWeight: 'bold' }}
           onClick={() => redirectRouter(this.props, '/learn-words/' + this.props.match.params.id)}
         >
           Learn

@@ -18,6 +18,8 @@ const btnStyle = { fontWeight: 'bold', fontSize: '17px', textTransform: 'none', 
 const correctAudio = new Audio("/audio/correct-6033.mp3");
 const errorAudio = new Audio("/audio/windows-error-sound-effect.mp3");
 const congraAudio = new Audio("/audio/congratulation.mp3");
+const clickChooseAudio = new Audio("/audio/clickChoose.mp3");
+const cancelChooseAudio = new Audio("/audio/cancelChoose.mp3");
 
 export default function LearnGrammar(props) {
 
@@ -86,6 +88,7 @@ export default function LearnGrammar(props) {
     }
 
     const addChoose = choose => {
+        { clickChooseAudio.play() }
         setUserChoose(old => new Set([...old, choose]))
     }
 
@@ -94,6 +97,14 @@ export default function LearnGrammar(props) {
         setServerAnswer({})
         setUserChoose([])
         setQuestionIndex(id => id + 1)
+    }
+
+    const onClickChoose = (a) => {
+        { cancelChooseAudio.play() }
+        setUserChoose(old => {
+            old.delete(a);
+            return new Set(old);
+        })
     }
 
     return (
@@ -140,10 +151,11 @@ export default function LearnGrammar(props) {
                             <div style={{ textAlign: 'center' }}>
                                 {[...userChoose].map(a => (
                                     <Button size="small" variant="outlined" key={a}
-                                        onClick={() => setUserChoose(old => {
-                                            old.delete(a);
-                                            return new Set(old);
-                                        })}
+                                        // onClick={() => setUserChoose(old => {
+                                        //     old.delete(a);
+                                        //     return new Set(old);
+                                        // })}
+                                        onClick={() => onClickChoose(a)}
                                         style={{ marginRight: '10px', marginBottom: '10px', borderRadius: '20px', textTransform: 'none', fontWeight: '600' }}
                                     >
                                         {a}
@@ -208,7 +220,7 @@ export default function LearnGrammar(props) {
                     open={openDialog}
                     style={{ overflowY: 'none' }}
                 >
-                    <DialogContent style={{fontWeight: '600' }}>
+                    <DialogContent style={{ fontWeight: '600' }}>
                         Congratulations on completing {countCorrect}/10 questions
                     </DialogContent>
                     <DialogActions style={{ justifyContent: 'center' }}>
