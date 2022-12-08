@@ -8,3 +8,10 @@ Build project:
 Find BNB testnet:
 
 ### https://testnet.bnbchain.org/faucet-smart
+
+configure aws:
+
+Access key ID: AKIAYMQ725SANV5JQQ5J
+Secret access key: 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
+Default region name: ap-southeast-1
+

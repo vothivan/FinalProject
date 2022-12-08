@@ -43,7 +43,7 @@ class LearnWords extends Component {
     getExercise = async (gameId) => {
         const res = await api.get("/vocabulary/game/" + gameId);
         const list_exercise = res.data.exercise.sort(() => Math.random() - 0.5);
-        const exercise_copy = list_exercise.filter((it, index) => index < 10 && it.type === 'SPEAK');
+        const exercise_copy = list_exercise.filter((it, index) => index < 10);
         this.setState({ exercise: exercise_copy, question_length: exercise_copy.length })
     }
     openDialog = () => {
@@ -81,7 +81,6 @@ class LearnWords extends Component {
         this.setState({
             check_status: true,
         })
-
     }
     onNextQuestion = (id_exercise_current) => {
         this.setState({
@@ -93,9 +92,7 @@ class LearnWords extends Component {
         redirectRouter(this.props, '/learn/word/list-word/' + this.props.match.params.id)
     }
     dataPhone = (props) => {
-        console.log(props);
         const chooses = props?.chooses || [];
-        console.log(chooses);
         const {
             transcript,
             listening,
@@ -106,7 +103,6 @@ class LearnWords extends Component {
         if (!browserSupportsSpeechRecognition) {
             return <span>Browser doesn't support speech recognition.</span>;
         }
-
         return (
             <div>
                 {/* <p>Microphone: {listening ? "on" : "off"}</p> */}
