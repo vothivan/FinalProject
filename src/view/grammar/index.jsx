@@ -30,9 +30,9 @@ class Grammar extends Component {
     render() {
         return (
             <div className='root'>
-                <h2 style={{ fontSize: '40px' }}>
+                <text style={{fontWeight: 'bold', fontSize: '40px' }}>
                     Grammar
-                </h2>
+                </text>
                 <h4>Practice grammar rules and earn stars</h4>
                 <div>
                     <h3 className='level'>Beginner</h3>
@@ -56,7 +56,7 @@ function ItemTopic(props) {
                 ROUTE.GRAMMAR_ALL + '/' + id
             }
         >
-            <Button style={{ height: '110px', borderRadius: '20px', marginBottom: '20px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', justifyContent: 'space-between' }}>
+            <Button style={{ height: '110px', borderRadius: '20px', marginBottom: '20px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ paddingLeft: '10px', display: 'block', textTransform: 'none', textAlign: 'left' }}>
                     <div style={{ fontSize: '13px', fontWeight: '600' }}>{header}</div>
                     <div style={{ fontSize: '13px', fontWeight: '600' }}>{name}</div>

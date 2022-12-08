@@ -32,7 +32,7 @@ class Words extends Component {
                 {/* <div style={{textAlign:'center'}}>
                     <img style={{width: '130px'}} src='https://scontent.xx.fbcdn.net/v/t1.15752-9/313199148_1949018905301733_8909389498709606620_n.png?_nc_cat=107&ccb=1-7&_nc_sid=aee45a&_nc_ohc=C6c1p8hjJE4AX-QMdjL&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=03_AdRRSIlocV7uqiSeL5bKT9k76eWsWlThe_ulXCsdKbmK9w&oe=639EB0EC' alt='' />
                 </div> */}
-                <h2 style={{ fontWeight: 'bold', fontSize: '40px' }}>Words</h2>
+                <text style={{ fontWeight: 'bold', fontSize: '40px' }}>Words</text>
                 {/* <div className='topic-continue'>
                     <span className='title-small'>Thức ăn</span>
                     <span className='title-big'>Trái cây và rau củ</span>

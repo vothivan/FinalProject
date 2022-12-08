@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CancelIcon from '@material-ui/icons/Cancel';
-import { Button } from '@material-ui/core';
+import { Button, Chip } from '@material-ui/core';
 import Dialog from "@material-ui/core/Dialog";
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -95,6 +95,7 @@ class LearnWords extends Component {
     dataPhone = (props) => {
         console.log(props);
         const chooses = props?.chooses || [];
+        console.log(chooses);
         const {
             transcript,
             listening,
@@ -112,11 +113,18 @@ class LearnWords extends Component {
                 <h2>{props.question}</h2>
                 <Button className="hover_record" style={{ marginBottom: '30px' }} onClick={SpeechRecognition.startListening}><MicIcon style={{ fontSize: '100px', color: '#099bd3' }} /></Button>
                 <br></br>
-                <p>Your voice: {transcript}</p>
+                <b>Suggestions: </b>
+                {chooses.map((item) => {
+                    return <Chip style={{ marginBottom: '5px', marginRight: '5px', background: 'rgb(241, 136, 129)', fontSize: '11px', fontWeight: '600' }} size='small' label = {item.text}/>
+                })}
+                <br />
+                <br/>
+                <b>Your voice: {transcript}</b>
+                <br></br>
+                <br></br>
                 <Button
                     onClick={(event) => {
                         const choose_id = (chooses.filter((item) => (item.text).toLowerCase() === transcript.toLowerCase())).map((it) => it.id)
-                        
                         return this.checkQuestion(choose_id[0] ? choose_id[0] : 1, props.id)
                     }}
                     variant="contained"
@@ -141,7 +149,7 @@ class LearnWords extends Component {
         }
         const Dataphone = this.dataPhone;
         return (
-            <div className="root" style={{overflow: 'hidden hidden'}}>
+            <div className="root" style={{ overflow: 'hidden hidden' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Button onClick={() => redirectRouter(this.props, '/learn/word/list-word/' + this.props.match.params.id)}>
                         <CancelIcon />
