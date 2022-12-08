@@ -5,3 +5,6 @@ Run Project:
 Build project:
 ###  npm run build && aws s3 sync ./build/ s3://learn-to-earn.cloud/
   
+Find BNB testnet:
+
+### https://testnet.bnbchain.org/faucet-smart

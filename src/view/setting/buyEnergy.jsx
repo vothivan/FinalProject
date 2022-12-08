@@ -141,7 +141,6 @@ export default function BuyEnergy(props) {
                 </div>
                 <div style={{ textAlign: 'center', justifyContent: 'center' }}>
                     <h5 style={{ color: 'rgb(0 0 0 / 54%)' }}>Please enter energy (1000 energy ~ 1 BNB)</h5>
-                    <br></br>
                     <h4>Selected: <b>{energy}</b> energy ~ <b>{energy / 1000.0}</b> BNB</h4>
                 </div>
                 <div style={{ flexGrow: '1', textAlign: 'center', marginTop: '20px' }}>

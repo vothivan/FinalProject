@@ -77,7 +77,7 @@ export default function LearnGrammar(props) {
     const checkAnswer = async (choose) => {
         setUserChoose([choose])
         onCheckAnswer([choose])
-        if (questionIndex + 1 === questions.length) {
+        if (questionIndex + 1 >= questions.length) {
             { congraAudio.play() }
             setOpenDialog(true)
 
@@ -108,7 +108,7 @@ export default function LearnGrammar(props) {
     }
 
     return (
-        <div className="root">
+        <div className="root" style={{overflow: 'hidden hidden'}}>
             <Link to={'/learn/grammar/lesson_all/' + id}>
                 <CancelIcon />
             </Link>

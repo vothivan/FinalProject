@@ -56,7 +56,7 @@ function ItemTopic(props) {
                 ROUTE.GRAMMAR_ALL + '/' + id
             }
         >
-            <Button className='hover_grammar' style={{ height: '110px', borderRadius: '20px', marginBottom: '20px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', justifyContent: 'space-between' }}>
+            <Button style={{ height: '110px', borderRadius: '20px', marginBottom: '20px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', justifyContent: 'space-between' }}>
                 <div style={{ paddingLeft: '10px', display: 'block', textTransform: 'none', textAlign: 'left' }}>
                     <div style={{ fontSize: '13px', fontWeight: '600' }}>{header}</div>
                     <div style={{ fontSize: '13px', fontWeight: '600' }}>{name}</div>

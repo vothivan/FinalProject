@@ -72,7 +72,7 @@ class SeeAll extends Component {
     render() {
         const { list_vocabulary, wordSets } = this.state;
         return (
-            <div style={{ marginLeft: '10px', marginRight: '10px'}}>
+            <div style={{ marginLeft: '10px', marginRight: '10px', marginTop: '16px'}}>
                 <Button
                     className="button-return"
                     style={{ marginRight: 'auto'}}
@@ -80,7 +80,7 @@ class SeeAll extends Component {
                 >
                     <ArrowBack style={{ marginRight: 'auto' }} />
                 </Button>
-                <div style={{fontSize: '40px', textAlign: 'center', fontWeight: 'bold', height: '60px'}}>{list_vocabulary.titleNative}</div>
+                <div style={{height: '100%', fontSize: '30px', textAlign: 'center', fontWeight: 'bold'}}>{list_vocabulary.titleNative}</div>
                 <div style={{ margin: 'auto', display: 'flex', flexWrap: 'wrap' }}>
                     {wordSets.map((item) => {
                         return (

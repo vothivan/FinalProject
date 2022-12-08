@@ -12,7 +12,6 @@ import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import MicIcon from '@material-ui/icons/Mic';
-import { id } from "ethers/lib/utils";
 
 const correctAudio = new Audio("/audio/correct-6033.mp3");
 const errorAudio = new Audio("/audio/windows-error-sound-effect.mp3");
@@ -93,7 +92,7 @@ class LearnWords extends Component {
     handleClose = () => {
         redirectRouter(this.props, '/learn/word/list-word/' + this.props.match.params.id)
     }
-    dataPhone = (props) = () => {
+    dataPhone = (props) => {
         console.log(props);
         const chooses = props?.chooses || [];
         const {
@@ -102,11 +101,11 @@ class LearnWords extends Component {
             resetTranscript,
             browserSupportsSpeechRecognition
         } = useSpeechRecognition();
-    
+
         if (!browserSupportsSpeechRecognition) {
             return <span>Browser doesn't support speech recognition.</span>;
         }
-    
+
         return (
             <div>
                 {/* <p>Microphone: {listening ? "on" : "off"}</p> */}
@@ -116,20 +115,15 @@ class LearnWords extends Component {
                 <p>Your voice: {transcript}</p>
                 <Button
                     onClick={(event) => {
-                        const choose_id = (chooses.filter((item) => item.text === transcript)).map((it) => it.id)
-                        return this.checkQuestion(choose_id, props.id)
+                        const choose_id = (chooses.filter((item) => (item.text).toLowerCase() === transcript.toLowerCase())).map((it) => it.id)
+                        
+                        return this.checkQuestion(choose_id[0] ? choose_id[0] : 1, props.id)
                     }}
-                    // onClick={SpeechRecognition.stopListening}
-                    // onClick={() => onCheckAnswer([...userChoose])}
                     variant="contained"
                     style={{ background: 'linear-gradient(rgb(255, 235, 57) 0%, rgb(255, 223, 57) 100%)', alignItems: 'center', borderRadius: '20px', color: 'black', textTransform: 'none', fontWeight: '600', boxShadow: 'rgb(242 153 74) 0px 4px 0px' }}
                 >
                     Submit
                 </Button>
-                {/* <button onClick={SpeechRecognition.startListening}>Start</button> */}
-                {/* <button onClick={SpeechRecognition.stopListening}>Submit</button> */}
-                {/* <button onClick={resetTranscript}>Reset</button> */}
-    
             </div>
         );
     };
@@ -142,13 +136,12 @@ class LearnWords extends Component {
         if (exercise_current?.type) {
             type = exercise[id_exercise_current]?.type;
         }
-        console.log(type);
         if (exercise_current?.chooses) {
             chooses = exercise_current?.chooses;
         }
         const Dataphone = this.dataPhone;
         return (
-            <div className="root">
+            <div className="root" style={{overflow: 'hidden hidden'}}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <Button onClick={() => redirectRouter(this.props, '/learn/word/list-word/' + this.props.match.params.id)}>
                         <CancelIcon />
@@ -187,22 +180,22 @@ class LearnWords extends Component {
                 </div>
                 <div>
                     {this.state.check_status !== true &&
-                        // (type === ' SPEAK' ?
-                        <div style={{ width: '100%', textAlign: 'center' }}>
-                            <Dataphone {...exercise_current}/>
-                        </div>
-                        //     :
-                        //     <div style={{ width: '100%', textAlign: 'center' }}>
-                        //         {exercise_current && <TypeOfQuestion {...exercise_current} />}
-                        //         {chooses && chooses.map((it) => {
-                        //             return (
-                        //                 <Button onClick={(event) => this.checkQuestion(it.id, exercise_current.id)} style={{ fontWeight: 'bold', fontSize: '17px', textTransform: 'none', height: '50px', borderRadius: '20px', marginBottom: '10px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', textAlign: 'center', alignItems: 'center' }}>
-                        //                     {it.text}
-                        //                 </Button>
-                        //             )
-                        //         })}
-                        //     </div>
-                        // )
+                        (type === 'SPEAK' ?
+                            <div style={{ width: '100%', textAlign: 'center' }}>
+                                <Dataphone {...exercise_current} />
+                            </div>
+                            :
+                            <div style={{ width: '100%', textAlign: 'center' }}>
+                                {exercise_current && <TypeOfQuestion {...exercise_current} />}
+                                {chooses && chooses.map((it) => {
+                                    return (
+                                        <Button onClick={(event) => this.checkQuestion(it.id, exercise_current.id)} style={{ fontWeight: 'bold', fontSize: '17px', textTransform: 'none', height: '50px', borderRadius: '20px', marginBottom: '10px', width: '100%', boxShadow: 'rgb(0 0 0 / 15%) 0px 4px 32px', textAlign: 'center', alignItems: 'center' }}>
+                                            {it.text}
+                                        </Button>
+                                    )
+                                })}
+                            </div>
+                        )
                     }
                 </div>
                 <div style={{ width: '100%', height: '100%' }}>
@@ -215,7 +208,7 @@ class LearnWords extends Component {
                         style={{ overflowY: 'none' }}
                     >
                         <DialogContent style={{ fontWeight: '600' }}>
-                            Congratulations on completing {this.state.count_correct_answer}/10 questions
+                            Congratulations on completing {this.state.count_correct_answer}/{exercise.length}
                         </DialogContent>
                         <DialogActions style={{ justifyContent: 'center' }}>
                             <Button onClick={() => this.handleClose()} color="primary" style={{ fontWeight: '600', fontSize: '18px' }}>
