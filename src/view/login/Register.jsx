@@ -30,15 +30,16 @@ class Register extends Component {
         error: '',
         isSubmitForm: true,
       })
-      const payload = {
-        email: this.state.email,
-        password: this.state.password,
-      }
-      api.post("/accounts/login", payload).then((res) => {
-        if (res && res.status === 200) {
-          redirectRouter(this.props, '/account')
-        }
-      })
+      redirectRouter(this.props, '/account')
+      // const payload = {
+      //   email: this.state.email,
+      //   password: this.state.password,
+      // }
+      // api.post("/accounts/login", payload).then((res) => {
+      //   if (res && res.status === 200) {
+      //     redirectRouter(this.props, '/account')
+      //   }
+      // })
     } else {
       this.setState({
         error: 'Please fill in all the information.'

@@ -29,22 +29,23 @@ class LoginUser extends Component {
         error: '',
         isSubmitForm: true,
       })
-      const payload = {
-        email: this.state.email,
-        password: this.state.password,
-      }
-      api.post("/accounts/login", payload).then((res) => {
-        if (res && res.status === 200) {
-          if (res.data.token) {
-            localStorage.setItem("jwt_token", res.data.token)
-            redirectRouter(this.props, '/account')
-          } else {
-            this.setState({
-              error: 'Email or password is invalid, please enter again! '
-            })
-          }
-        }
-      })
+      redirectRouter(this.props, '/account')
+      // const payload = {
+      //   email: this.state.email,
+      //   password: this.state.password,
+      // }
+      // api.post("/accounts/login", payload).then((res) => {
+      //   if (res && res.status === 200) {
+      //     if (res.data.token) {
+      //       localStorage.setItem("jwt_token", res.data.token)
+      //       redirectRouter(this.props, '/account')
+      //     } else {
+      //       this.setState({
+      //         error: 'Email or password is invalid, please enter again! '
+      //       })
+      //     }
+      //   }
+      // })
     }
 
   }
