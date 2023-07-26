@@ -30,7 +30,7 @@ class App extends Component {
     }
 
     demoMergeAbort = () => {
-        console.log("This is demo");
+        console.log("This is demo merge error");
     }
 
     render() {
