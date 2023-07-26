@@ -28,6 +28,11 @@ class App extends Component {
             hover_color_status: item
         })
     }
+
+    demoMergeAbort = () => {
+        console.log("This is demo");
+    }
+
     render() {
         const {hover_color_status} = this.state;
         return (
